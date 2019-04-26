@@ -14,17 +14,18 @@ In addition, I started playing DnD after a 4 month hiatus and the DM finds it hi
 
 ## Courses
 Some are incomplete, for example courses that I've taken during the Fall of 2018 are incomplete as this was before I decided to LaTeX all my notes, only my assignments.
-| Course Name                         | Course ID | Instructor        | Term        |
-| :---------------------------------- | :-------- | :---------------- | :---------- |
-| File and Database Management        | CMPUT-291 | Davood Rafiei     | Fall 2018   |
-| Quantitative Methods in Economics   | ECON-299  | Alexander Gainer  | Fall 2018   |
-| Elementary Calculus II              | MATH-115  | Mohammad Niksirat | Winter 2019 |
-| Intermediate Macroeconomic Theory I | ECON-282  | Andrew Wong       | Winter 2019 |
-| The Oceans                          | EAS-212   | Paul Myers        | Winter 2019 |
-| Search, Knowledge and Simulations   | CMPUT-496 | Martin Muller     | Winter 2019 |
-| Operating System Concept            | CMPUT-379 | Ioanis Nikolaidis | Winter 2019 |
-| Case Studies in Research            | ENGL-103  | Jennifer Sheckter | Spring 2019 |
-| Compiler Design                     | CMPUT-415 | J Nelson Amaral   | Fall 2020   |
+
+| Course ID | Instructor        | Term        |
+| :-------- | :---------------- | :---------- |
+| CMPUT-291 | Davood Rafiei     | Fall 2018   |
+| ECON-299  | Alexander Gainer  | Fall 2018   |
+| MATH-115  | Mohammad Niksirat | Winter 2019 |
+| ECON-282  | Andrew Wong       | Winter 2019 |
+| EAS-212   | Paul Myers        | Winter 2019 |
+| CMPUT-496 | Martin Muller     | Winter 2019 |
+| CMPUT-379 | Ioanis Nikolaidis | Winter 2019 |
+| ENGL-103  | Jennifer Sheckter | Spring 2019 |
+| CMPUT-415 | J Nelson Amaral   | Fall 2020   |
 
 
 ## Disclaimer
