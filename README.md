@@ -27,11 +27,33 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | ENGL-103  | Jennifer Sheckter | Spring 2019 |
 | CMPUT-415 | J Nelson Amaral   | Fall 2020   |
 
+## The "Wacky" Cover Art
+As a Computing Science major I get exposed to a lot different programming and computing books. For example:
+- Compilers: Principles, Techniques, and Tools used in compiler design classes is affectionately known as the **Dragon Book**
+- Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaurs Book**
+- Mastering Regular Expressions is called the **Owl Book**
+
+A lot of it can be traced back to O'Reilly Media as they started this trend as a way to distinguish them from other publishers.
+
+To continue the trend I decided to give a fantasy flair as a way to further increase the DnDness of my notes. Plus they provide excellent symbolism to the content of the course. 
+
+## To Build my Notes
+In order to build these notes yourself you need a few programs:
+- LaTeX typesetting engine: Either TeX Live (full) or MikTeX (required)
+- Rubber (you can manually build the notes yourself but its more of a pain) (recommended)
+- GNU Make (recommended)
+
+Goto the root directory that contains the Makefile and type
+``` make 
+    make full       # Build with the full paper background
+    make print      # Make the druids happy by building the notes with a white paper background 
+    make clean      # Clean the aux files
+```
 
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicated stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 
 
 ## Copyright
-Due to the fact that I am using assets from the instructor as well images from Wizard of the Coast and other companies' IPs. If requested by their rightful owners I may have to remove them from this repository. Hopefully, I wouldn't need to as these are my personal notes that I had fun creativity making and make no monetary value on. If anything I lose money just by printing them. 
+Due to the fact that I am using assets from the instructor as well images from Wizard of the Coast and/or other companies' IPs. If requested by their rightful owners I may have to remove them from this repository. Hopefully, I wouldn't need to as these are my personal notes that I had fun creativity making and make no monetary value on. If anything I lose money just by printing them. 
 
 
