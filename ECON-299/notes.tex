@@ -1,0 +1,150 @@
+\documentclass{book}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\begin{titlepage}
+    \title{ECON 299 Notes}
+    \author{Jihoon Og}
+    \date{11/26/2018}
+\end{titlepage}
+
+\begin{document}
+\frontmatter
+\maketitle 
+\tableofcontents
+\mainmatter
+\chapter{Data Description, Presentation, and Manipulation}
+A good economist can take a complex subject and explain it in a simple terms to anyone. Moreover and more jobs for economists in the real world involves working with big data-set in excel, where you must find a few interesting stories that can be easily explained.\\
+Why do economists care about data?\\
+
+\begin{enumerate}
+    \item Describes the real world. Using current and past data to describe: The economy, a business, consumer, or a sports team competitor.
+    \item Test theories: Use data to test theories or models to see if they accurately represent the real world. For example. How much does an increase in minimum wage increases the unemployment rate.
+\end{enumerate}
+
+Data can be categorized by:
+\begin{enumerate}
+    \item How it's collected
+    \begin{itemize}
+        \item time series: 
+        \item cross sectional
+        \item panel data
+    \end{itemize}
+    \item How it's measured
+    \begin{itemize}
+        \item nominal data
+        \item real data (base year)
+    \end{itemize}
+\end{enumerate}
+\chapter{Economic Application of Single-Variable Calculus}
+\chapter{Mathematical Version pf Simple Economic Models}
+\chapter{Multi-Variable Calculus}
+\date{11/28/2018}
+    \section{Application of multi-variable Calculus\\ Interpreting partial elasticity}
+    What do partial derivatives mean?\\
+    Let the function: $y = f(a,b,c)$\\
+    - So dependent variable y is impacted by 3 independent variables (a,b,c).\\
+    - It is difficult to interpret how $a$ impact y if $b$ and $c$ are also changing.
+    So we hold b and c to be constants by taking the partial derivative $\frac{dy}{da}$.\\
+    - $\frac{dy}{da}$ means how much does $y$ change if $a$ changes by 1 unit.\\
+    - $\frac{d^2y}{da^2}$ looks at the curvature or the rate of change of $\frac{dy}{da}$. Tell us the curvature with respect to a.
+    \subsection{Notation of Second-Order Partial derivative}
+        - $\frac{d^2y}{da^2}$ or $\frac{d^2y}{db^2}$ or $\frac{d^2y}{dc^2}$ for the same variable above.
+    \section{Second cross order partial derivative}
+    - $\frac{d^2y}{dadb}$: means we first calculate $\frac{dy}{da}$, then calculate the partial derivative of $\frac{dy}{da}$ with respect to b.\\
+    - The order of the second cross partial derivative does not matter, as Young's theorem states: $\frac{d^2y}{dadb} = \frac{d^2y}{dbda}$
+    \subsection{Interpreting second cross-partial derivative}
+    - $\frac{d^2y}{dadb}$ this tells us how much $y$ changes if both $a$ and $b$ change by one unit.
+    \subsubsection{Example: Quantity Demanded}
+    Let The Quantity Demanded: $f(Price,Income)$\\
+    Doing the partial derivative gives you these functions:\\
+    $\frac{dQ_d}{dP}$ tells us how much $Q_d$ changes if $P$ changes by one.\\
+    $\frac{dQ_d}{dI}$ tells us how much $Q_d$ changes if $I$ changes by one.\\
+    $\frac{d^2Q_d}{dPdI}$ tells us how much $Q_d$ changes if both $P$ and $I$ changes by one.
+    \section{Partial Elasticities}
+    - This is similar to the single variable calculus model.
+    Where the elasticity function was $\frac{dy}{dx} \frac{x}{y}$.\\
+    However, in this case we replace the single variable derivative with a partial derivative and replace the variable that is being changed.
+    \subsection{Quantity Demanded using 3 variables}
+    Let $Q_d = \beta_1 + \beta_2 P_{good} + \beta_3 P_{other\ good} + \beta_4 Income$.
+    This can be broken down to three individual elasticities.\\\\
+    $\frac{dQ_d}{dP_{good}} \frac{P_{good}}{Q_d} = \beta_2 \frac{P_{good}}{Q_d}$: This function is the price elasticity of Demand. If $P_{good}$ changes by 1\%, how much does $Q_d$ change by. $\beta_2$ is negative as this is a demand function.\\\\
+    $\frac{dQ_d}{dP_{other\ good}} \frac{P_{other\ good}}{Q_d} = \beta_2 \frac{P_{other\ good}}{Q_d}$: This function is the cross-product elasticity of Demand. If there is an one percent change in the price of the other good, how much does quantity change by?\\
+    \[ 
+        \beta_3 = 
+        \begin{cases}
+            Complements & \text{if $\beta_3 < 0$}\\
+            Substitutes & \text{if $\beta_3 > 0$}
+        \end{cases}   
+    \]
+    $\frac{dQ_d}{dI} \frac{I}{Q_d} = \beta_2 \frac{I}{Q_d}$: Income elasticity of demand. How much does quantity demanded change if Income increases by one percent?.\\
+    \[
+    \beta_4 =
+    \begin{cases}
+        Normal & \text{if $\beta_4 > 0$}\\
+        Inferior & \text{if $\beta_4 < 0$}
+    \end{cases}    
+    \]   
+    \pagebreak
+    \subsection{Application: Marginal variables}
+    Production Function(Cobb-Douglas):
+    $Q=AL^\beta K^\alpha$\\
+    Where:\\
+    A is the total factor productivity\\
+    L is the amount of workers\\
+    K is the amount of capital\\
+    $\beta$ and $\alpha$ are constants where in general $\beta + \alpha = 1$.\\
+    Marginal Product of labor:
+    $\frac{dQ}{dL} = \beta \frac{(AL^\beta K^\alpha)}{L} = \beta \frac{Q}{L}$\\
+    This equation is the Marginal product of labour as $\beta \text{Avg Product of labour} = MLP$\\
+    Marginal Product of Capital: 
+    $\frac{dQ}{dK} = \alpha \frac{A L^\beta K^\alpha}{K} = \alpha \text{avg product of capital} = MPK$.
+
+    \section{Optimization with multiple variables}
+    \begin{enumerate}
+        \item Unconstrained Optimization: Finding the max or min with no constraints. Not realistic as there are boundaries in reality.\\
+        - There are two different types of unconstrained optimization.
+        \begin{enumerate}
+            \item Single variable: All but one variable is fixed.\\
+             - This is similar to the single variable optimization where you find the First Order Condition, then the Second Order Condition, and finally find the coordinates of the optimization using the value of the root and constant(s). 
+            \item Multiple variables: All the variables can change.\\
+            - This uses a different algorithm then the single variable optimization.
+            \subsection{Algorithm for Multiple Variable Optimization}
+            Let $z = f(x,y)$
+            \begin{enumerate}
+                \item First Order Condition: Determine the roots for all partial derivatives\\
+                \begin{equation*}
+                    \frac{dz}{dy} = 0\ and\ \frac{dz}{dx} = 0
+                \end{equation*}
+                Use Linear Algebra to solve this system of equations to find the roots for both equations.
+                \pagebreak
+                \item Second Order Condition: Determine if the roots are max or min points.\\
+                - Both conditions must hold in order to satisfy this condition.
+                \begin{enumerate}
+                    \item Confirm that the point is a min or max point.
+                    \begin{itemize}
+                        \item Point is max iff
+                        \begin{equation*}
+                            \frac{d^2z}{dx^2} < 0 \wedge \frac{d^2z}{dy^2} < 0 
+                        \end{equation*}
+                        \item Point is min iff
+                        \begin{equation*}
+                            \frac{d^2z}{dx^2} > 0 \wedge \frac{d^2z}{dy^2} > 0 
+                        \end{equation*}
+                    \end{itemize}
+                    \item Confirm that this point is not on a saddle point.\\
+                    \begin{equation*}
+                        (\frac{d^2z}{dx^2})(\frac{d^2z}{dy^2}) - (\frac{d^2z}{dxdy}) > 0
+                    \end{equation*} 
+                \end{enumerate}
+                \item Find the coordinates of the optimization using the parameters found from the First Order Condition.
+            \end{enumerate}
+        \end{enumerate}
+        \item Constrained Optimization: Finding the max or min with constraints. More realistic.\\
+        - Internalize the constraint to solve this problem.\\
+        - Basically manipulate the constant into a single variable on one side and substitute it into the original function. E.x. $y = 5 + x$ >substitute into $z = y + 2xy$\\
+        - In most cases this becomes a single variable optimization problem. Use the step from those types of problems to solve this.
+    \end{enumerate}
+\chapter{Stat Review}
+\chapter{Simple Regression and OLS Estimation}
+\end{document}

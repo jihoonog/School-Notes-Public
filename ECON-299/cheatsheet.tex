@@ -1,0 +1,374 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb, mathtools}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Seamus) 
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\footnotesize\bfseries}}
+\makeatother
+
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols*}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{ECON 299 Cheatsheet}}
+\end{center}
+\section{GDP}
+\subsection{Nominal GDP}
+\begin{equation}
+    \sum^n_{i=1} = p_i\times q_i
+\end{equation}
+\subsection{Real GDP}
+\begin{equation}
+    \sum^n_{i=1} = p_{base year}\times q_i
+\end{equation}
+\section{Real, Nominal, Price Index}
+\subsection{Real Variable}
+\begin{equation}
+    \frac{Nominal Variable}{Price\ Index}\times 100
+\end{equation}
+\subsection{Nominal Variable}
+\begin{equation}
+    \frac{Real\ Variable}{100}\times Price\ Index
+\end{equation}
+\subsection{Price Index}
+\begin{equation}
+    \frac{Nominal\ Variable}{Real Variable}\times 100
+\end{equation}
+\subsection{Normalized Price Index$_t$}
+\begin{equation}
+    \frac{\text{Raw Price Index}_t}{\text{Raw Price Price}_{Base Year}}\times 100
+\end{equation}
+\section{LPI}
+\subsection{LPI$_t$}
+\begin{equation}
+    \frac{\sum^m_{i=0} P_{it}\times Q_{ib}}{\sum^m_{i=0}P_{ib}\times Q_{ib}}
+\end{equation}
+Where:\\
+m - is the basket of goods\\
+t - is the current time period\\
+b - is the base time period
+\subsection{LCL$_{t-1,t}$}
+\begin{equation}
+    \frac{\sum^m_{i=0} P_{it}\times Q_{it-1}}{\sum^m_{i=0} P_{it-1}\times Q_{it-1}}
+\end{equation}
+\subsection{LCPI$_t$}
+\begin{equation}
+    LCPI_{t-1} \times LCL_{t-1,t}
+\end{equation}
+Where LCPI$_1$ = 100
+\section{Joining Price Indexes}
+\subsection{Conversion factor}
+The price index must overlap
+\begin{equation}
+    \frac{\text{PI value from new base year}}{\text{PI value from old base year}}
+\end{equation}
+\subsection{Conversion}
+Multiply the old PI with the conversion factor to get the new PI.
+
+
+\section{Growth Rates}
+\begin{equation}
+    \left(\frac{X_t}{X_{t-1}}-1\right)\cdot 100
+\end{equation}
+\begin{equation}
+    \ln\left({\frac{X_t}{X_{t-1}}}\right)\cdot 100
+\end{equation}
+Only for small growth rates $<$ 5\%.
+\section{Financial Calculation}
+\subsection{Real Interest Rate}
+\begin{equation}
+    r_{norm}-\text{inflation rate}
+\end{equation}
+\subsection{Compound Interest}
+\begin{equation}
+    S = P(1+r)^t
+\end{equation}
+\begin{equation}
+    S = P\left(1 + \left(\frac{r}{m}\right)\right)^{m\cdot p}
+\end{equation}
+Where:\\
+S: Value of Asset\\
+P: Principle Amount\\
+r: Interest Rate\\
+t: \# of periods\\
+m: The frequency of the yearly rate
+\subsection{Effective Rate $r_e$}
+Normalize to the annual rate\\
+The first is only for the annual rate
+\begin{equation}
+    \left( 1 + \frac{r}{m}\right)^m    
+\end{equation}
+For all other periods of rates
+\begin{equation}
+    (1 + r)^m - 1
+\end{equation}
+\subsection{Present Value}
+\begin{equation}
+    \frac{S}{(1 + r)^t}
+\end{equation}
+\subsection{Future Payments}
+Receive the money at the beginning of each year.
+\begin{equation}
+    \frac{A\left(1-\frac{1}{1+r}^n\right)}{1-\left(\frac{1}{1+r}\right)}
+\end{equation}
+Receive the money at the end of each year.
+\begin{equation}
+    \frac{A\left(1-\frac{1}{1+r}^n\right)}{r}
+\end{equation}
+Where:\\
+A: is the annual value of Payments\\
+n: is the number of payments\\
+r: is the annual interest rate
+\subsection{Arithmetic $\mu$}
+\begin{equation}
+    \frac{\sum^n_{i=1} x_i}{n}
+\end{equation}
+\subsection{Geometric $\mu$}
+\begin{equation}
+    (\Pi^n_{i=1} x_i)^{1/n}
+\end{equation}
+\subsubsection{Geometric Interest rate}
+subtract the geometric $\mu$ by 1
+\subsection{UCC$_t$}
+\begin{equation}
+    P_{kt}\left( d_t + r_t - \left(\frac{P_{kt+1}}{P_{kt}}-1\right) \right)
+\end{equation}
+Where:\\
+$P_{tk}$: Purchase price of capital in period t\\
+$d_t$: rate of deprecation (annual)\\
+$r_t$: interest rate or RoR on alternative asset\\
+$\left(\frac{P_{kt+1}}{P_{kt}}-1\right)$: Capital gain or loss
+\section{Models}
+\subsection{Growth Formula}
+\begin{equation}
+    g = \left( \frac{X_t}{X_{t-1}} -1 \right)
+\end{equation}
+\begin{equation}
+    X_t = X_0(1+g)^t
+\end{equation}
+\begin{equation}
+    \ln(X_t) = \ln(X_0) + g\cdot t
+\end{equation}
+\subsubsection{Linear time trend model}
+\begin{equation}
+    X_t = \beta_1 + \beta_2 t
+\end{equation}
+\subsubsection{Quadratic time trend model}
+\begin{equation}
+    X_t = \beta_1 + \beta_2t + \beta_3t^2
+\end{equation}
+\subsubsection{Lin-Log model}
+\begin{equation}
+    X_t = \beta_1 + \beta_2\ln(t)
+\end{equation}
+\subsubsection{Reciprocal model}
+\begin{equation}
+    X_t = \beta_1 + \frac{\beta_2}{t}
+\end{equation}
+\subsubsection{Log-Log model}
+\begin{equation}
+    \ln|X_t| = \beta_1 + \beta_2 \ln|t|
+\end{equation}
+\subsubsection{Cyclical model}
+\begin{equation}
+    X_t = \beta_1 + \beta_2 \sin\left(\frac{2\pi}{t}\right)+ \beta_3 \cos\left(\frac{2\pi}{t}\right)
+\end{equation}
+\section{Stat} 
+\subsection{Economic model/Population Regression Function}
+\begin{equation}
+    Y_i = \beta_1 + \beta_2 X_i + \varepsilon_i
+\end{equation}
+\subsection{Sample Regression Function (OLS)}
+\begin{align}
+    \hat{Y_i} &= \hat{\beta_1} + \hat{\beta_2}X_i\\
+    \hat{\beta_2} &= \frac{\sum (X_i-\bar{X})(Y_i-\bar{Y})}{\sum(X_i-\bar{X})^2}\\
+    \hat{\beta_1} &= \bar{Y}-\hat{\beta_2}\bar{X}
+\end{align}
+\subsection{Expected Value / Mean}
+Population:
+\begin{align}
+    \mu_Y &= E(x) = \sum^n_{i=1} y_i\cdot pdf(y_i)\\
+    \mu_Y &= E(k) = k\\
+    \mu_Y &= E(a + bX) = a + bE(x)\\
+    \mu_Y &= E(x^a) = \sum^n_{i=1} x^a_i\cdot f(x)
+\end{align}
+Sample:
+\begin{equation}
+    \bar{Y} = \frac{\sum_{i=1}^N Y_i}{N}
+\end{equation}
+\subsection{Variance}
+Population:
+\begin{align}
+    \sigma^2_y = \sum^n_{i=1} &(y_i-E(y))^2\cdot f(y_i)\\
+    \sigma^2_k &= 0\\
+    \sigma^2_{a+bW} &= b^2\sigma^2_W\\
+    \sigma^2_{a+bW+cV} &=
+    b^2\sigma^2_W + c^2\sigma^2_V + 2bc\ Cov(W,V) \nonumber
+\end{align}
+Sample:
+\begin{equation}
+    S_Y^2 = \frac{\sum_{i=1}^N (Y_i = \hat{Y})^2}{N-1}
+\end{equation}
+\subsection{Std Dev}
+Population:
+\begin{equation}
+    \sigma_Y = \sqrt{\sigma^2_Y}
+\end{equation}
+Sample:
+\begin{equation}
+    S_Y = \sqrt{S_Y^2}
+\end{equation}
+\subsection{Conditional Probability}
+\begin{equation}
+    P(A|B) = \frac{P(A \cap B)}{P(B)}
+\end{equation}
+\subsection{Co-variance(W,V)}
+Population:
+\begin{equation}
+    \sum^N_{i=1}\sum^N_{j=1}(V_i-E(V))(W_j-E(W))f(V_i,W_j)
+\end{equation}
+Sample:
+\begin{equation}
+    \frac{\sum_{i=1}^N (V_i - \bar{V})(W_i - \bar{W})}{N-1}
+\end{equation}
+\subsection{Correlation(V,W)}
+Population:
+\begin{equation}
+    \sigma_{wv} = \frac{Cov(V,W)}{\sigma_V\sigma_W}
+\end{equation}
+Sample:
+\begin{equation}
+    r_{wv} = \frac{Cov(V,W)}{S_V S_W}
+\end{equation}
+\subsection{Statistical Independence}
+\begin{align}
+    f(w | any\ v) = f(w)\ \wedge &\ f(v|any\ w) = f(v)\\ \nonumber
+    \Downarrow& \\ \nonumber
+    Cov(v,w) = 0\ \wedge &\ Corr(v,w) = 0 \nonumber
+\end{align}
+\subsubsection{Std Err}
+\begin{equation}
+    \frac{S_x}{\sqrt{N}}
+\end{equation}
+\subsection{CI}
+\subsubsection{z-score}
+\begin{equation}
+    \frac{x-\mu_x}{\sigma}
+\end{equation}
+\subsubsection{t-score}
+\begin{equation}
+    \frac{x - \mu_x}{Std\ err}
+\end{equation}
+With $df(n-1)$
+\subsubsection{CI to a \%} 
+\begin{equation}
+    \bar{X} \pm t^\ast \cdot SE
+\end{equation}
+\section{Calculus}
+\subsection{Optimization}
+\subsubsection{3 steps for Optimization}
+\begin{enumerate}
+    \item FOC: find the roots of y'.
+    \item SOC: eval y'' to confirm max/min point.
+    \item find coordinates.
+\end{enumerate}
+\subsection{Multi-variable Calculus}
+\subsubsection{Second Cross Partial Derivatives}
+$\frac{\partial^2y}{\partial a\partial b}$
+means we first calculate $\frac{\partial y}{\partial a}$ then calculate $\frac{\partial y}{\partial b}$
+\subsection{Elasticity}
+\begin{equation}
+    \frac{\partial Q}{\partial P}\frac{P}{Q} = \text{Price slope} \times \frac{P}{Q}
+\end{equation}
+Replace P with other variables to find the elasticity for that variable.
+\subsection{Marginal Variables}
+    \begin{equation}
+    Q = AL^\beta K^\alpha
+    \end{equation}
+    \begin{equation}
+        \frac{\beta(AL^\beta K^\alpha)}{L} = \beta \frac{Q}{L} = \beta\times AvgPL  = MPL
+    \end{equation}
+    \begin{equation}
+        \frac{\alpha(AL^\beta K^\alpha)}{K} = \alpha \frac{Q}{K} = \alpha\times     AvgPK = MPK
+    \end{equation} 
+\subsection{Optimization}
+\subsubsection{Unconstrained}
+If all but one is a constant then it just a single variable optimization.\\
+If multiple variable then:\\
+- FOC: Find the roots for all partial derivatives.
+Use linear algebra to find the parameter values for the roots.\\
+-SOC: Make sure that the second-order partial derivatives are either all positive or all negative and that there is no saddle point.
+\begin{equation}
+    \left( \frac{\partial^2 z}{\partial x^2} \right) \left( \frac{\partial^2 z}{\partial y^2} \right) - \left( \frac{\partial^2 z}{\partial x \partial y} \right)^2 > 0
+\end{equation}
+-Find the coordinates of the optimization using the values found from the FOC.
+\subsubsection{Constraint}
+Internalize the constraint. i.e. use algebra to have a single variable on one side and all others and constants on the other. Then substitute it into the function that is being optimized. From there its the same as optimizing for a single variable function (For the most part).
+\subsection{Quadratic Equation}
+\begin{equation}
+    \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+\end{multicols*}
+\end{document} 
