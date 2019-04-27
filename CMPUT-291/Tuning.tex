@@ -1,0 +1,16 @@
+\documentclass{article}
+
+\begin{document}
+\section{Measure of Performance}
+\begin{description}
+    \item [Response time]: Average time to wait for a response to a particular query
+    \item [Throughput]: volume of work completed in a fixed amount of time (measured in transactions per second)
+    \item [Workload]: The amount and priority of queries processed by the database. (Lower the better)
+\end{description}
+\section{Normalization}
+Can improve or decrease performance.\\
+It can improve performance as less redundancy leads to more unique rows per record leading to a decrease in I/O operation.\\
+More tables leads to smaller and more clustered indexes.\\
+However, it can decrease performance as reducing redundancies can leads to a loss in functional dependencies which often leads to costly join operations.
+There is a trade off between maintaining functional dependencies and reducing redundancies. The choice of optimization is dependent on the situation at hand.
+\end{document}

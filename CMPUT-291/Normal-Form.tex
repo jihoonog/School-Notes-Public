@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{qtree}
+\begin{document}
+Lossless-join, Dependency Preserved Decomposition to 3NF.
+\begin{itemize}
+    \item Given a relation R with a minimal set of FDs.
+    \item Find a lossless-join decomposition of the R to BCNF.
+    \item For every FD $X \rightarrow A$ which is not preserved after the decomposition, create a new relation with the schema $XA$.
+    \item If the two relations $R1(X)$ and $R2(Y)$ exist where $X \subseteq Y$ delete $R1(X)$
+\end{itemize}
+
+\section{Example}
+FDs:\\
+$A \rightarrow B$, $A^+ = AB$\\
+$CE \rightarrow D$, $CE^+ = CDEABF$\\
+$BC \rightarrow D$, $BC^+ = BCDAB$\\
+$AE \rightarrow F$, $AE^+ = AEFB$\\
+$CD \rightarrow A$, $CD^+ = CDAB$
+\Tree [.R(A,B,C,D,E,F)\\$A\rightarrow B$ R1(A,B)\\$A\rightarrow B$ [.R2(A,C,D,E,F)\\$AE\rightarrow F$ R3(A,E,F)\\$AE\rightarrow F$ [.R4(A,E,C,D)\\$CD\rightarrow A$ R5(C,D,A)\\$CD\rightarrow A$ R6(E,C,D)\\$CE\rightarrow D$ ]]]\\ 
+The leaves of the tree are the relations that will create a lossless-join in BCNF.\\
+However, because $BC\rightarrow D$ is missing from the FD we create a new relation R7(B,C,D) and use that in conjunction with the relations created from the decomposition to create a lossless-join, dependency perserving decomposition in 3NF.
+\pagebreak
+\section{Why do we want to preserve the FDs?}
+\subsection{Answer}
+In order to maintain dependency constraint on the set of relations, one may have to join the table in order to check such constraint.
+Joining a table is computationally intensive and may lead to performance problems if the constraint is checked multiple times.
+\section{Summary}
+\begin{enumerate}
+    \item No redundancy (trade off with Dependency preserving)
+    \item Minimal number of relations
+    \item Lossless join (Necessary)
+    \item Dependency preserving (trade off with no redundancy)
+\end{enumerate}
+\end{document}
