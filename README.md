@@ -54,6 +54,16 @@ To build it manually use this command
 pdflatex -synctex=1 -interaction=nonstopmode filename.tex 
 # You may need to recompile as latex needs multiple passes in order to get cross-references to work. 
 ```
+
+## Future Goals
+- Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not on Linux Adobe Acrobat)
+- Speed up the compiling process. 
+- Easily change the color of the boxes within the same document.
+- Quickly create and typeset images
+- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Summer 2019 project)
+- Create a .sty template for assignments (Not in DnD format)
+
+
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicated stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 
 
