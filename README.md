@@ -33,27 +33,31 @@ As a Computing Science major I get exposed to a lot different programming and co
 - Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaurs Book**
 - Mastering Regular Expressions is called the **Owl Book**
 
-A lot of it can be traced back to O'Reilly Media as they started this trend as a way to distinguish them from other publishers.
+A lot of it can be traced back to O'Reilly Media as they started this trend as a way to distinguish themselves from other publishers.
 
-To continue the trend I decided to give a fantasy flair as a way to further increase the DnDness of my notes. Plus they provide excellent symbolism to the content of the course. 
+To continue the trend I decided to give a fantasy flair to further increase the DnDness of my notes. Plus they provide excellent symbolism to the content of the course. 
 
 ## To Build my Notes
-In order to build these notes yourself you need a few programs:
-- LaTeX typesetting engine: Either TeX Live (full) or MikTeX (required)
+In order to build these notes yourself you need at least one program:
+- LaTeX typesetting engine: Either TeX Live (full) or MikTeX is fine, TeX Live is preferred.
 - Rubber (you can manually build the notes yourself but its more of a pain) (recommended)
-- GNU Make (recommended)
+- GNU Make (recommended) if you want to use the Makefiles.
 
 Goto the root directory that contains the Makefile and type
 ``` make 
-    make full       # Build with the full paper background
-    make print      # Make the druids happy by building the notes with a white paper background 
-    make clean      # Clean the aux files
+make full       # Build with the full paper background
+make print      # Make the druids happy by building the notes with a white paper background 
+make clean      # Clean the aux files
 ```
-
+To build it manually use this command
+```
+pdflatex -synctex=1 -interaction=nonstopmode filename.tex 
+# You may need to recompile as latex needs multiple passes in order to get cross-references to work. 
+```
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicated stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 
 
 ## Copyright
-Due to the fact that I am using assets from the instructor as well images from Wizard of the Coast and/or other companies' IPs. If requested by their rightful owners I may have to remove them from this repository. Hopefully, I wouldn't need to as these are my personal notes that I had fun creativity making and make no monetary value on. If anything I lose money just by printing them. 
+Due to the fact that I am using assets from the instructor as well images from Wizard of the Coast and/or other companies' IPs. If requested by their rightful owners I may have to remove them from the repository. For some notes I will only provide the complete PDFs and not the LaTeX code if it requires access to certain copyright assets. 
 
 
