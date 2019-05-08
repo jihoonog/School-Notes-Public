@@ -24,7 +24,6 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | EAS-212   | Paul Myers        | Winter 2019 |
 | CMPUT-496 | Martin Muller     | Winter 2019 |
 | CMPUT-379 | Ioanis Nikolaidis | Winter 2019 |
-| ENGL-103  | Jennifer Sheckter | Spring 2019 |
 | CMPUT-415 | J Nelson Amaral   | Fall 2020   |
 
 ## The "Wacky" Cover Art
@@ -59,9 +58,9 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 - Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not on Linux Adobe Acrobat)
 - Speed up the compiling process. 
 - Easily change the color of the boxes within the same document.
-- Quickly create and typeset images
+- Quickly create and typeset images (Summer 2019 project)
 - Create a collections of snippets, macros and templates so it is easier to typeset my notes (Summer 2019 project)
-- Create a .sty template for assignments (Not in DnD format)
+- Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
 
 
 ## Disclaimer
