@@ -29,12 +29,16 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 ## The "Wacky" Cover Art
 As a Computing Science major I get exposed to a lot different programming and computing books. For example:
 - Compilers: Principles, Techniques, and Tools used in compiler design classes is affectionately known as the **Dragon Book**
-- Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaurs Book**
+- Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaur Book**
 - Mastering Regular Expressions is called the **Owl Book**
+- Programming Python has an **African Rock Python** on its cover
+- MySQL in a Nutshell has a **Pied Kingfisher** on its cover
 
 A lot of it can be traced back to O'Reilly Media as they started this trend as a way to distinguish themselves from other publishers.
 
-To continue the trend I decided to give a fantasy flair to further increase the DnDness of my notes. Plus they provide excellent symbolism to the content of the course. 
+To continue the trend I decided to give a fantasy flair to further increase the DnDness of my notes. Plus they provide a good metaphor to the content of the course. 
+
+I'm half tempted to call CMPUT-415 which is the compiler design course "How to Clang your Dragon" 
 
 ## To Build my Notes
 In order to build these notes yourself you need at least one program:
@@ -56,12 +60,13 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 
 ## Future Goals
 - Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not on Linux Adobe Acrobat)
-- Speed up the compiling process. 
-- Easily change the color of the boxes within the same document.
 - Quickly create and typeset images (Summer 2019 project)
-- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Summer 2019 project)
 - Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
 
+## Done/Somewhat Done
+- Easily change the color of the boxes within the same document. (Alpha)
+- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Alpha)
+- Speed up the compiling process. (Alpha)
 
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicated stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 

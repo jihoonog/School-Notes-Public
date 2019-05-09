@@ -1,0 +1,52 @@
+\ProvidesPackage{dndnotes}[2019/05/03 My note style]
+
+\RequirePackage{dnd}
+\RequirePackage{amsmath, amsthm, amssymb}
+\RequirePackage{microtype}
+\RequirePackage{lipsum}
+\RequirePackage{lmodern}
+\RequirePackage[hidelinks]{hyperref}
+\setlength{\marginparwidth}{2cm} % this is to fix margin warnings
+\RequirePackage[colorinlistoftodos,textsize=normalsize]{todonotes}
+
+
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{1}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+%% This is where the new environment starts
+% Math and term definitions
+\newenvironment{Definition}[1]{\begin{paperbox}{}\begin{definition}[#1]}
+{\end{definition}\end{paperbox}}
+\newenvironment{Theorem}[1]{\begin{paperbox}{}\begin{theorem}[#1]}
+{\end{theorem}\end{paperbox}}
+\newenvironment{Corollary}{\begin{paperbox}{}\begin{corollary}}
+{\end{corollary}\end{paperbox}}
+\newenvironment{Lemma}{\begin{paperbox}{}\begin{lemma}}
+{\end{lemma}\end{paperbox}}
+% Reviewing a list of things after a class
+\newenvironment{Review}{\begin{paperbox}{Review}[DmgLilac]}
+{\end{paperbox}}
+% For Additional notes
+\newenvironment{Note}{\begin{commentbox}{Note}[PhbTan]}
+{\end{commentbox}}
+\newenvironment{Questions}{\begin{commentbox}{Question(s)}\begin{enumerate}}
+{\end{enumerate}\end{commentbox}}
+\newenvironment{Answers}{\begin{commentbox}{Answer(s)}[PhbLightCyan]\begin{enumerate}}
+{\end{enumerate}\end{commentbox}}
+%% new commands for Cornell Methods
+%% These are useful for short, single question, item, and things to do.  
+\newcommand{\Cues}[1]{\todo[inline,backgroundcolor=green!20]{#1}}
+\newcommand{\Unsure}[1]{\todo[inline,backgroundcolor=red!20]{#1}}
+\newcommand{\Info}[1]{\todo[inline,backgroundcolor=purple!50]{#1}}
+\newcommand{\Improve}[1]{\todo[inline,backgroundcolor=blue!20]{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+%% TODO: 
+%% Add more mathematical key terms like conjectures, 
