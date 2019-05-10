@@ -38,7 +38,7 @@ A lot of it can be traced back to O'Reilly Media as they started this trend as a
 
 To continue the trend I decided to give a fantasy flair to further increase the DnDness of my notes. Plus they provide a good metaphor to the content of the course. 
 
-I'm half tempted to call CMPUT-415 which is the compiler design course "How to Clang your Dragon" 
+I'm half tempted to call CMPUT-415 which is the compiler design course "How to Clang Your Dragon" 
 
 ## To Build my Notes
 In order to build these notes yourself you need at least one program:
