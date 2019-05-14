@@ -17,6 +17,7 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 
 | Course ID | Instructor        | Term        |
 | :-------- | :---------------- | :---------- |
+| MATH-1410 | Habiba Kadiri     | Fall 2017   |
 | CMPUT-291 | Davood Rafiei     | Fall 2018   |
 | ECON-299  | Alexander Gainer  | Fall 2018   |
 | MATH-115  | Mohammad Niksirat | Winter 2019 |
