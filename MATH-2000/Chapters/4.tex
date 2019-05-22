@@ -1,0 +1,298 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{First Order Logic}
+\section{Quantifiers}
+Earlier, we observed that Propositional Logic cannot fully express ideas involving quantity, such as ``some'' or ``all.''  In this chapter, we will fill this gap by introducing quantifier symbols. Together with predicates and sets, which have already been discussed, this completes the language of First-Order-Logic. We will then use this language to translate assertions from English into mathematical notation.
+\\~\\
+Consider the following symbolization key
+\begin{itemize}
+    \item[U]: The set of all people.
+    \item[L]: The set of all people in \hbox to 0pt{Lethbridge.\hss} % !!!
+    \item[A]: The set of all angry people.
+    \item[H]: The set of all happy people.
+    \item [x$\mathrel{R}$y]: $x$ is richer than $y$
+    \item [d]: Donald
+    \item [g]: Gregor
+    \item [m]: Marybeth
+\end{itemize}
+Now consider these assertions
+\begin{itemize}
+    \item Everybody is happy
+    \item Everyone in Lethbridge is happy
+    \item Everyone in Lethbridge is richer than Donald
+    \item Someone in Lethbridge is angry
+\end{itemize}
+It might be tempting to translate Assertion 1 as $(d \in H)\ \&\ (g \in H)\ \&\ (m \in H)$. Yet this would only say that Donald, Gregor, and Marybeth are happy. We want to say that \emph{everyone} is happy, even if we have not listed them in our symbolization key. In order to do this, we introduce the ``$\forall$'' symbol. This is called the \textbf{universal quantifier}.
+\begin{Definition}
+    {Universal Quantifier}
+    \(\forall x\) mean "for all x"\\
+    \(\forall x \in X\) mean "for all x in X", where X is any set.
+\end{Definition}
+    For example this "\(\forall x,\ x\in H\)" means that everyone is happy.
+\begin{Note}
+    Each quantifier much have a variable that the quantifier affect. This variable could be from a set that is not the universe.
+\end{Note}
+To translate Assertion 4, we introduce another new symbol: the \textbf{existential quantifier} \(\exists\).
+\begin{Definition}
+    {Existential quantifier}
+    \(\exists e\) means "there exists some x, such that"\\
+    \(\exists x \in X\) means "there exists some x in X, such that", where X is any set.
+\end{Definition}
+\newpage
+Consider the following:
+\begin{itemize}
+    \item[S]:  The set of all students.
+    \item[B]: The set of all books.
+    \item[N]: The set of all novels.
+    \item[x$\mathrel{L}$y]: $x$ likes to read~$y$.
+\end{itemize}
+\begin{itemize}
+    \item[] $\forall n \in N, (n \in B)$ means "every novel is a book\rlap,"
+    and
+    \item[] $\forall s \in S, \bigl( \exists b \in B, (s  \mathrel{L} b) \bigr)$ means "for every student, there is some book that the student likes to read\rlap."
+\end{itemize}
+It is important to have proper ordering of quantifiers, as having them in different order means different things.
+\\~\\
+Consider the following:
+\begin{enumerate}
+    \item [U]: everything
+    \item \(\forall x(\exists y, x = y)\)
+    \item \(\exists x (\forall y, x = y)\)
+\end{enumerate}
+1 and 2 looks the same except for the ordering however 1 means "everything is equal to something" while 2 means "there exist something that equals to every other thing". The ordering is done from left to right manner.
+\begin{Theorem}
+    {Demorgans of Quantifiers}~\\
+    \(\neg \forall x, X(x) \equiv \exists x, \neg X(x)\)\\
+    \(\neg \exists x, X(x) \equiv \forall x, \neg X(x)\)
+\end{Theorem}
+\subsection{Vacuous Truth}
+Note that if the assertion
+	$$ \exists x \in A, \neg P(x)$$
+is true (where $A$ is any set and $P(x)$ is  any unary predicate), then there must exist an element~$a$ of~$A$, such that $P(a)$ is false. Ignoring the last condition (about $P(a)$), we know that $a \in A$, so $A \neq \emptyset$. That is, we know:
+	$$ \text{If the assertion \ $\exists x \in A, \neg P(x)$ \  is true, then $A \neq \emptyset$.} $$
+So the contrapositive is also true:
+	$$ \text{If $A = \emptyset$, then the assertion \ $\exists x \in A, \exists P(x)$ \ is false.} $$
+Therefore, the assertion $\exists x \in \emptyset, \neg P(x)$ is false, so its negation is true:
+\begin{paperbox}{The Assertion}
+    $\forall x \in \emptyset, P(x)$ is true.
+\end{paperbox}
+Since $P(x)$ is an arbitrary predicate, this means that any assertion about \emph{all} of the elements of the empty set is true; we say it is \textbf{vacuously true}.
+The point is that there is nothing in the empty set to contradict whatever assertion you care to make about all of the elements.
+\begin{paperbox}{Summary}
+    Any assertion about \emph{all} of the elements of the empty set is \emph{vacuously true}.
+\end{paperbox}
+\subsection{Uniqueness}
+Saying ``there is a \textbf{unique} so-and-so'' means not only that there is a so-and-so, but also that there is only one of them---there are not two different so-and-so's. For example, to say that
+``there is a \emph{unique} person who owes Hikaru money'' means
+\begin{quotebox}
+    some person owes Hikaru 
+    \emph{and} no other person owes Hikaru.
+\end{quotebox}
+This translates to
+    $$ \exists h\in H, \left( \forall y, (y \neq h \Rightarrow y \notin H) \right);$$
+or, equivalently,
+    $$ \exists h\in H, \left( \forall y, ( y \in H \Rightarrow y =h ) \right).$$ 
+Unfortunately, both of these are quite complicated expressions (and are examples of ``multiple quantifiers\rlap,'' because they use both $\exists$ and~$\forall$). To simplify the situation, mathematicians introduce a special notation: 
+\begin{Definition}
+    {Uniqueness Quantifier}~\\
+    ``$\exists!\, x$'' means ``there is a unique $x$, such that\dots''\\%
+    If $X$ is any set, then ``$\exists!\, x \in X$'' means ``there is a unique $x$ in~$X$, such that\dots''
+\end{Definition}
+\section{The introduction and elimination rules for quantifiers}
+As you know, there are two quantifiers ($\exists$ and~$\forall$). Each of these has an introduction rule and an elimination rule, so there are $4$~rules to present in this section. 
+Proofs in First-Order Logic can use both of these rules, plus all of the rules of Propositional Logic (such as the rules of negation and the basic theorems, including introduction and elimination rules), and also any other theorems that have been previously proved.
+\subsection{\texorpdfstring{$\exists$}{}-introduction}
+We need to determine how to prove a conclusion of the form 
+$\exists x \in X, \dots$. 
+For example, in a murder mystery, perhaps Inspector Thinkright gathers the suspects in a room and tells them, ``Someone in this room has red hair\rlap.'' That is a $\exists$-statement. (With an appropriate symbolization key, in which $P$~is the set of all of the the people in the room, and $R(x)$~is the predicate ``$x$~has red hair\rlap,'' it is the assertion $\exists p \in P, R(p)$.) How would the Inspector convince a skeptic that the claim is true? The easiest way would be to exhibit an explicit example of a person in the room who has red hair. For example, if Jim is in the room, and he has red hair, the Inspector might say,
+\begin{quotebox}
+``Look, Jim is sitting right there by the door, and now, when I take off his wig, you can see for yourself that he has red hair. So I am right that someone in this room has red hair\rlap.'' 
+\end{quotebox}
+In general, the most straightforward way to prove $\exists p \in P, R(p)$ is true is to find a specific example of a~$p$ that makes $R(p)$ true. That is the essence of the $\exists$-intro rule. 
+
+Here is a principle to remember:
+\begin{paperbox}{Principle}
+    The proof of an assertion that begins ``there exists~$x \in X$, such that\dots'' will usually be based on the statement ``Let $x =\boxed{}$\rlap,'' where the box is filled with an appropriate element of~$X$
+\end{paperbox}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Prove that there exist a real number \(c\), such that \(n^2 = 64\)
+\end{commentbox}
+\begin{proof}
+    Let \(n = 8 \in \R\). Then \(n^2 = 8^2 - 64\).
+\end{proof}
+\subsection{\texorpdfstring{$\exists$}{}-elimination}
+Perhaps Inspector Thinkright knows that one of the men lit a match at midnight, but does not know who it was. The Inspector might say,
+\begin{quotebox}
+``We know that one of the men lit a match at midnight. Let us call this mysterious gentleman `Mr.~X\rlap.' Because right-handed matches are not allowed on the island, we know that Mr.~X is left handed. Hence, Mr.~X is not a butler, because all of the butlers in this town are right handed. \dots''
+\end{quotebox}
+and so on, and so on, telling us more and more about Mr.~X, based only on the assumption that he lit a match at midnight.
+
+The situation in mathematical proofs is similar. Suppose we know there exists an element of the set~$A$. Then it would be helpful to have a name for this mysterious element, so that we can talk about it. But a mathematician would not call the element ``Mr.~X'': if it is an element of the set~$A$, then he or she would probably call it~$a$ (or $a_1$ if there are going to be other elements of~$A$ to talk about).  In general, the idea of the $\exists$-elimination rule is:
+\begin{paperbox}{Principle}
+    If $\exists x \in X, P(x)$ is known to be true, then we may let $x$ be an element of~$X$, such that $P(x)$ is true.
+\end{paperbox}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Show that if there exists $a \in \R$, such that $a^3 + a + 1 = 0$, then there exists $b \in \R$, such that $b^3 + b - 1 = 0$.
+\end{commentbox} 
+\begin{proof}
+    Assume there exists $a \in \R$, such that $a^3 + a + 1 = 0$. Let $b = -a$. Then $b \in \R$, and
+	\begin{align*}
+	 b^3 + b - 1
+	&= (-a)^3 + (-a) - 1
+	\\&= -a^3 - a - 1
+	\\&= -(a^3 + a + 1)
+	\\&= -0 
+	&& \text{(by the definition of~$a$)}
+	\\&= 0
+	, \end{align*}
+    as desired.
+\end{proof}
+\subsection{\texorpdfstring{$\forall$}{}-elimination}
+Perhaps Inspector Thinkright knows that Jeeves is a butler in the town, and that all of the butlers in the town are right handed. Well, then it is obvious to the Inspector that Jeeves is right handed. This is an example of $\forall$-elimination: if you know something is true about every element of a set, then it is true about any particular element of the set.
+\begin{paperbox}{Principle}
+    If $\forall x \in X, P(x)$ is true, and $a \in X$, then $P(a)$ is true.
+\end{paperbox}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Suppose 
+    \begin{enumerate}
+        \item $C \subset \R$, 
+        and
+        \item \label{x2=9Eg-x2=9}
+        $\forall x \in \R, \bigl( (x^2 = 9) \Rightarrow (x \in C) \bigr)$.
+    \end{enumerate}
+Show $\exists c \in \R, c \in C$.
+\end{commentbox}
+\begin{proof}
+    Let $c = 3 \in \R$. Then $c^2 = 3^2 = 9$, and letting $x = c$ in Hypothesis~\ref{x2=9Eg-x2=9}  tells us that
+        $$( c^2 = 9) \Rightarrow ( c \in C) .$$
+    Therefore $c \in C$.
+\end{proof}
+
+\subsection{\texorpdfstring{$\forall$}{}-introduction}
+If Inspector Thinkright needs to verify that all of the butlers in town have seen the aurora borealis, he would probably get a list of all the butlers, and check them one-by-one. That is a valid approach, but it could be very time-consuming if the list is very long. In mathematics, such one-by-one checking is often not just time-consuming, but impossible. For example, the set~$\N$ is infinite, so, if we wish to show $\forall n \in \N, (\text{$2n$ is even})$, then we would never finish if we tried to go through all of the natural numbers one-by-one. So we need to deal with many numbers at once. 
+
+Consider the following simple deduction:
+\begin{commentbox}{Deduction Example}
+    Hypotheses:
+    \begin{itemize}
+        \item[]Every butler in town got up before 6am today.
+        \item[]Everyone who got up before 6am today, saw the aurora.
+    \end{itemize}
+    Conclusion:
+    \begin{itemize}
+        \item[] Every butler in town saw the aurora.
+    \end{itemize}
+\end{commentbox}
+This is clearly a valid deduction in English.  Let us translate it into First-Order-Logic to analyze how we were able to reach a conclusion about all of the butlers, without checking each of them individually.  Here is a symbolization key:
+\begin{itemize}
+    \item[B]: The set of all of the butlers in town.
+    \item[P]: The set of all people.
+    \item[U(x)]: $x$ got up before 6am today.
+    \item[S(x)]: $x$ saw the aurora.
+\end{itemize}
+We can now translate our English deduction, as follows:
+
+Hypotheses
+\begin{itemize}
+    \item[]$\forall b \in B, U(b)$. 
+    \item[]$\forall p \in P, \bigl( U(p) \Rightarrow S(p) \bigr)$.
+\end{itemize}
+Conclusion: $\forall b \in B, S(b)$.    
+
+How do we justify the conclusion?  Well, suppose for a moment that we start to check every butler in town, and that $j$ represents Jimmy, who is one of the butlers in town.  Then our first hypothesis allows us to conclude $U(j)$.  Since Jimmy is a person, our second hypothesis allows us to conclude that $U(j) \Rightarrow S(j)$. Then, using $\Rightarrow$-elimination, we conclude $S(j)$.  But there was nothing special about our choice of Jimmy.  All that we know about him, is that he is a butler in the town.  So we could use exactly the same argument to deduce $S(b)$ for any butler~$b$ in the town.
+
+This is how we justify a $\forall$-introduction.  If we can prove that the desired conclusion is true for an \emph{arbitrary} element of a set, when we assume \emph{nothing} about the element except that it belongs to the set, then the conclusion must be true for every element of the set.
+
+We write the above deduction as follows:
+\begin{Theorem}
+    {}
+    Assume that every butler in town got up before 6am today. Also assume that everyone who got up before 6am today, saw the aurora. Then every butler in town  saw the aurora.
+\end{Theorem}
+\begin{proof}
+    Let $b$ represent an arbitrary butler in town. Then, since all of the butlers got up before 6am, we know that $b$ got up before 6am. By hypothesis, this implies that $b$~saw the aurora.  Since $b$ is an arbitrary butler in town, we conclude that every butler in town saw the aurora.
+\end{proof}
+This reasoning leads to the $\forall$-introduction rule: in order to prove that \emph{every} element of a set~$X$ has a certain property,  it suffices to show that an \emph{arbitrary} element of~$X$ has the desired property. For example, if we wish to prove $\forall b \in B, P(b)$, then our proof should start with the sentence ``Let $b$ be an arbitrary element of~$B$\rlap.'' (However, this can be abbreviated to: ``Given $b \in B$, \ldots'') After this, our task will be to prove that $P(b)$ is true, without assuming anything about~$b$ other than it is an element of~$B$.  
+\begin{paperbox}{Principle}
+    The proof of an assertion that begins ``for all $x \in X$\rlap,'' will usually begin with ``Let $x$ be an arbitrary element of~$X$'' (or, for short, ``Given $x \in X$\rlap,'').
+\end{paperbox}
+\begin{Note}
+    It is important not to assume anything about~$x$ other than that it is an element of~$X$. If you choose~$x$ to be a particular element of~$X$ that has some special property, then your deduction will not be valid for \emph{all} elements of the set.
+\end{Note}
+\Cues{This is the proof proof subsection: The pain in the ass that makes math people win Fields medal.}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Suppose we would like to justify the following deduction:
+    \begin{quote}
+        All of the butlers in town dislike Jimmy, and Jimmy is a butler in town. Therefore, all of the butlers in town dislike  themselves.
+    \end{quote}
+Then it suffices to show, for an arbitrary butler~$b$, that $b$ dislikes~$b$. We might try the following proof:
+\end{commentbox}
+
+\begin{proof}[\textbf{Proof attempt}]
+    Let $b$ be Jimmy, who is a butler in town.  Then, since all of butlers in town dislike Jimmy, we know that $b$ dislikes Jimmy. Since $\text{Jimmy} = b$, this means $b$ dislikes~$b$, as desired.  So every butler in town dislikes himself.
+\end{proof}
+This proof is certainly \emph{not} valid, however.  Letting $b = \text{Jimmy}$ does not make~$b$ an \emph{arbitrary} butler; rather, it makes~$b$ a very special butler --- the one that everybody dislikes. In this case, conclusions that are true about~$b$ are not necessarily true about the other butlers.
+
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Assume $A$ and~$B$ are sets. We have $A = B$ if and only if $A \subset B$ and $B \subset A$.
+\end{commentbox}
+\begin{proof}
+    ($\Rightarrow$) Assume $A = B$. 
+    Every set is a subset of itself, so we have 
+    $$ \text{$A = B \subset B$ \quad and \quad $B = A \subset A$,}$$
+    as desired.
+    
+    ($\Leftarrow$) Assume $A \subset B$ and $B \subset A$. We wish to show $A = B$; in other words, we wish to show 
+        $$ \forall x,  (x \in A \Leftrightarrow x \in B) .$$
+    
+    Let~$x$ be arbitrary.
+    
+    \qquad($\Rightarrow$) Suppose $x \in A$. Since $A \subset B$, this implies $x \in B$.
+    
+    \qquad($\Leftarrow$) Suppose $x \in B$. Since $B \subset A$, this implies $x \in A$.
+    
+    \noindent Therefore, $x \in A \Leftrightarrow x \in B$. 
+    Since $x$~is arbitrary, this implies $\forall x, (x \in A \Leftrightarrow x \in B)$, as desired.
+\end{proof}
+
+\section{Counterexample (reprise)}
+\underline{Recall:} to show  deduction is valid, we provided a proof: to prove its valid.
+
+\begin{Definition}
+    {Counterexample}
+    To show a deduction that is not valid we provided a counterexample. We only need a single example that the proof is not valid. That is the assumption(s) are correct but the conclusion is not.
+\end{Definition}
+
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Show that the following deduction is not valid:
+    $$ \exists x, (x \in A), \qquad \therefore \ \forall x, (x \in A) .$$
+\end{commentbox}
+\textit{Scratchwork.} We could consider what this says if A is the set of Flyers fans. So our universe could be all people A where A could be Flyers fans in this room.
+
+Then the deduction becomes. There exist a Flyer fan in this room. Therefore everyone in this room is a Flyers fan.
+
+Which is clearly not valid.
+
+\begin{proof}[Counterexample]
+    Let
+	$$ \text{$\mathcal{U} = \{1,2\}$ and $A = \{1\}$.} $$
+    Then:
+    \begin{itemize}
+    \item[] $1 \in A$ is true, so $\exists x, (x \in A)$ is true,
+    so the hypothesis is true, 
+    \end{itemize}
+    but
+    \begin{itemize}
+    \item[] $2 \notin A$, so $\forall x, (x \in A)$ is false, so the conclusion is false.
+    \end{itemize}
+    Since we have a situation in which the hypothesis is true, but the conclusion is false, the deduction is not valid.
+\end{proof}
+
+
+\section{Proof strategies}
+The strategies  we used in Propositional Logic is the same strategies we use in First-Order-Logic
+\begin{enumerate}
+    \item If you have \(\exists x,A(x)\) you probably want to do an \(\exists\)-elimination, assume A(c) for some undeclared 'c'.
+    \item If you're trying to deduce an assertion: \(\forall x, A(x)\), you probably want to use a \(\forall\)-intro, use the form Let \(x\in X\) or given \(x\in X\).
+    \item If you have \(\forall x , A(x)\), and it might be useful to know A(c) for some constant c, then you can use \(\forall\)-elimination
+\end{enumerate}
+\end{document}

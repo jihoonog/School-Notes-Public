@@ -1,0 +1,106 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Sets}
+Consider the following deduction\\
+Assumption:
+\begin{itemize}
+    \item Merlin is a wizard
+    \item All wizards wear funny hats
+\end{itemize}
+Conclusion: Merlin is wearing a funny hat.
+\\~\\
+This type of language is called first order logic\\
+A \underline{predicate} is an expression like "\underline{\ \ \ } is wearing a funny hat." This is not an assertion on its own, because it is neither true nor false until we fill in the blank, to specify who it is that we claim is wearing a funny hat.
+\\~\\
+The words "all" and "some" are \textit{quantifiers}, and we will have symbols that represent them. For instance, "\(\exists\)" will mean "There exists some \underline{\ \ \ }, such that." Thus, to say that someone is wearing a funny hat, we can write \(\exists x, H(x)\) where \(H(x)\) is "x is wearing a funny hat." This mean that there exist a person x that is wearing a funny hat. \(\forall\) will mean "For all \underline{\ \ \ }, such that." Thus, to say that everyone is wearing a funny hat, we can write \(\forall x, H(x)\).
+\section{Sets}
+A \underline{set} is a collection of unique, unordered objects. The objects in the set are called \underline{elements} or members of the set. 
+\subsection{Roster method}
+An easy way to describe a set is simply list all the elements in the set. Let \(X\) be a set, then we can write it like this \(X = \{1,2,3,4,5\}\), \(\in\) means the element is in the set, while \(\notin\) means the element is not in the set. For example, \(1 \in X\) while \(8\notin X\)
+\\~\\
+There is a unique set called the \textbf{empty set} which is a set that has no elements, it is written like this \(\emptyset\) or \( \{\}\)
+\\~\\
+A set is determined by its elements, we cannot have two distinct sets with identical elements.
+\subsubsection{List of common sets}
+\begin{itemize}
+    \item \(\mathbb{N} = \{0,1,2,3,\dots\}\) - Natural Numbers
+    \item \(\mathbb{N}+ = \{1,2,3,\dots\}\) - Positive Natural Numbers
+    \item \(\mathbb{Z} = \{\dots,-2,1,0,1,2,\dots\}\) - Integers
+    \item \(\mathbb{Q} = \{\frac{a}{b}|a,b\in \mathbb{Z}, and\ b\neq 0\}\) - Rational Numbers
+    \item \(\mathbb{R} = \{\pi, e, 12.3,1,2,-1,2029\}\) - Real Numbers
+    \item \(\mathbb{C} = \{a + bi | a,b\in \mathbb{R}\}\) - Complex Numbers
+\end{itemize}
+\subsection{Cardinality}
+\begin{Definition}
+    {Cardinality}
+    The number of elements within a set.
+    \\~\\
+    \textbf{Notation:} Let A be a set. \#A or |A| means the cardinality of A
+\end{Definition}
+\begin{Note}
+    Infinity is a valid "number" within this context. Also the set A is said to be finite if and only if there exist some natural number n such that |A| = n.
+\end{Note}
+\subsection{Subset}
+Suppose A and B are sets, we say that A is a subset of B and write \(A \subseteq B\) if and only if for every x if x is in A then x must be in B. 
+\begin{Definition}
+    {Subset}
+    \(A \subseteq B \leftrightarrow \forall x (x\in A \rightarrow x\in B)\).
+    \\~\\
+    We can say that A is contained in B, B contains A, or B is a superset of A.
+\end{Definition}
+\begin{Note}
+    We write \(A\subset\) if A is a \underline{proper subset} of B but A and B are different. \(A \not\subseteq B\) means A is not a subset of B.
+    \\~\\
+    \begin{enumerate}
+        \item For all set A, then \(A\subseteq A\)
+        \item For every set A, then \(\emptyset \subseteq A\)
+        \item If \(A\subseteq B\) then \(|A| \leq |B|\)
+        \item Let A and B bet sets. \(A = B\) if and only if they are a subset of each other. i.e., \(A\subseteq B\) and \(B \subseteq A\) 
+    \end{enumerate}
+\end{Note}
+
+\section{Predicates}
+The simplest predicates are things we can say about on individual objects. for example "x is a dog" or "x is tall" could be symbolize as D(x): "x is a dog" or T(x): "x is tall". Predicates such as these are called unary or one-place predicates, they only have one object for their predicates. Other predicates are about relations between objects i.e., x = y, or x > y. These are examples of two-place or binary predicates. By convention, when we are writing our symbolization key specific objects (constant) go to the end. So for example
+\begin{itemize}
+    \item S(x): "x is a Skaven"
+    \item xAy: "x assassinated y"
+    \item i: Ikit Claw
+    \item m: Malekith
+\end{itemize} 
+\subsection{Set Builder Notation}
+Rather than listing all the elements of a set, it is often more convenient to use predicates to build sets. Suppose A is a set, and P(x) is a predicate. Then \(\{z\in A;P(a)\}\) denotes the set of all elements in A, for which P(a) is true.
+\\~\\
+If A is a set, P(x) is a predicate, \(B = \{a\in A; P(a)\}\) then the assertion \(b\in B\) is logically equivalent to the assertion \(b\in A \wedge P(b)\). In a proof this \(\equiv\) could be justified as the definition of B. 
+\\~\\
+When we are talking about sets or predicates we usually assume a universe of discord (U) has been agreed upon. This means all element of the sets are assumed to be elements of (U). Then {x|P(x)} could be short hand to \(\{x\in U|P(x)\}\). Instead of writing D(x) for "x is a dog" we might let D denote the set of all dogs and we can say \(x\in D\).
+
+\section{Set Operations}
+\begin{Theorem}
+    {Set Operations}~\\
+    \begin{itemize}
+        \item Union: \(A\bigcup B =  \{x | x \in A \vee x\in B\}\)
+        \item Intersection: \(A\bigcap B = \{x| x\in A \wedge x\in B\}\)
+        \item Set Difference: \(A\backslash B = \{x | x\in A \wedge x\not\in B\}\)
+        \item Complements: \(\bar{A} = \{x \in U | x\not\in A\} = U\backslash A\)
+    \end{itemize}
+\end{Theorem}
+\begin{Definition}
+    {Disjoint Set}
+    Two sets A and B are said to be disjoint if and only if \(A \wedge B = \emptyset\). Meaning there is nothing common between the two sets.
+\end{Definition}
+\begin{Definition}
+    {Power Set}
+    The power set of set A is the set of all subsets of A: \(\mathcal{P}(A) = \{B|B\subseteq A\}\). For example if \(A = \{a,b,c\}\). The power set of A \textbf{denoted} P(A) would be this: \(\{\emptyset, \ \{a\}, \{b\}, \{c\}, \ \{a,b\}, \{a,c\}, \{b,c\}, \ \{a,b,c\} \}\)
+\end{Definition}
+
+\section{Example}
+Let A and B be sets, prove that if \(x \in \bar{A}\bigcup \bar{B}\), then \(x\in \overline{(A\bigcap B)}\). DeMorgans for sets.
+\begin{proof}
+    Let \(x\in \bar{A}\bigcup \bar{B}\), then by definition of union we have x be either \(x \in \bar{A}\) or \(X \in \bar{B}\). We will solve by cases.
+    \begin{enumerate}
+        \item if \(x\in \bar{A}\), then by definition of complements, \(x\notin A\), and therefore \(x\notin A\bigcap B\), then by definition of complement we have \(x \in \overline{A\bigcap B}\)
+        \item  if \(x\in \bar{B}\), then by definition of complements, \(x\notin B\), and therefore \(x\notin A\bigcap B\), then by definition of complement we have \(x \in \overline{A\bigcap B}\)
+    \end{enumerate}
+    In either case we see that \(x \in \overline{A\bigcap B}\) and therefore conclude that if \(x\in \bar{A} \bigcup \bar{B}\) then \(x \in \overline{A\bigcap B}\).
+\end{proof}
+\end{document}

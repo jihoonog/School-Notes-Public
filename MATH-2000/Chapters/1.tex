@@ -1,0 +1,144 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Introduction and Logical Deduction}
+\section{Course Description}
+This course can be viewed as a "math as a second language" course. It introduces basic concepts such as logic, set theory, and techniques of proof that form the foundation of mathematics. The course acts as a bridge between computational courses like calculus, and later theoretical courses, like analysis and number theory.
+\section{Course Objective}
+The main goal in this course is to develope the ability to learn to write proofs and form mathematical arguments. We want to make the transition from \textit{using} mathematics - for example, computing a derivative using established rules - and \textit{doing} mathematics - establishing those rules in the first place, and explaining why they're valid. You will learn the precise logical meaning of words like 'and, 'or', and 'if', and why a precise meaning is necessary. While we will be stressing the importance of proper syntax, the primary focus will be on learning to produce writing that is clear and concise, and easily understood by the rest of your classmates. Even if you not planning to continue to higher-level math courses, this course should prepare you for any situation where clear technical writing or convincing arguments are needed.  
+\section{Logic}
+Logic includes a hypothesis (assumptions), and a conclusion. For example, today is tuesday and you have Math 2000 on tuesday and thursday. Therefore, you have Math 2000 today.
+
+\begin{Definition}
+    {Assertion}
+    An assertion is a sentence which is either \textbf{True} or \textbf{False} (has a truth value) proposition. For example, today is a tuesday, this is an assertion, Is today a tuesday? is not an assertion.
+\end{Definition}
+\begin{Definition}
+    {Deduction}
+    is a series of hypothesis or assumptions followed by a conclusion, where each of the hypothesis and the conclusion are assertion. For example, Socrates is a man, and all man are mortal, therefore Socrates is mortal.
+    \\~\\
+    A deduction is valid if its conclusion is true whenever all it's hypothesis is true. In other words it is impossible to have a situation where all the hypothesis is true but the conclusion is false.
+\end{Definition}
+
+\chapter{Propositional Logic}
+\begin{paperbox}{Notation}
+    in propositional logic, capital letters are used to represent assertion. Considered only as a symbol of propositional logic, the letter 'A' could represent any assertion. Therefore, it is important to provide a symbolization key when translating english to PL.
+\end{paperbox}
+For example let:
+\begin{dndtable}[lX]
+    A & There is an apple on the desk\\
+    B & If there is an apple on the desk then Jenny made it to class\\
+    C & Jenny made it to class
+\end{dndtable}
+This is our symbolization key.
+\\~\\
+We can write this as: A, B, Therefore C.
+\begin{Note}
+    Assertions that are represented by a single letter are called \underline{atomic} assertions. These are the building blocks from which more complex assertions are made. 
+\end{Note}
+
+\section{Connectives}
+\begin{dndtable}[XXX]
+    \textbf{Symbol} & \textbf{'read as'} & \textbf{meaning}\\
+    \textasciitilde/- & Not & is not the case \underline{ \ \ }\\
+    \& /$\wedge$ & And & both \underline{ \ \ } and \underline{ \ \ }\\
+    $\vee$ & Or & Either \underline{ \ \ } or \underline{ \ \ }\\
+    \(\rightarrow\) & implies & if \underline{ \ \ } then \underline{ \ \ }\\
+    \(\leftrightarrow\) & iff & \underline{ \ \ } if and only if \underline{ \ \ }
+\end{dndtable}
+The following holds for any assertion P.
+\begin{enumerate}
+    \item If P is true then $\neg$P is false
+    \item If P is false then $\neg$P is true
+\end{enumerate}
+\begin{Note}
+    \begin{itemize}
+        \item \(\vee\) and \(\wedge\) are commutative, while \(\rightarrow\) is not. 
+    \end{itemize}
+\end{Note}
+\section{Tautologies and Contradictions}
+\textbf{Tautologies} are true values by their logical structure and their truth values are independent from their atomic assertions. \textbf{Contradictions} follows the same idea as tautologies but with false values instead.
+\\~\\
+For example:
+\begin{itemize}
+    \item \(P\vee \neg P =\) tautology also called the law of excluded middle since it says that every assertion true or false
+    \item \(P \wedge \neg P = \) contradiction 
+\end{itemize}
+\section{Logical equivalences}
+\begin{Definition}
+    {Logical equivalences}
+    Two assertions P and Q are said to be logically equivalent provided by both obtain the same truth value for every possible truth value assignment for their atomic assertion.
+    \\~\\
+    Denoted as \(\equiv\).
+    \\~\\
+    Rules for equivalence:
+    \begin{itemize}
+        \item \(\neg \neg P = P\)
+        \item \(\neg (P\vee Q) \equiv \neg P \wedge \neg Q\)
+        \item \(\neg (P\wedge Q) \equiv \neg P \vee \neg Q\)
+        \item \(\neg (P \rightarrow Q) \equiv \neg P \wedge \neg Q\)
+        \item \(\neg (P\leftrightarrow Q) \equiv P \leftrightarrow \neg Q \)
+        \item \(P \vee Q \equiv Q \vee P\)
+        \item \(P \wedge Q \equiv Q \wedge P\)
+        \item \(P \leftrightarrow Q \equiv Q \leftrightarrow P\)
+        \item \(P\wedge (Q \wedge R) \equiv (P \wedge Q) \wedge R\) same with \(\vee\)
+        \item \(P\wedge (Q \vee R) \equiv P\wedge Q \vee P \wedge R\)
+        \item \(P \vee (Q \wedge R) \equiv (P \vee Q) \wedge (P\vee R)\)
+        \item \(P \Rightarrow R \equiv \neg P \vee Q\)
+    \end{itemize}
+    \Cues{Follows the same algbraic rules}
+\end{Definition}
+\begin{Definition}
+    {Converse}
+    For an implication \(P\rightarrow Q\) its converse is the implication \(Q\rightarrow P\)
+\end{Definition}
+\begin{Definition}
+    {Contrapositive}
+    For an implication \(P \rightarrow Q\) its  contrapositive is the implication \(\neg Q \rightarrow \neg P\)
+\end{Definition}
+\begin{Note}
+    Implication is not logically equivalent to its converse.
+\end{Note}
+\begin{Definition}
+    {Inverse}
+    For an implication \(P \rightarrow Q\) its inverse is the implication \(\neg P \rightarrow \neg Q\)
+\end{Definition}
+\begin{Note}
+    \begin{itemize}
+        \item an implication  is not logically equivalent to its inverse
+        \item an implication is logically equivalent to its contrapositive.
+    \end{itemize}
+\end{Note}
+
+\section{Rules for Propositional Logic}
+\begin{enumerate}
+    \item Repeat: \(A \therefore A\)
+    \item ANDIntro: \(A,B \therefore A\wedge B\)
+    \item AND-Elim: \(A\wedge B \therefore A\ /\ A\wedge B \therefore B\)
+    \item OR-Intro: \(A\therefore A \vee B\)
+    \item OR-Elim: \(A\vee B, -A \therefore B\) (Modus Ponens)
+    \item Implicit-Elim: \(A \rightarrow B, A \therefore B\)
+    \item IFF-Intro: \(A \rightarrow B, B\rightarrow A \therefore A\leftrightarrow B\)
+    \item IFF-Elim: \(A \leftrightarrow B \therefore A \rightarrow B\)
+    \item Proof by cases: \(A\vee B, A\rightarrow C, B\rightarrow C \therefore C\)
+\end{enumerate}
+\Cues{Intro combines the atomic assertions into the binary operator for its conclusion}
+\Cues{Elim turns the binary operator into an atomic assertion that has to be true}
+\(P \rightarrow Q\) can be expressed in a number of ways
+\begin{itemize}
+    \item If P, then Q, Q if P
+    \item P implies Q, whenever P is true then Q is true
+    \item P only if Q, Q is true whenever P is true
+    \item Q is necessary for P, P is sufficient for Q
+\end{itemize}
+\(P \leftrightarrow Q\) could mean: P if and only if Q, P implies Q and Q implies P, P is necessary and sufficient for Q.
+\begin{Questions}
+    \item Explain Why MP is valid?
+\end{Questions}
+\begin{Answers}
+    \item If we know that A is true and we know that A is a sufficient condition for B to be true, then B must be true. 
+\end{Answers}
+Prove that \(A\leftrightarrow B\)
+\begin{proof}
+    \(A \rightarrow B\) s false if A is true and B is false, \(B \rightarrow A\) is false if B is T and A is false. Hence, we see that \(A\rightarrow B\), and \(B\rightarrow A\) are both true whenever A and B have the same truth value, These are precisely the conditions for which \(A \leftrightarrow B\) are true. 
+\end{proof}
+\end{document}

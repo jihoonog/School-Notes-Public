@@ -1,0 +1,256 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Equivalence Relations}
+\section{Binary relations}
+\begin{Definition}
+    {Binary relations}
+    Suppose A and B are sets
+    \begin{enumerate}
+        \item Any subset of \(A \times B\) is called a \textbf{relations from A to B}
+        \item For the special case where \(A = B\), any subset of \(A \times A\) is called a \textbf{binary relations} on A.
+    \end{enumerate}
+\end{Definition}
+\textbf{Notation:} Let R be any notation.
+\begin{enumerate}
+    \item if \((x,y) \in R\) we write \(xRy\)
+    \item if \(x,y) \in R\) we write \(x\not R\ y\)
+\end{enumerate}
+There are other relations like \(>\) and \(<\).
+\begin{Definition}
+    {}
+    Suppose R is a binary relation on a set A.
+    \begin{enumerate}
+        \item We say that $R$ is \textbf{reflexive} if and only if \quad
+              $ \forall a \in A, (a R a) \vphantom{\Bigr)}$.
+        \item We say that $R$ is \textbf{symmetric} if and only if \quad
+              $ \forall a,b \in A, \bigl( (a R b) \implies (b R a) \bigr) \vphantom{\Bigr)}$.
+        \item We say that $R$ is \textbf{transitive} if and only if \quad
+              $ \forall a,b,c \in A, \Bigl( \bigl( (a R b)\ \text{\&}\ (b R c) \bigr) \implies (a R c) \Bigr) $.
+    \end{enumerate}
+\end{Definition}
+
+\begin{Definition}
+    {digraph}
+    We can draw a picture to represent any given binary relation on any given set~$A$:
+    \begin{itemize}
+        \item Draw a dot for each element of~$A$.
+        \item For $a,b \in A$, draw an arrow from $a$ to~$b$ if and only if $(a,b)$ is an element of the relation.
+    \end{itemize}
+    The resulting picture is called a \textbf{digraph}.
+\end{Definition}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Consider the relation \(R = \{(1,1),(2,2),(3,3),(1,2),(2,1),(2,3),(3,2)\}\) we can represent this relation by drawing a digraph
+\end{commentbox}
+\begin{figure}[htbp]
+    \centering
+
+
+    \begin{tikzpicture}[
+            roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+            squarednode/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+        ]
+        %Nodes
+        \node[roundnode]      (maintopic)                              {2};
+        \node[roundnode]        (uppercircle)       [above=of maintopic] {1};
+        \node[roundnode]      (rightsquare)       [right=of maintopic] {3};
+
+        %Lines
+        \draw[->] (uppercircle.south) -- (maintopic.north);
+        \draw[<-] (uppercircle.south) -- (maintopic.north);
+        \draw[->] (maintopic.east) -- (rightsquare.west);
+        \draw[<-] (maintopic.east) -- (rightsquare.west);
+        \draw[->] (maintopic) to [out=330,in=300,looseness=8] (maintopic);
+        \draw[->] (uppercircle) to [out=330,in=300,looseness=8] (uppercircle);
+        \draw[->] (rightsquare) to [out=330,in=300,looseness=8] (rightsquare);
+    \end{tikzpicture}
+    \caption{Digraph of the relation above}
+    \label{fig:digraph}
+\end{figure}
+\\
+This relation is:
+\begin{enumerate}
+    \item reflexive since \(1R1\),\(2R2\),\(3R3\)
+    \item symmetric since \(\forall_{(a,b)}\in R\) we have \((b,a)\in R\), \(\forall a,b \in \{1,2,3\}\ (aRb)\implies (bRa)\)
+    \item not transitive, since 1R2, 2R3, but 1 is not related to 3
+\end{enumerate}
+
+\section{Definition and basic properties of equivalence relations}
+\begin{Definition}
+    {equivalence relation}
+    An \textbf{equivalence relation} on a set~$A$ is a binary relation on~$A$ that is reflexive, symmetric, and transitive.
+
+    Instead of representing an equivalence relation by a letter, it is traditional to use the symbol~$\sim$%
+    (or sometimes~$\equiv$%
+    or~$\cong$).%
+\end{Definition}
+\begin{Questions}
+    \item Define a binary relation~$\sim$ on~$\R$ by $x \sim y$ if and only if $x^2 = y^2$. Then $\sim$ is an equivalence relation.
+    \item \label{NxNEquivRelEg}
+    Define a binary relation~$\sim$ on~$\N \times \N$ by $(a_1,b_1) \sim (a_2,b_2)$ if and only if $a_1 + b_2 = a_2 + b_1$. Then $\sim$ is an equivalence relation.
+
+\end{Questions}
+
+\begin{Answers}
+    \item
+    \begin{proof}
+        We wish to show that $\sim$ is reflexive, symmetric, and transitive.
+
+        (reflexive) Given $x \in \R $, we have $x^2 = x^2$, so $x \sim x$.
+
+        (symmetric) Given $x,y \in \R$, such that $x \sim y$, we have $x^2 = y^2$. Since equality is symmetric, this implies $y^2 = x^2$, so $y \sim x$.
+
+        (transitive) Given $x,y,z \in \R$, such that $x \sim y$ and $y \sim z$, we have $x^2 = y^2$ and $y^2 = z^2$. Therefore $x^2 = y^2 = z^2$, so $x^2 = z^2$. Hence $x \sim z$.
+    \end{proof}
+    \item
+    \begin{proof}
+        We wish to show that $\sim$ is reflexive, symmetric, and transitive.
+
+        (reflexive) Given $(a,b) \in \natural \times \natural$, we have $a + b = a + b$, so $(a,b) \sim (a,b)$.
+
+        (symmetric) Given $(a_1,b_1) , (a_2,b_2) \in \natural \times \natural$, such that $(a_1,b_1) \sim (a_2,b_2)$, the definition of~$\sim$ tells us that $a_1 +b_2 = a_2 + b_1$. Since equality is symmetric, this implies $a_2 + b_1 = a_1 + b_2$, so $(a_2,b_2) \sim (a_1,b_1)$.
+
+        (transitive) Given $(a_1,b_1) , (a_2,b_2) , (a_3,b_3) \in \natural \times \natural$, such that
+        $$ \text{$(a_1,b_1) \sim (a_2,b_2)$ \ and \  $(a_2,b_2) \sim (a_3,b_3)$} ,$$
+        we have
+        \begin{equation} \label{NxNEquivRelEgEqn}
+            \text{$a_1 + b_2 = a_2 + b_1$ and $a_2 + b_3 = a_3 + b_2$.}
+        \end{equation}
+        Therefore
+        \begin{align*}
+            (a_1 + b_3) + (a_2 + b_2)
+             & = (a_1 + b_2) + (a_2 + b_3) &  & \text{(rearrange terms)}
+            \\&= (a_2 + b_1) + (a_3 + b_2) && \text{\ref{NxNEquivRelEgEqn}}
+            \\&= (a_3 + b_1) + (a_2 + b_2) && \text{(rearrange terms)} .
+        \end{align*}
+        Subtracting $a_2 + b_2$ from both sides of the equation, we conclude that $a_1 + b_3 = a_3 + b_1$,
+        so $(a_1,b_1) \sim (a_3,b_3)$.
+    \end{proof}
+\end{Answers}
+
+\section{Equivalence classes}
+\begin{Definition}
+    {Equivalence classes}
+    Suppose $\sim$ is an equivalence relation on a set~$A$. For each $a \in A$, the \textbf{equivalence class} of~$a$ is the following subset of~$A$:
+    $$ [a] = \{\, a' \in A \mid a' \sim a \,\}
+        .$$
+\end{Definition}
+\begin{commentbox}{Example}[{PhbLightCyan}]\label{EquivClassEg}
+    Suppose $A = \{1,2,3,4,5\}$ and
+    $$R = \left\{ \begin{matrix} (1,1), (1,3), (1,4), (2,2), (2,5), (3,1), (3,3), \\
+            (3,4), (4,1), (4,3), (4,4), (5,2), (5,5)
+        \end{matrix}
+        \right\} .$$
+    One can verify that $R$ is an equivalence relation on~$A$. The equivalence classes are:
+    $$ [1] = \{1,3,4\},
+        \qquad [2] = \{2,5\} ,
+        \qquad [3] = \{1,3,4\}
+    $$
+    $$[4] = \{1,3,4\} ,
+        \qquad [5] = \{2,5\} .$$
+\end{commentbox}
+\begin{Theorem}
+    {Equivalence relations properties}\label{EquivRelProps}
+    Suppose $\sim$ is an equivalence relation on a set~$A$. Then:
+    \begin{enumerate}
+        \item \label{EquivRelProps-aIn[a]}
+              For all $a \in A$, we have $a \in [a]$.
+        \item \label{EquivRelProps-nonempty}
+              For all $a \in A$, we have $[a] \neq \emptyset$.
+        \item \label{EquivRelProps-union}
+              The union of the equivalence classes is all of~$A$. That is, we have $A = \bigcup_{a \in A} [a]$, where
+              $$ \bigcup_{a \in A} [a] = \{ x\ |\ \exists a \in A, \bigl(x \in [a] \bigr)\} .$$
+              %Every element of~$A$ is in some equivalence class.
+        \item \label{EquivRelProps-equal}
+              For any $a_1,a_2 \in A$, such that $a_1 \sim a_2$, we have $[a_1] = [a_2]$.
+        \item \label{EquivRelProps-disjoint}
+              For any $a_1,a_2 \in A$, such that $a_1 \not\sim a_2$, we have $[a_1] \cap [a_2] = \emptyset$.
+    \end{enumerate}
+\end{Theorem}
+\begin{proof}
+    Left as an exercise
+\end{proof}
+\begin{Note}
+    That if \(\sim\) is a equivalence relation on a set A, and \(a_1,a_2 \in A\) for which \(a_1 \sim a_2\), it is tempting to think of \(a_1\) and \(a_2\) as being equal but this is not technically correct. However, we have that \(a_1 \sim a_2\) if and only if \([a_1] = [a_2]\)
+\end{Note}
+
+\section{Modular arithmetic}
+\subsection{The integers modulo 3} Recall that if \(n\in \N^+\), then congruence modulo n is an equivalence relation. We will work with \(n=3\).
+\begin{Note}
+    That when \(\Z, k \) is divided by 3. The remainder is either 0,1,2. Hence \([k]_3\) is either \([0]_3, [1]_3, [2]_3\).
+\end{Note}
+
+Thus the congruence modulo 3 gives 3 distinct equivalence classes. The set \(\Z_3 = \{[0]_3, [1]_3, [2]_3\}\) is called the integers modulo 3. Rather than writing \([k]_3\) it si often more convenient to write k like this \(\Z_3 = \{\overline{0},\overline{1},\overline{2}\}\).
+
+We can do arithmetic (add, subtract, and multiply) on these equivalence classes, just as we do for ordinary integers. This is called  \textbf{arithmetic modulo~$3$}. The rules are:
+\begin{itemize}
+    \item $[a]_3 + [b]_3 = [a+b]_3$ \qquad (or $\overline{a} + \overline{b} = \overline{a + b}$),
+    \item $[a]_3 - [b]_3 = [a-b]_3$ \qquad (or $\overline{a} - \overline{b} = \overline{a - b}$),
+          and
+    \item $[a]_3 \times [b]_3 = [ab]_3$\hphantom{${}\times{}$}
+          \qquad (or $\overline{a} \times \overline{b} = \overline{a  b}$).
+\end{itemize}
+(Actually, we should write $+_3$, $-_3$, and~$\times_3$, to indicate that the arithmetic is being done modulo~$3$, but we will usually not bother.)
+
+
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    We have $[1]_3 + [2]_3 = [1 + 2]_3 = [3]_3$. However, since $3 \equiv 0 \pmod{3}$, we have $[3]_3 = [0]_3$, so the above equation can also be written as $[1]_3 + [2]_3 = [0]_3$. Equivalently, $\overline{1} + \overline{2} = \overline{0}$.
+
+    This is an example of the following general principle:
+    $$ \text{%the result of any arithmetic operation (modulo~$3$) will be either $[0]_3$, $[1]_3$, or~$[2]_3$:
+            \it If $r$ is the remainder when $a + b$ is divided by\/~$3$, then $\overline{a} \mathbin{+_3} \overline{b} = \overline{r}$.} $$
+
+    Here is a table that shows the results of addition modulo~$3$:
+    \begin{center} \begin{tabular}{c||c|c|c}
+            $+_3$          & $\overline{0}$ & $\overline{1}$ & $\overline{2}$ \\
+            \noalign{\hrule}
+            \noalign{\smallskip}
+            \noalign{\hrule}
+            $\overline{0}$ & $\overline{0}$ & $\overline{1}$ & $\overline{2}$ \\
+            \noalign{\hrule}
+            $\overline{1}$ & $\overline{1}$ & $\overline{2}$ & $\overline{0}$ \\
+            \noalign{\hrule}
+            $\overline{2}$ & $\overline{2}$ & $\overline{0}$ & $\overline{1}$ \\
+        \end{tabular}
+    \end{center}
+\end{commentbox}
+
+\begin{Definition}
+    {}
+    Fix some nonzero natural number $n \in \N^+$.
+    \begin{enumerate}
+        \item For any integer~$k$, we use $[k]_n$ to denote the equivalence class of~$k$ under congruence modulo~$n$. When $n$ is clear from the context, we may write~$\overline{k}$, instead of $[k]_n$.
+        \item The set of these equivalence classes is called the \textbf{integers modulo~$n$}. It is denoted~$\Z_n$.
+        \item Addition, subtraction, and multiplication modulo~$n$ are defined by:
+              \begin{itemize}
+                  \item $\overline{a} \mathbin{+_n} \overline{b} = \overline{a + b}$,
+                  \item $\overline{a} \mathbin{-_n} \overline{b} = \overline{a - b}$,
+                        and
+                  \item $\overline{a} \mathbin{\times_n} \overline{b} = \overline{a  b}$.
+              \end{itemize}
+              (When $n$ is clear from the context, we usually write $+$, $-$, and~$\times$, rather than $+_n$, $-_n$, and~$\times_n$.)
+    \end{enumerate}
+\end{Definition}
+\begin{Proposition}
+    {}
+    For any $n \in \N^+$, we have 
+	$$\Z_n = \{ \overline{0}, \overline{1}, \overline{2}, \ldots, \overline{n-1} \}$$
+and\/ $\overline{0}, \overline{1}, \overline{2}, \ldots, \overline{n-1}$ are all distinct.
+\end{Proposition}
+
+\begin{Questions}
+    \item Simplify $(\overline{17} - \overline{5}) \times (\overline{21} +\overline{11})$ in $\Z_7$.
+\end{Questions}
+\begin{Answers}
+    \item We have
+	\begin{align*}
+	(\overline{17} - \overline{5}) \times (\overline{21} +\overline{11})
+	&=(\overline{3} - \overline{5}) \times (\overline{0} +\overline{4})
+	=  (\overline{3 - 5}) \times (\overline{0 + 4})
+	\\&= \overline{-2} \times \overline{4}
+	= \overline{5} \times \overline{4}
+	= \overline{5 \times 4}
+	= \overline{20}
+	= \overline{6}
+	. \end{align*}
+\end{Answers}
+\end{document}

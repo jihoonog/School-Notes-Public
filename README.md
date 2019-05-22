@@ -17,6 +17,7 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 
 | Course ID | Instructor        | Term        |
 | :-------- | :---------------- | :---------- |
+| MATH-2000 | Jeff Bleaney      | Spring 2017 |
 | MATH-1410 | Habiba Kadiri     | Fall 2017   |
 | CMPUT-291 | Davood Rafiei     | Fall 2018   |
 | ECON-299  | Alexander Gainer  | Fall 2018   |
@@ -31,9 +32,11 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 As a Computing Science major I get exposed to a lot different programming and computing books. For example:
 - Compilers: Principles, Techniques, and Tools used in compiler design classes is affectionately known as the **Dragon Book**
 - Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaur Book**
+- Structure and Interpretation of Computer Programs is often called the **Wizard Book**
+- Database System Concepts is sometimes called the **Sailboat Book**
+- Introduction to Automata Theory, Languages, and Computation, among experts is known as the **Cinderella Book**
+- Lions' Commentary on UNIX 6th Edition, with Source Code, commonly referred to as the **Lions Book**
 - Mastering Regular Expressions is called the **Owl Book**
-- Programming Python has an **African Rock Python** on its cover
-- MySQL in a Nutshell has a **Pied Kingfisher** on its cover
 
 A lot of it can be traced back to O'Reilly Media as they started this trend as a way to distinguish themselves from other publishers.
 
@@ -45,7 +48,7 @@ I'm half tempted to call CMPUT-415 which is the compiler design course "How to C
 In order to build these notes yourself you need at least one program:
 - LaTeX typesetting engine: Either TeX Live (full) or MikTeX is fine, TeX Live is preferred.
 - Rubber (you can manually build the notes yourself but its more of a pain) (recommended)
-- GNU Make (recommended) if you want to use the Makefiles.
+- GNU Make (recommended) if you want to use the Makefile.
 
 Goto the root directory that contains the Makefile and type
 ``` make 
@@ -61,13 +64,13 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 
 ## Future Goals
 - Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not on Linux Adobe Acrobat)
-- Quickly create and typeset images (Summer 2019 project)
 - Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
 
 ## Done/Somewhat Done
-- Easily change the color of the boxes within the same document. (Alpha)
-- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Alpha)
-- Speed up the compiling process. (Alpha)
+- Easily change the color of the boxes within the same document. (Beta)
+- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Beta)
+- Speed up the compiling process. (Beta)
+- Quickly create and typeset images (Alpha)
 
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicated stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 

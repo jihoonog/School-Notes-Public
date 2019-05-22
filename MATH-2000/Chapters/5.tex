@@ -1,0 +1,210 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+
+\begin{document}
+\chapter{Sample Topics}
+Up to this point, our valid deductions have been called "theorems\rlap," but mathematicians usually reserve this name for the ones that are particularly important, and apply some other name to the others. The terminology allows some flexibility, but here are general guidelines
+\begin{Definition}
+    {Terminologies}~\\
+    \begin{itemize}
+        \item Any valid deduction can be referred to as a "result"
+        \item A \textbf{theorem} is an important result
+        \item A \textbf{proposition} is a result that is not sufficiently important to be called a theorem
+        \item A \textbf{corollary} is a result that is proved as an easy consequence of some other result
+        \item A \textbf{lemma} is a minor result that is not interesting for its own sake, but will be used as part of the proof of theorem (or other more significant result)
+    \end{itemize}
+\end{Definition}
+\section{Number Theory: divisibility and congruence}
+In this section, we will get some practice with proving properties of integers.
+\subsection{Divisibility}
+\begin{Definition}
+    {Divisibility}
+    \label{DividesDefn}
+    Suppose $a,b \in \Z$.
+    We say $a$ is a \textbf{divisor} of~$b$ (and write ``$a\ |\  b$'')
+    if and only if there exists $k \in \Z$, such that $a k = b$. (Since multiplication is commutative and equality is symmetric, this equation can also be written as $b = ka$.)
+
+    These means the same
+    \begin{itemize}
+        \item a is a \textbf{divisor} of b
+        \item a is a \textbf{factor} of b
+        \item b is a \textbf{multiple} of a
+        \item b is \textbf{divisible} by a
+    \end{itemize}
+\end{Definition}
+\begin{Definition}
+    {Even and Odd}
+    Let $n \in \Z$.
+    We say $n$ is
+    \textbf{even} if and only if $2\ |\  n$.
+    We say $n$~is \textbf{odd} if and only if $2 \nmid n$.
+\end{Definition}
+
+We will assume the well-known fact that the sum, dif and only iference, and product of integers are integers: for all $k_1, k_2 \in \Z$, we know that $k_1 + k_2 \in \Z$, $k_1 - k_2 \in \Z$, and $k_1 k_2 \in \Z$. Also, the negative of any integer is an integer: for all $k \in \Z$, we have $-k \in \Z$.
+
+Our first result is a generalization of the well-known fact that the sum of two even numbers is even.
+\begin{Proposition}
+    {}
+    Suppose $a,b_1,b_2 \in \Z$.
+    If $a \divides b_1$ and $a \divides b_2$, then $a \divides (b_1 + b_2)$.
+\end{Proposition}
+\begin{proof}
+    Assume \(a \divides b_1\), and \(a \divides b_2\). By definition, it follows that there exists \(k_1,k_2 \in \Z\) such that \(ak_1 = b_1\) and \(ak_2 = b_2\). Let \(k = k_1 + k_2\), then \(k\in \Z\), and we have \(ak = a(k_1 + k_2) = ak_1 + ak_2 = b_1 + b_2\). Therefore, we have \(a \divides (b_1 + b_2)\) as desired.
+\end{proof}
+\begin{Proposition}
+    {}
+    Suppose $a,b \in \Z$.
+    We have $a \divides b$ if and only if $a \divides -b$.
+\end{Proposition}
+\begin{proof}~\\
+    ($\Rightarrow$) By assumption, there is some $k \in \Z$, such that $a k = b$. Then $-k \in \Z$, and we have $a(-k) = -ak = -b$, Therefore, $a$ divides~$-b$.
+
+    ($\Leftarrow$) Assume $a \divides -b$. From the preceding paragraph, we conclude that $a \divides -(-b) = b$, as desired.
+\end{proof}
+\begin{Proposition}
+    {}
+    Suppose \(a,b_1,b_2 \in \Z\), if \(a \divides b_1\), and \(a \divides b_2\) then \(a \divides (b_1 -b_2)\).
+\end{Proposition}
+\begin{proof}
+    Assume \(a \divides b_1\) and \(a \divides b_2\) then there exist \(k_1,k_2 \in \Z\) such that \(k = k_1 + k_2\) because \(-k \in \Z\) and \() -k = k_1 - k_2\), and we have \(-ak = a(k_1-k_2) = ak_1 - ak_2 = b_1 - b_2\). Therefore, we have \(a\divides (b_1 - b_2)\) as desired.
+\end{proof}
+\begin{Proposition}
+    {}
+    \label{DivisorPfEx}
+    Suppose $a,b_1,b_2 \in \Z$.
+    If $a \divides b_1$ and $a \nmid b_2$, then $a \nmid (b_1 + b_2)$.
+\end{Proposition}
+\begin{proof}
+    Assume $a \divides b_1$ and $a \nmid b_2$.
+
+    Suppose $a \divides (b_1 + b_2)$. (This will lead to a contradiction.) Then $a$ is a divisor of both $b_1 + b_2$ and (by assumption)~$b_1$. So Proposition~\ref{DivisorPfEx} tells us
+    $$a \divides \bigl( (b_1 + b_2) - b_1 \bigr) = b_2 .$$
+    This contradicts the assumption that $a \nmid b_2$.
+
+    Because it leads to a contradiction, our hypothesis that $a \divides (b_1 + b_2)$ must be false. This means $a \nmid (b_1 + b_2)$.
+\end{proof}
+
+\subsection{Congruence modulo \texorpdfstring{\(n\)}{}}
+\begin{Definition}
+    {Congruence}
+    Suppose $a,b,n \in \Z$. We say $a$ is \textbf{congruent to~$b$ modulo~$n$} if and only if $a - b$ is divisible by~$n$. The notation for this is:
+    $ a \equiv b \pmod{n} $.
+\end{Definition}
+\begin{commentbox}{Examples}[{PhbLightCyan}]
+    \begin{enumerate}
+        \item \label{CongruenceEasyEg-even}
+              We have $22 \equiv 0 \pmod{2}$, because $22 - 0 = 22 = 11 \times 2$ is a multiple of~$2$.  (More generally, for $a \in \Z$, one can show that $a \equiv 0 \pmod{2}$ if and only if $a$~is even.)
+        \item \label{CongruenceEasyEg-odd}
+              We have $15 \equiv 1 \pmod{2}$, because $15 - 1 = 14 =  7 \times 2$ is a multiple of~$2$. (More generally, for $a \in \Z$, one can show that $a \equiv 1 \pmod{2}$ if and only if $a$~is odd.)
+        \item We have $28 \equiv 13 \pmod{5}$, because $28 - 13 = 15 = 3 \times 5$ is a multiple of~$5$.
+        \item For any $a,n \in \Z$, it is not difficult to see that $a \equiv 0 \pmod{n}$ if and only if $a$~is a multiple of~$n$.
+    \end{enumerate}
+\end{commentbox}
+
+\begin{Theorem}
+    {Division Algorithm}\label{DivAlgThm}
+    Suppose $a,n \in \Z$, and $n \neq 0$.
+    Then there exist unique integers $q$ and~$r$ in~$\Z$, such that:
+    \begin{enumerate}
+        \item $a = qn + r$,
+              and
+        \item $0 \le r < |n|$.
+    \end{enumerate}
+\end{Theorem}
+
+\begin{Definition}
+    {}
+    In the situation of \ref{DivAlgThm}, the number~$r$ is called the \textbf{remainder} when $a$ is divided by~$n$.
+\end{Definition}
+\begin{Proposition}
+    {} \label{CongVsRemainderEx}
+    Suppose \(a,b \in \Z, n\in \Z^+\),
+    \begin{enumerate}
+        \item Let r be the remained when \(a \mid n\), then \(a \equiv r \pmod n\).
+        \item \(a \equiv b \pmod n\) if and only if a and b have the same remainder when divided by n.
+    \end{enumerate}
+\end{Proposition}
+It follows from \ref{DivAlgThm} and \ref{CongVsRemainderEx} that every \(\Z\), is congruent to either 0 or 1 module 2 exclusively that is
+\begin{paperbox}{Even and Odd}\label{0or1Mod2}~\\
+    $n$ is even if and only if $n \equiv 0 \pmod{2}$.
+    \\[5pt] $n$ is odd if and only if $n \equiv 1 \pmod{2}$.
+\end{paperbox}
+More generally we can say if \(n \in \N^+\) then we have \(\forall x \in \Z, \exists r\in \{0,1,2,3,\dots,n-1\}\) such that \(a \equiv r \pmod n\)
+
+\begin{Theorem}
+    {Properties of modulo arithmetic}
+    Let \(a_1,a_2,b_1,b_2 \in \Z\) and \(n \in \N^+\), with \(a_1 \equiv b_1 \pmod n\) and \(a_2 \equiv b_2 \pmod n\). We have the following
+    \begin{enumerate}
+        \item \(a_1 + a_2 \equiv b_1 + b_2 \pmod n\)
+        \item \(a_1 - a_2 \equiv b_1 - b_2 \pmod n\)
+        \item \(a_1 \times a_2 \equiv b_1 \times b_2 \pmod n\)
+    \end{enumerate}
+\end{Theorem}
+
+\begin{proof}
+    Exercise
+\end{proof}
+
+\begin{Proposition}
+    {}\label{n2+nEven}
+    Let $n \in \Z$. Then $n^2 + n$ is even.
+\end{Proposition}
+\begin{proof}
+    From \ref{0or1Mod2}, we know that $n$ is congruent to either $0$ or~$1$ modulo~$2$. We consider these two possibilities as separate cases.
+
+    \begin{enumerate}
+        \item
+              Assume $n \equiv 0 \pmod 2$.
+              By the assumption of this case, we have $n = 2q$, for some $q \in \Z$. Therefore
+              $$ n^2 + n = (2q)^2 + 2q = 4q^2 + 2q = 2(2q^2 + q)$$
+              is divisible by~$2$.
+        \item
+              Assume $n \equiv 1 \pmod 2$.
+              By the assumption of this case, we have $n = 2q+1$, for some $q \in \Z $. Therefore
+              $$ n^2 + n
+                  = (2q+1)^2 + (2q+1)
+                  = (4q^2 + 4q + 1) + (2q+ 1)
+                  = 4q^2 + 6q+ 2
+                  = 2(2q^2 + 3q + 1)$$
+              is divisible by~$2$.
+    \end{enumerate}
+\end{proof}
+
+Let $n \in \Z$.
+\begin{enumerate}
+\item \label{SquareMod4or8Ex-even}
+Show that if $n$ is even, then $n^2 \equiv 0 \pmod{4}$.
+{\textit{hint:} We have $n = 2q$, for some $q \in \Z$.}
+\item \label{SquareMod4or8Ex-odd}
+Show that if $n$ is odd, then $n^2 \equiv 1 \pmod{8}$.
+{\textit{hint:} We have $n = 2q+1$, for some $q \in \Z$.}
+\item \label{SquareMod4or8Ex-squareeven}
+Show that if $n^2$ is even, then $n$~is even.
+\end{enumerate}
+
+
+\subsection{Irrational Numbers}
+\underline{Recall:} \(\Q = \{\frac{p}{q}|\text{where}\ p\in\Z, q\in\Z \wedge q\neq 0\}\)
+
+Note that every rational number is a real number \(\Q \subseteq \R\). However, it is not so clear that not all \(\Q\) are rational. That is \(\R \not\subseteq \Q\)
+
+\begin{Proposition}
+    {}
+    \label{Sqrt2Irrat}
+    $\sqrt{2}$ is irrational.
+\end{Proposition}
+
+\begin{proof}[Proof by contradiction]
+    Suppose $\sqrt{2}$ is rational. (This will lead to a contradiction.) By definition, this means $\sqrt{2} = a/b$ for some $a,b \in \Z$, with $b \neq 0$. By reducing to lowest terms, we may assume that $a$ and~$b$ have no common factors. In particular, 
+    $$ \text{it is not the case that both $a$ and~$b$ are even.}$$
+    We have 
+        $$ \frac{a^2}{b^2} = \left(\frac{a}{b}\right)^2 = \sqrt{2}^2 = 2 ,$$
+    so $a^2 = 2b^2$ is even. Then \ref{SquareMod4or8Ex-squareeven} from the previous subsection tells us that 
+        $$ \text{$a$~is even}, $$
+    so we have $a = 2k$, for some $k \in \Z$. Then
+        $$2b^2 = a^2 = (2k)^2 = 4k^2 ,$$
+    so $b^2 = 2k^2$ is even. Then \ref{SquareMod4or8Ex-squareeven} from the previous subsection tells us that 
+        $$ \text{$b$~is even}. $$
+    We have now shown that $a$ and~$b$ are even, but this contradicts the fact, mentioned above, that it is not the case that both $a$ and~$b$ are even.
+\end{proof}
+
+\end{document}

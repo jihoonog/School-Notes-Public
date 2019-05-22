@@ -1,0 +1,105 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Two-Column Proofs}
+\section{Proof}
+The aim of a proof is to show that a deduction is valid. We do this by putting together, a number of simpler deduction which we already know to be valid.
+
+\subsection{Here is an example} 
+\textit{hypotheses:}
+\begin{enumerate}
+    \item \(P \Rightarrow (Q \wedge R)\)
+    \item P
+\end{enumerate}
+\textit{Conclusion:}
+\(R\)
+
+Formally, a \underline{proof} is a sequence of assertions. The first few assertions are the assumptions of the deduction, and each subsequent line is an immediate column in our 2 column proof, consequence of the preceding lines must contain two pieces with the final line begin our conclusion of information.
+\\~\\
+\subsubsection{Format of 2-column-proof}
+\begin{dndtable}[XX]
+    \textbf{Assertion in PL} & \textbf{Justification}\\
+    Assertion & Justification
+\end{dndtable}
+So for the example above we have this assumption
+\begin{dndtable}[XX]
+    \(P \Rightarrow (Q \wedge R)\) & assumption\\
+    \(P\) & assumption\\
+    \((Q \wedge R)\) & implicit elim\\
+    \(R\) & AND elim
+\end{dndtable}
+\begin{Note}
+    In this example everything was done in the language of PL. However, the deduction might be given in English, in which case we must first translate the deduction into PL using a symbolization key. 
+\end{Note}
+
+\subsection{Assumptions and theorems}
+A two column proof starts off by listing each of the assumptions. These are justified by writing assumptions in the second column. We then draw a line to separate our assumptions from the rest of the proof. Any deduction which is already known to be valid is called a \underline{theorem}. They can be used for justification, in a proof, provided that the assumptions of the theorem have already been established or assumed to be true.
+\\~\\
+Example:
+\begin{dndtable}[XX]
+    \(P \vee S\) & Assumption\\
+    \(P\rightarrow (Q \wedge R)\) & assumption\\
+    \(\neg S\) & assumption\\
+    P & OR-elim\\
+    R & e.x 2.1
+\end{dndtable}
+\begin{Note}
+    Each line in a 2-column proof (after the assumption) is an assertion which is true whenever all the assumptions are true. Since tautologies are always true we can introduce a tautology into our two-col-proof whenever it is convenient. These are justified as tautologies when writing. 
+\end{Note}
+\section{Sub-proof into implicit intro}
+Consider the deduction \(P \rightarrow R \therefore (P \wedge Q) \rightarrow R\). This is a valid deduction. Intuitively we can see that if \(P\wedge Q\) is true then P is true, and it follows from MP that R is true. That is, R is a necessary consequence of \(P\wedge Q\).
+\begin{proof}~\\
+    \begin{enumerate}
+        \item \(P \Rightarrow R\): This is our assumption
+        \item Here is the beginning of our sub-proof\begin{enumerate}
+            \item \(P \wedge Q\): Assumption, we want R\\
+            \item \(P\), AND-Elim
+            \item \(R\), MP
+        \end{enumerate}
+        \item \((P \wedge Q) \Rightarrow R\), implicit intro
+    \end{enumerate}
+    2. Was our the beginning of our sub-proof. 4. was our ending.
+\end{proof}
+\Cues{We can add a new assumption within a sub proof for the sake of argument to create an implicit intro}
+\Cues{We created a new implciate statement based on the subproof and the assumption from the main proof}
+\begin{Note}
+    Once you closed the sub-proof you cannot go back.
+\end{Note}
+\section{Proof by Contradiction}
+We need to be able to prove that an assertion is false, the usual way of doing this is to show that it cannot be true. We do this by considering what would happen if the assertion were true. If, by using logic, we can show that this assumption leads to a contradiction, then we can conclude that the assumption must be wrong This is a proof by contradiction.
+\subsubsection{Example}
+Prove that there is no largest natural number
+\begin{proof}
+    Suppose that there is a largest natural number called \(n\).
+    Then \(n + 1 \in \N\), and \(n+1 > n\). This contradicts our assumptions that \(n \) is the largest natural number.
+    \\~\\ 
+    \(\therefore\) our assumption cannot be true hence there is no largest natural number.
+\end{proof}
+\section{Proof strategies}
+We are told our starting condition and our end goal. We also have a set of rules which tells us what our acceptable or valid moves are. At each step there are several valid moves and we just need to choose the right one. However, there is no procedure on what that is.
+\begin{enumerate}
+    \item Work forward from what you have
+    \item Work backward from what you want
+    \item Break our proof into cases: if it looks like your proof requires an additional assumption, try considering multiple cases.
+    \item Use logical equivalences to change what we are looking at: We can use replacement rules to make life easier, or use a different substitution something like DeMorgans, or what not.
+    \item Look for useful sub-goals: If you have establish or maybe assumed it. \(P\rightarrow Q\), you should think about how you might obtain \(P\) or \(\neg P\) so you can use implicit elim/MP
+    \item Proof by contradiction: if you have trouble establishing \(P\) directly, consider assuming \(neg P\), and deducing a contradiction. Eg,m instead of deducing \(P\) or \(Q\) directly, it might be easier to show \(neg P \wedge \neg Q\) and deduce a contradiction.
+    \item Repeat as necessary: after you made some progress (either deriving new assertion or deciding on a new sub-goal that represent significant progress) use the strategies above to plan our next move.
+    \item Don't give up (seriously): stop, backtrack and try something else.
+\end{enumerate}
+\section{Counterexamples}
+Consider the deduction:\\
+\(P\vee Q\), \(P\rightarrow Q\), \(\therefore P\), this is not valid, why?\\
+To prove something not being valid we need a \textbf{counter example}. To do this, it suffices to show that it is possible to have a false conclusion when all our assumption(s) are true. This should be done by finding and assignment for our variables which makes the conclusion false and our assumption(s) true. 
+\begin{proof}
+    Let \(P\) be false and let \(Q\) be true. Then we have 
+    \begin{itemize}
+        \item \(P\vee Q = F \vee T  = T\)
+        \item \(P\rightarrow Q = F \rightarrow T = T\)
+    \end{itemize}
+    So both our assumptions are true but our conclusion is false therefore the deduction is not valid
+\end{proof}
+\begin{Definition}
+    {Counterexample}
+    Any situation in which all our assumptions are true but our conclusion is false is called a \textbf{Counterexample}.
+\end{Definition}
+\end{document}

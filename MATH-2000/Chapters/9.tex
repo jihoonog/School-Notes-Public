@@ -1,0 +1,372 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Cardinality}
+\section{Definition and basic properties}
+\begin{Definition}
+    {Cardinality}
+    \begin{enumerate}
+        \item Let A be a set and let n be a natural number, we say \underline{cardinality} of A is n, and write \#A. \#A = n if and only if there is a bijection from \(A \rightarrow \{1,2,3,\dots,N\}\)
+        \item A set is finite if and only if there exist a natural number for which the cardinality of A is n
+        \item A set is infinite if and only if the set is not finite.
+    \end{enumerate}
+\end{Definition}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Show that \(\# \{1,2,3,\dots,n\} = n\) for each natural number n.
+\end{commentbox}
+\begin{proof}
+    Let \(n\in \N\), and set \(A = \{1,2,3,\dots,n\}\) note that \(I_A: A \rightarrow A\) is a bijection from the set \(\{1,2,3,\dots,n\}\) to \(\{1,2,3,\dots,n\}\).
+\end{proof}
+\begin{Note}
+    that the \(\# \emptyset = 0\).
+\end{Note}
+\begin{Proposition}
+    {Cardinality A = Cardinality B}
+    \label{CardA=CardBbijection}
+    Suppose $A$ and $B$ are finite sets.
+    Then $\#A = \#B$ if and only if there is a bijection from~$A$ to~$B$.
+\end{Proposition}
+
+\begin{proof}
+    ($\Rightarrow$) Let $n$ be the cardinality of~$A$. By definition, this means
+    $$ \text{there is a bijection $f \colon A \to \{1,2,\ldots,n\}$} .$$
+    By assumption, $n$~is also the cardinality of~$B$, so
+    $$ \text{there is also a bijection $g \colon B \to  \{1,2,\ldots,n\} $} .$$
+    The inverse of a bijection is a bijection, and the composition of bijections is a bijection, so $g^{-1} \circ f$ is a bijection from~$A$ to~$B$.
+
+    \smallskip
+
+    ($\Leftarrow$) We leave this as an exercise.
+\end{proof}
+
+\begin{Proposition}
+    {Cardinality of Disjoint Finite Sets}
+    \label{|AcupB|}
+    If $A$ and~$B$ are disjoint finite sets, then
+    $$ \# (A \cup B) = \#A + \# B .$$
+\end{Proposition}
+\begin{proof}
+    Let $m = \#A$ and $n = \# B$. Then there exist bijections
+    $$ \text{$f \colon \{1,2,\ldots,m\} \to A$ \quad and \quad $g \colon \{1,2,\ldots,n\} \to B$.} $$
+    Define a function $h \colon \{1,2,\ldots,m+n\} \to (A \cup B)$ by
+    $$ h(k) = \begin{cases}
+            \hfil f(k) & \text{if $k \le m$} \\
+            g(k-m)     & \text{if $k > m$}
+        \end{cases} $$
+    (Notice that if $k \in \{1,2,\ldots,m+n\}$, and $k > m$, then $m + 1 \le k \le m+n$, so $1 \le k - m \le n$; therefore, $k -m$ is in the domain of~$g$, so the expression $g(k-m)$ makes sense.)
+
+    To complete the proof, it suffices to show that $h$~is a bijection; thus, we we need only show that $h$ is one-to-one and onto.
+
+    (onto) Given $y \in A \cup B$, we have either $y \in A$ or $y \in B$, and we consider these two possibilities as separate cases.
+    \begin{enumerate}
+        \item Suppose $y \in A$. Since $f$ is onto, there is some $k \in \{1,2,\ldots,m\}$ with $f(k) = y$. Then, because $k \le m$, we have
+              $$ h(k) = f(k) = y .$$
+        \item Suppose $y \in B$. Since $g$ is onto, there is some $k \in \{1,2,\ldots,n\}$ with $g(k) = y$. Then $k + m \in \{1,2,\ldots,m+n\}$ and $k+m > m$, so
+              $$ h(k+m) = g \bigl( (k+m) - m \bigr) = g(k) = y .$$
+    \end{enumerate}
+    Since $y$ is an arbitrary element of $A \cup B$, we conclude that $h$~is onto.
+
+    (one-to-one) We leave this as an exercise.
+\end{proof}
+
+\begin{Theorem}
+    {Cardinality of Cartesian Products}
+    \label{Card(AxB)Thm}
+    For any finite sets $A$ and~$B$, we have
+    $$\#(A \times B) = \#A \cdot \#B .$$
+\end{Theorem}
+
+
+\begin{proof}
+    Let $m = \#A$. Then there is no harm in assuming $A = \{1,2,\ldots,m\}$. Therefore
+    $$ A = \{1\} \cup \{2\} \cup \cdots \cup \{m\} ,$$
+    and the sets $\{1\} , \{2\} , \cdots , \{m\}$ are pairwise-disjoint, so
+    \begin{align*}
+        \#(A \times B)
+         & = \#\bigl( \{1\} \times B\bigr) +  \#\bigl( \{2\} \times B \bigr) + \cdots +  \#\bigl( \{m\} \times B \bigr)
+         &
+        \\&= \#B +   \#B + \cdots +   \#B \qquad \text{($m$ summands)}
+         &
+        \\&= m \cdot \#B
+        \\& = \#A \cdot \#B
+        . \qedhere\end{align*}
+\end{proof}
+
+\section{Pigeonhole Principle}
+\begin{Proposition}
+    {Pigeonhole Principle}
+    \label{PigeonholePrinciple}
+    Let $B$ and $A_1,A_2,\ldots,A_n$ be finite sets. If
+    $$ B \subset A_1 \cup A_2 \cup \ldots \cup A_n ,$$
+    and $\#B > n$, then $\#A_i \ge 2$, for some~$i$.
+\end{Proposition}
+\begin{Corollary}
+    \label{Cardinality:OneToOneVsOntoThm}
+    Suppose $A$ and~$B$ are finite sets. %% don't assume $A$ is finite? !!!
+    \begin{enumerate}
+        \item \label{Cardinality:OneToOneVsOntoThm-11}
+              If there exists a one-to-one function $f \colon A \to B$, then $\#A \le \#B$.
+        \item \label{Cardinality:OneToOneVsOntoThm-onto}
+              If there exists an onto function $f \colon A \to B$, then $\#A \ge \#B$.
+    \end{enumerate}
+\end{Corollary}
+\begin{proof}
+    Let $m = \#A$ and $n = \#B$.
+
+    (\ref{Cardinality:OneToOneVsOntoThm-11})
+    Suppose $f \colon A \to B$ is one-to-one, and $m > n$. Assume without loss of generality that $B = \{1,2,\ldots,n\}$, so we may let
+    $$ \text{$A_i = f^{-1}(i)$ \ for $i = 1,2,\ldots,n$} . $$
+    For any $a \in A$, we have $a \in f^{-1} \bigl( f(a) \bigr) = A_{f(a)}$, so $a \in A_1 \cup A_2 \cup \cdots \cup A_n$. Since $a$ is an arbitrary element of~$A$, this implies $A \subset A_1 \cup A_2 \cup \ldots \cup A_n$. Because $\#A = m > n$, we conclude that $\#A_i \ge 2$ for some~$i$. This means $\#f^{-1}(i) > 1$, which contradicts the fact that $f$~is one-to-one.
+
+    (\ref{Cardinality:OneToOneVsOntoThm-onto})
+    Suppose $f\colon A \to B$ is onto, and $m < n$.
+    There is no harm in assuming $A = \{1,2,\ldots,m\}$, and then we may let
+    $$B_i = \{f(i)\} $$
+    for $i = 1,2,\ldots,m$. Since $f$~is onto, we know, for any $b \in B$, there is some $i \in A$, such that $f(i) = b$. This means $b \in B_i$; hence,  $b \in B_1 \cup B_2 \cup \cdots \cup B_m$. Since $b$ is an arbitrary element of~$B$, this implies $B \subset B_1 \cup B_2 \cup \ldots \cup B_m$. Because $\#B = n > m$, we conclude that $\#B_i \ge 2$ for some~$i$. This contradicts the fact that $\#B_i = 1$ (because $B_i =  \{f(i)\}$ has only one element).
+\end{proof}
+
+\section{Cardinality of a union}
+\begin{Proposition}
+    {Cardinality of a union}
+    \label{card(AcupB)}
+    For any finite sets $A$ and~$B$, we have
+    $$ \#(A \cup B) = \#A + \#B - \#(A \cap B) .$$
+\end{Proposition}
+
+
+\begin{proof}
+    We know that $A \setminus B$, $B \setminus A$, and $A \cap B$ are pairwise-disjoint, and that their union is $A\cup B$, so
+    $$ \#(A \setminus B) + \#(B \setminus A) + \# (A \cap B)
+        = \# \bigl( (A \setminus B) \cup (B \setminus A) \cup (A \cap B)  \bigr)
+        = \# (A \cup B) .$$
+    Also, we have
+    \begin{align*}
+        \#A
+         & = \# \bigl( (A \setminus B) \cup (A \cap B) \bigr) \\
+         & = 	 \#(A \setminus B) + \# (A \cap B)
+        .\end{align*}
+    Similarly, we have
+    $$  \# B = \#(B \setminus A) + \# (A \cap B) .$$
+    Therefore
+    \begin{align*}
+        \#A + \#B
+         & = \bigl( \#(A \setminus B) + \# (A \cap B)  \bigr) + \bigl(  \#(B \setminus A) + \# (A \cap B) \bigr)
+        \\&=  \#(A \setminus B) + \#(B \setminus A) + 2\# (A \cap B)
+        \\&=  \#(A \cup B) + \# (A \cap B)
+        .\end{align*}
+    The desired conclusion is obtained by subtracting $\# (A \cap B)$ from both sides.
+\end{proof}
+
+
+\section{Cardinality of infinite sets}
+\begin{Definition}
+    {same cardinality} \label{def:same-cardinality}
+    We say that two sets A and B have the \textbf{same cardinality} if and only if there is a bijection \(f: A\rightarrow B\).
+
+    Let A be a set
+    \begin{enumerate}
+        \item A is said to be countably infinite if and only if there is a bijection \(f: A\to \N^+\).
+        \item A is said to be countable if and only if it is either finite or countably infinite
+        \item A is said to be uncountable if and only if it is not countable.
+    \end{enumerate}
+\end{Definition}
+\begin{Note}
+    Remark: A set is countable if and only if the elements of a set can be listed as a sequence. (either finite or infinite)
+    \begin{enumerate}
+        \item A set is finite if and only if its elements can be listed in a sequence as, \(a_1,a_2,a_3,\dots,a_n\) for some \(n\in \N\).
+        \item If the elements of A can be listed in an infinite sequence like so \(a_1,a_2,a_3,\dots\)
+        \item Conversely, if A is countable infinite, then there is a bijection \(f: \N^+ \to A\). Then, letting \(a_i  = f(i)\), yields a infinite sequence \(a_1,a_2,\dots\) that lists all the elements of A.
+    \end{enumerate}
+
+    Note that the "smallest" infinite sets are the countable ones.
+\end{Note}
+
+
+\section{Countable sets}
+Recall the definition \ref{def:same-cardinality}
+\begin{Theorem}{}~\\
+    \label{CountableSmall}
+    \begin{enumerate}
+        \item \label{CountableSmall-HasSubset}
+              Every infinite set contains a countably infinite subset.
+        \item  \label{CountableSmall-subset}
+              Every subset of a countable set is countable.
+    \end{enumerate}
+\end{Theorem}
+
+\begin{proof}~\\
+    \begin{enumerate}
+        \item Given an infinite set A, it suffices to construct an infinite sequence \(a_1,a_2,\dots\) of distinct elements of A. Then \(\{a_1,a_2,\dots\}\) is a countably infinite subset of A.
+              \begin{enumerate}
+                  \item Since A is infinite, A is not empty, so we may choose \(a_1 \in A\)
+                  \item Since A is infinite; \(A\setminus \{a_1\}\) is not empty, so we may choose \(a_2 \in A \setminus \{a_1\}\).\\~\\ \(\vdots\)
+                        \begin{enumerate}
+                            \item Since A is infinite we have that \(A \setminus \{a_1,a_2,\dots,a_{i-1}\}\) is not empty. So we may take \(a_i \in A \setminus \{a_1,a_2,\dots,a_{i-1}\}\). Continuing this process uelds an infinite sequence \(a_1,a_2,\dots\) of distinct elements of A.
+                        \end{enumerate}
+              \end{enumerate}
+        \item Given a subset M of a countable set A, we need to show that M is countable. Since A is countable, we may list the elements of A as \(a_1,a_2,\dots\)
+    \end{enumerate}
+    Since \(M\subseteq A\) every \(m\in M\) appears somewhere in the sequence \(A = a_1,a_2,\dots\) We let \(m_1\) be the first element of M in the sequence. We let \(m_2\) be the second and so on, and so forth. This produces a sequence \(m_1,m_2,\dots\) containing all the elements of M hence M is countable.
+\end{proof}
+
+\begin{Theorem}
+    {Countability from set operations}
+    \label{CtblUnion} \
+    \begin{enumerate}
+        \item  \label{CtblUnion-union}
+              A countable union of countable sets is countable.
+        \item  \label{CtblUnion-product}
+              The cartesian product of two countable sets is countable.
+        \item  \label{CtblUnion-image}
+              The image of a countable set is countable.
+    \end{enumerate}
+\end{Theorem}
+\begin{proof}[Proof of Theorem] %% Is this a theorem? !!!
+    (\ref{CtblUnion-union}) Given either an infinite sequence $A_1,A_2,A_3,\ldots$ of countable sets, or a finite sequence $A_1,A_2,A_3,\ldots,A_n$ of countable sets, we wish to show that the the union of the sets is countable. Subsets of a countable set are countable, so there is no harm in assuming:
+    \begin{itemize}
+        \item the sequence is infinite (because adding additional terms to the sequence will make the union larger),
+              and
+        \item each of the sets is infinite (because replacing $A_i$ with an infinite superset will make the union larger).
+    \end{itemize}
+    Now, the numbering method from the previous section shows there is an onto function $g \colon \N^+ \to \bigcup_{i=1}^\infty A_i$. So, from~\ref{CtblUnion-image}, we conclude that $\bigcup_{i=1}^\infty A_i$ is countable.
+
+    \medskip
+
+    (\ref{CtblUnion-product}) Given countable sets $A$ and~$B$, we wish to show that $A \times B$ is countable. Subsets of a countable set are countable, so there is no harm in assuming that $A$ and~$B$ are infinite (because replacing $A$ and~$B$ with infinite supersets will make the cartesian product larger). Let
+    \begin{itemize}
+        \item $a_1,a_2,a_3,\ldots$ be a list of the elements of~$A$,
+              and
+        \item $b_1,b_2,b_3,\ldots$ be a list of the elements of~$B$,
+    \end{itemize}
+    Then the elements of $A \times B$ are listed in the following table (or matrix):
+    $$\begin{matrix}
+            (a_1,b_1) & (a_1,b_2) & (a_1,b_3) & (a_1,b_4) & (a_1,b_5) & \cdots \\
+            (a_2,b_1) & (a_2,b_2) & (a_2,b_3) & (a_2,b_4) & (a_2,b_5) & \cdots \\
+            (a_3,b_1) & (a_3,b_2) & (a_3,b_3) & (a_3,b_4) & (a_3,b_5) & \cdots \\
+            (a_4,b_1) & (a_4,b_2) & (a_4,b_3) & (a_4,b_4) & (a_4,b_5) & \cdots \\
+            (a_5,b_1) & (a_5,b_2) & (a_5,b_3) & (a_5,b_4) & (a_5,b_5) & \cdots \\
+            \vdots    & \vdots    & \vdots    & \vdots    & \vdots    & \ddots
+        \end{matrix}$$
+    The numbering method from the previous section defines a bijection from $A \times B$ to~$\N^+$. So $A \times B$ is countable.
+
+    \medskip
+    (\ref{CtblUnion-image}) Suppose $f \colon A \to B$, and $A$~is countable. By replacing~$B$ with~$f(A)$, we may assume $f$~is onto; then we wish to show that $B$ is countable.
+
+    It suffices to define a one-to-one function $g \colon B \to A$. The function~$f$ is onto, so, for each $b \in B$, there is some $a \in A$, such that $f(a) = b$; thus, for each $b \in B$, we may choose $g(b)$ to be an element of~$A$ such that
+    $$ f \bigl( g(b) \bigr) = b .$$
+    Then $g \colon B \to A$, and all that remains is to show that $g$ is one-to-one. Given $b_1,b_2 \in B$, such that $g(b_1) = g(b_2)$, we have $f \bigl( g(b_1) \bigr) = b_1$ and $f \bigl( g(b_2) \bigr) = b_2$. Therefore
+    $$ b_1 = f \bigl( g(b_1) \bigr) = f \bigl( g(b_2) \bigr) = b_2 .$$
+    So $g$~is one-to-one, as desired.
+\end{proof}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    Show that \(\Z\) is countably infinite
+\end{commentbox}
+\begin{proof}
+    Lets consider \(\Z = \{0,-1,1,-2,2,\dots\}\)
+    \\~\\
+    Define \(f: \Z \to \N^+\), by
+    \[f(k) = \begin{cases}
+            2k+1,\ \text{if $k \geq 0$} \\
+            -2k,\ \text{if $k < 0$}
+        \end{cases}\]
+    We need to show that f is a bijection.
+
+    (onto) let \(n\in \N^+\), we wwill consider two cases
+    \begin{enumerate}
+        \item If n is odd, then we have \(2k + 1 = n\) for some \(k \in \Z\). Since n is a positive natural number so \(n > 0\) and \(2(1) + 1 > 0\) hence \(f(k) = 2k + 1 = n\)
+        \item If n is even, then we have \(n = 2k\) for some \(k \in \Z\) Since \(n >0\), \(k > 0\). Then we have \(-k \in \Z \) with \(-k < 0\). Hence, \(f(-k) = -2(-k) = 2k = n\)
+    \end{enumerate}
+    In either case there exist some integer for which \(f(k) = n\) therefore f is onto.
+    \\~\\
+    (one-to-one) exercise.
+\end{proof}
+
+\begin{Note}
+    It is very important to remember that \(\Q\) is countable. Since \(\N\) and \(\Z\) are subsets of \(\Q\), this implies that \(\N \) and \(\Z \) are also countable.
+\end{Note}
+
+\section{Uncountable sets}
+\subsection{The real set}
+\begin{Theorem}
+    {\(\R\) are uncountable}
+    If \(\R \) were countable, then all of its subsets would be countable. thus, in order to prove this theorem we will do a proof by contradiction. Assume that \(\R \) is countable.
+\end{Theorem}
+\textbf{Notation}\\
+For $a,b \in \real$ with $a < b$:
+\begin{itemize}
+    \item \textbf{open interval}:
+          $(a,b) = \{\, x \in \real \mid a < x < b \,\}$.
+    \item \textbf{closed interval}:
+          $[a,b] = \{\, x \in \real \mid a \le x \le b \,\}$.
+    \item \textbf{half-open interval}:
+          $[a,b) = \{\, x \in \real \mid a \le x < b \,\}$
+                          or $(a,b] = \{\, x \in \real \mid a < x \le b \,\}$.
+
+\end{itemize}
+
+\begin{proof}[Proof by contradiction]
+    We will prove the interval \([0,1)\) is uncountable.
+    \\~\\
+    Suppose $[0,1)$ is countable. (This will lead to a contradiction.) This means there is a list $x_1,x_2,x_3,\ldots$ of all the numbers in~$[0,1)$. 
+    %We will show that there is an element of $[0,1)$ that is missing from this list, contradicting the fact that the list was suppose to include all the elements of $[0,1)$.
+    To obtain a contradiction, we will use a method called the \emph{Cantor Diagonalization Argument}. It was discovered by the mathematician Georg Cantor in the 19th century.
+    
+    Each number in $[0,1)$ can be written as a decimal of the form $0.d_1d_2d_3\ldots$, where each $d_k$ is a digit ($0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$, or~$9$). In particular, we can write each $x_i$ in this form:
+        $$ x_i = 0. x_{i,1} x_{i,2} x_{i,3} x_{i,4} x_{i,5} \ldots $$
+     Then we can make a list of all of these decimals (omitting the leading~$0$ in each one):
+        $$\begin{matrix}
+        x_1= & . x_{1,1} x_{1,2} x_{1,3} x_{1,4} x_{1,5} \ldots \\
+        x_2= & . x_{2,1} x_{2,2} x_{2,3} x_{2,4} x_{2,5} \ldots \\
+        x_3= & . x_{3,1} x_{3,2} x_{3,3} x_{3,4} x_{3,5} \ldots \\
+        x_4= & . x_{4,1} x_{4,2} x_{4,3} x_{4,4} x_{4,5} \ldots \\
+        x_5= & . x_{5,1} x_{5,2} x_{5,3} x_{5,4} x_{5,5} \ldots \\
+        \vdots & \vdots 
+        \end{matrix} $$
+    The right-hand side can be thought of as an array of digits, and we now focus on the diagonal entries $x_{i,i}$ of this array, which are circled in the following picture:
+    \def\circleit{\vbox to 0pt{\vss\hbox to 0pt{\hskip-4pt\color{blue}\Huge$\bigcirc$\hss}\vskip-9pt}}
+        $$\begin{matrix}
+        x_1= & . \circleit x_{1,1} x_{1,2} x_{1,3} x_{1,4} x_{1,5} \ldots \\
+        x_2= & . x_{2,1} \circleit x_{2,2} x_{2,3} x_{2,4} x_{2,5} \ldots \\
+        x_3= & . x_{3,1} x_{3,2} \circleit x_{3,3} x_{3,4} x_{3,5} \ldots \\
+        x_4= & . x_{4,1} x_{4,2} x_{4,3} \circleit x_{4,4} x_{4,5} \ldots \\
+        x_5= & . x_{5,1} x_{5,2} x_{5,3} x_{5,4} \circleit x_{5,5} \ldots \\
+        \vdots & \vdots 
+        \end{matrix} $$
+    They form a sequence $x_{1,1}, x_{2,2}, x_{3,3}, \ldots$. 
+    
+    The key to the proof is to make a new sequence $d_1,d_2,d_3,\ldots$ of digits, such that 
+        $$ \text{$d_1 \neq x_{1,1}$, \ $d_2 \neq x_{2,2}$, \ $d_3 \neq x_{3,3}$, \ etc.} $$
+    This means that every term of the new sequence is different from the corresponding term of the diagonal sequence. (This idea of choosing a sequence that is completely different from the diagonal is called \textbf{Cantor diagonalization}, because it was invented by the mathematician Georg Cantor.) Also, to avoid problems coming from the fact that $.999\cdots = 1.000\cdots$, you should not use the digits $0$ and~$9$. The sequence $\{d_i\}$ can be constructed in many ways: just be sure to choose each~$d_i$ to be a digit that is not $x_{i,i}$ (and is not $0$ or~$9$).  For example, we could let
+        $$ d_i = \begin{cases} 1 & \text{if $x_{i,i} \neq 1$} \\ 5 & \text{if $x_{i,i} = 1$} . \end{cases} $$
+    
+    Now, let 
+        $$d = 0.d_1d_2d_3\ldots \in [0,1) .$$
+    For each~$i$, we made sure that $d_i \neq x_{i,i}$, which means that the $i$th digit of~$d$ is different from the $i$th digit of~$x_i$. Therefore, for each~$i$, we have $d \neq x_i$\rlap.\footnote{The digits of~$d$ are only $1$'s and~$5$'s, so it is not a problem that numbers ending $000\ldots$ can also be expressed as a different decimal that ends $999\ldots$.} So $d$ is an element of~$[0,1)$ that is not in the list $x_1,x_2,x_3,\ldots$. This contradicts the fact that $x_1,x_2,x_3,\ldots$ is a list of \emph{all} the numbers in~$[0,1)$.
+\end{proof}
+\subsection{The cardinality of power sets}
+If $A$ is a finite set, then the set $\mathcal{P}(A)$ of all subsets of~$A$ is also finite. (Indeed, $\#\mathcal{P}(A) = 2^{\#A}$.) However, this assertion does \emph{not} remain true when the word "finite" is replaced with "countable".
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    \label{P(N)UncountEx}
+    Show that $\mathcal{P}(\N^+)$ is uncountable.
+    \\Hint: For any $f \colon \N^+ \to \mathcal{P}(\N^+)$, the set $\{i \in \N^+; i \notin f(i)\}$ is not in the image of~$f$.
+    \\~\\
+    For every set~$A$, not just the countable ones, the same argument shows that the cardinality of $\mathcal{P}(A)$ is greater than the cardinality of~$A$. Thus, there is no ``largest'' infinite set. For every set, there is always some set that has \emph{much} larger cardinality.
+\end{commentbox}
+\subsubsection{Barber Paradox}
+Suppose
+\begin{enumerate}
+    \item There is a town with only one barber
+    \item The barber is a man
+    \item The barber shaves precisely those men in the town who do not shave themselves
+\end{enumerate}
+
+Now we ask:
+\begin{quotebox}
+    Does the barber shave himself?
+\end{quotebox}
+This question is a paradox:
+	\begin{itemize}
+	\item If the answer is \textsf{yes}, then the barber shaves himself. But the barber does \emph{not} shave men who shave themselves, so this means that the barber does not shave himself. But we already said that the barber does shave himself, so this is nonsense.
+	\item If the answer is \textsf{no}, then the barber does not shave himself. But the barber \emph{does} shave any man who does not shave himself, so this means that the barber does  shave himself. But we already said that the barber does not shave himself, so this is nonsense.
+	\end{itemize}
+The premise of this discussion is that the hypothesized situation leads to a contradiction, so it is impossible.
+\end{document}

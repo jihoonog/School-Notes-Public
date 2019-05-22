@@ -1,0 +1,371 @@
+\documentclass[../MATH-2000-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Proof by Induction}
+\section{The Principle of Mathematical Induction}
+\begin{Axiom}
+    {Principle of Mathematical Induction}
+    \label{InductionP(n)}
+
+    Suppose $P(n)$ is a predicate of natural numbers. If
+    \begin{enumerate}
+        \renewcommand{\theenumi}{\roman{enumi}}
+        \renewcommand{\labelenumi}{\rm(\theenumi)}
+        \item \label{InductionP(n)-base} $P(1)$ is true,
+              and
+        \item \label{InductionP(n)-step}
+              for every $ k \ge 2, \bigl( P(k-1) \implies P(k) \bigr)$,
+    \end{enumerate}
+    then $P(n)$ is true for all $n \in \N^+$.
+\end{Axiom}
+\Cues{pretty much like recursion but upward instead of downwards}
+\begin{Definition}
+    {Terminology}~\\
+    \begin{itemize}
+        \item In a proof using Mathematical Induction, establishing~(\ref{InductionP(n)-base}) is called the \textbf{base case}, and establishing~(\ref{InductionP(n)-step}) is the \textbf{induction step}.
+        \item In the induction step, we are proving $P(k-1) \implies P(k)$, so we assume that $P(k-1)$ is true (and establish $P(k)$). This assumption $P(k-1)$ is called the \textbf{induction hypothesis}.
+    \end{itemize}
+\end{Definition}
+\begin{Proposition}
+    {Sum of Natural Numbers}
+    \label{1+...+n}
+    For every $n \in \N^+$, we have
+    \ $\displaystyle 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} $.
+\end{Proposition}
+
+\begin{proof}[Proof by induction]
+    Define $P(n)$ to be the assertion
+    $$ 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} .$$
+
+    (i) \emph{Base case.} For $n = 1$, we have
+    $$1 + 2 + 3 + \cdots + n = 1 \mbox{\quad and\quad}  \frac{n(n+1)}{2}=\frac{1(1+1)}{2}=1.$$
+    Since these are equal,
+    $P(1)$ is true.
+
+    \medbreak
+    (ii) \emph{Induction step.} Assume $P(k-1)$ is true (and $k \ge 2$). This means that
+    $$ 1 + 2 + 3 + \cdots + (k-1) = \frac{(k-1)\bigl( (k-1)+1\bigr)}{2} .$$
+    Hence
+    \begin{align*}
+        1 + {} & 2 + 3 + \cdots + k
+        \\&= \bigl(1 + 2 + 3 + \cdots + (k-1) \bigr) + k
+        \\&= \frac{(k-1)\bigl( (k-1)+1\bigr)}{2} + k && \text{(Induction Hypothesis)}
+        \\&= \frac{(k-1)k}{2} + k
+        \\&= k \left( \frac{k-1}{2} + 1 \right)
+        \\&= k \left( \frac{k+1}{2} \right)
+        \\&= \frac{k (k+1)}{2}
+        ,\end{align*}
+    so $P(k)$ is true.
+
+    Therefore, by the Principle of Mathematical Induction, we know $P(n)$ is true for all~$n$. This means
+    $$ 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} $$
+    for every $n \in \N^+$.
+\end{proof}
+
+\begin{Proposition}
+    {\(2n^2 + n\)}
+    For every $n \in \N^+$, we have
+    $$ 3 + 7 + 11 + \cdots + (4n-1) = 2n^2 + n .$$
+\end{Proposition}
+
+\begin{proof}[Proof by induction]
+    Define $P(n)$ to be the assertion
+    $$ 3 + 7 + 11 + \cdots + (4n-1) = 2n^2 + n .$$
+
+    (i) \emph{Base case.} For $n = 1$, we have
+    $$3 + 7 + 11 + \cdots + (4n-1) = 3 \mbox{\quad and\quad}  2n^2 + n = 2(1^2) + 1 = 3.$$
+    Since these are equal,
+    $P(1)$ is true.
+
+    \medbreak
+    (ii) \emph{Induction step.} Assume $P(k-1)$ is true (and $k \ge 2$). This means that
+    $$ 3 + 7 + 11 + \cdots + \bigl(4(k-1)-1 \bigr) = 2(k-1)^2 + (k-1) .$$
+    Hence
+    \begin{align*}
+        3 +  {} & 7 + 11 + \cdots + (4k-1)
+        \\&= \Bigl( 3 +  7 + 11 + \cdots + \bigl(4(k-1)-1\bigr) \Bigr) + (4k-1)
+        \\&= \Bigl( 2(k-1)^2 + (k-1) \Bigr)  + (4k-1) && \text{(Induction Hypothesis)}
+        \\&= \Bigl( 2(k^2 - 2k + 1) + (k-1) \Bigr)  + (4k-1)
+        \\&= (2k^2 - 4k + 2) + (k-1)  + (4k-1)
+        \\&= 2k^2 + k
+        ,\end{align*}
+    so $P(k)$ is true.
+
+    \medbreak
+
+    Therefore, by the Principle of Mathematical Induction, we know $P(n)$ is true for all~$n$. This means
+    $$ 3 + 7 + 11 + \cdots + (4n-1) = 2n^2 + n $$
+    for every $n \in \N^+$.
+\end{proof}
+
+\section{Other proofs by induction}
+\begin{commentbox}{Example on Mondulo Operations}[{PhbLightCyan}]
+    Suppose $a,b,n \in \Z$, with $a \equiv b \pmod{n}$. Show
+    $a^k \equiv b^k \pmod{n}$, for all $k \in \N^+$.
+\end{commentbox}
+
+\begin{proof}[Proof by induction]
+    We induct on~$k$. Define $P(k)$ to be the assertion
+    $$ a^k \equiv b^k \pmod{n}.$$
+
+    (i) \emph{Base case.} Since $a^1 = a$ and $b^1 = b$, the hypothesis $a \equiv b \pmod{n}$ tells us that
+    $$ a^1 \equiv b^1 \pmod{n} ,$$
+    so $P(1)$ is true.
+
+    (ii) \emph{Induction step.} Assume $P(k-1)$ is true.
+    This means that
+    $$a^{k-1} \equiv b^{k-1} \pmod{n} .$$
+    By assumption, we also have
+    $$ a \equiv b \pmod{n} .$$
+    We can multiply the above congruences, to conclude that
+    $$ (a^{k-1} )(a) \equiv ( b^{k-1}) (b) \pmod{n} .$$
+    In other words,
+    $$ a^k \equiv b^k \pmod{n} ,$$
+    so $P(k)$ is true.
+
+    \medskip
+    Therefore, by the Principle of Mathematical Induction, $P(k)$ is true for every $k \in \N^+$.
+\end{proof}
+
+\begin{Definition}
+    {Fibonacci Numbers}
+    The \textbf{Fibonacci numbers} $F_1,F_2,F_3,\ldots$ are defined by:
+    \begin{itemize}
+        \item $F_1 = 1$,
+        \item $F_2 = 1$,
+              and
+        \item $F_n = F_{n-1} + F_{n-2}$ for $n \ge 3$.
+    \end{itemize}
+    (For example, $F_3 = F_{3-1} + F_{3-2} = F_2 + F_1 = 1 + 1 = 2$.)
+    In general, each Fibonacci number (after~$F_2$) is the sum of the two preceding Fibonacci numbers, so
+    the first few Fibonacci numbers are:
+    $$\begin{array}{c||c|c|c|c|c|c|c|c}
+            n   & 1 & 2 & 3 & 4 & 5 & 6 & 7  & \cdots \\
+            \noalign{\hrule}
+            F_n & 1 & 1 & 2 & 3 & 5 & 8 & 13 & \cdots
+        \end{array}$$
+\end{Definition}
+
+\begin{commentbox}{Example on Fibonacci Numbers}[{PhbLightCyan}]
+    Prove \ $\displaystyle \sum\limits_{k=1}^n F_k = F_{n+2} - 1$ \ for all $n \in \N^+$.
+\end{commentbox}
+\begin{proof}[Proof by induction]
+    Define $P(n)$ to be the assertion
+    $$ \sum_{k=1}^n F_k = F_{n+2} - 1 .$$
+
+    \medskip
+
+    (i) \emph{Base case.} For $n = 1$, we have
+    $$ \sum_{k=1}^n F_k = \sum_{k=1}^1 F_k = F_1 = 1 = 2 - 1 = F_3 - 1 = F_{1+2} - 1 = F_{n+2} - 1,$$
+    so $P(1)$ is true.
+
+    \medskip
+    (ii) \emph{Induction step.} Assume $P(n-1)$ is true (and $n \ge 2$). Then
+    \begin{align*}
+        \sum_{k=1}^n F_k
+         & = \left( \sum_{k=1}^{n-1} F_k \right) + F_n
+        \\&= \Bigl( F_{(n-1)+2} - 1 \Bigr) + F_n && \text{(Induction Hypothesis)}
+        \\&= (F_{n+1} - 1) + F_n
+        \\&= (F_{n+1} + F_n) - 1
+        \\&= F_{n+2} - 1
+         &                                             & \begin{pmatrix} \text{definition of} \\ \text{Fibonacci number} \end{pmatrix}
+        .\end{align*}
+
+    \medskip
+    Therefore, by the Principle of Mathematical Induction, $P(n)$ is true for every~$n$. This means
+    $\displaystyle \sum\limits_{k=1}^n F_k = F_{n+2} - 1$ for all $n \in \natural^+$.
+\end{proof}
+
+\section{Other versions of induction}
+There are other versions of induction that works better in solving other cases.
+\begin{Proposition}
+    {}
+    \label{pr-OtherInduct}
+    \renewcommand{\theenumii}{\roman{enumii}}
+    \makeatletter\renewcommand{\p@enumii}{}\makeatother
+    Suppose $P(n)$ is a predicate of natural numbers, and $m \in \N^+$.
+    \begin{enumerate}
+        \item \label{pr-OtherInduct-strong}
+              {\rm(Strong induction)}
+              If
+              \begin{enumerate}
+                  \item \label{InductionStrong-base} $P(1)$ is true,
+                        and
+                  \item \label{InductionStrong-step}
+                        for every $ n \ge 2$,
+                        \\ \hbox{\qquad} $\Bigl( \bigl( \mbox{for every } k \in \{1,2,\ldots,n-1\}, P(k) \bigr) \implies P(n) \Bigr)$,
+              \end{enumerate}
+              then $P(n)$ is true for all $n \in \N^+$.
+
+        \item \label{pr-OtherInduct-Gen}
+              {\rm(Generalized induction)}
+              If
+              \begin{enumerate}
+                  \item \label{InductionGen-base} $P(m)$ is true,
+                        and
+                  \item \label{InductionGen-step}
+                        for every $ n > m$, $\bigl( P(n-1)  \implies P(n) \bigr)$,
+              \end{enumerate}
+              then $P(n)$ is true for all $n \ge m$.
+
+        \item \label{pr-OtherInduct-multiple}
+              {\rm(Strong induction with multiple base cases)}
+              If
+              \begin{enumerate}
+                  \item \label{InductionMultiple-base} $P(k)$ is true for all $k \in \{1,2,\ldots,m\}$,
+                        and
+                  \item \label{InductionMultiple-step}
+                        for every $ n > m$,
+                        \\ \hbox{\qquad} $\Bigl( \bigl( \mbox{for every } k \in \{1,2,\ldots,n-1\}, P(k) \bigr) \implies P(n) \Bigr)$,
+              \end{enumerate}
+              then $P(n)$ is true for all $n \in \N^+$.
+
+        \item \label{pr-OtherInduct-n+1}
+              If
+              \begin{enumerate}
+                  \item \label{pr-OtherInduct-n+1-base}
+                        $P(1)$ is true,
+                        and
+                  \item \label{pr-OtherInduct-n+1-step}
+                        for every $ k \in \N^+$, $P(k) \Rightarrow P(k+1)$,
+              \end{enumerate}
+              then $P(n)$ is true for all $n \in \N^+$.
+
+        \item \label{pr-OtherInduct-set}  % was \label{InductionSet}
+              Suppose $S \subset \N^+$. If
+              \begin{enumerate} \renewcommand{\theenumi}{\roman{enumi}}
+                  \item \label{InductionSet-base} $1 \in S$,
+                        and
+                  \item \label{InductionSet-step}
+                        for every $n \in S, \bigl( n+1 \in S \bigr)$,
+              \end{enumerate}
+              then $S = \N^+$.
+
+    \end{enumerate}
+\end{Proposition}
+\Cues{Strong induction goes down to the base case}
+\begin{commentbox}{Example}[{PhbLightCyan}]
+    \label{Fn<2nEg}
+    Prove $F_n < 2^n$, for every $n \in \N^+$.
+\end{commentbox}
+\begin{proof}[Proof by induction]
+    Define $P(n)$ to be the assertion
+    $$ F_n < 2^n .$$
+    We use strong induction with $2$~base cases.
+
+    (i) \emph{Base cases.}
+    We have
+    $$ F_1 = 1 < 2 = 2^1 ,$$
+    and
+    $$ F_2 =1 < 4 = 2^2 ,$$
+    so $P(1)$ and $P(2)$ are true.
+
+    (ii) \emph{Induction step.} Assume $n \ge 3$, and that $P(n-1)$ and $P(n-2)$ are true. We have
+    \begin{align*} F_n
+         & = F_{n-1} + F_{n-2}
+        \\&< 2^{n-1} + 2^{n-2} && \text{(Induction Hypotheses)}
+        \\&< 2^{n-1} + 2^{n-1}
+        \\&= 2^n
+        ,\end{align*}
+    so $P(n)$ is true.
+
+    By the Principle of Mathematical Induction (in the form of strong induction with multiple base cases), we conclude that $P(n)$ is true for all $n \in \N^+$.
+\end{proof}
+
+\section{Well-ordered}
+\begin{Definition}
+    {Smallest}
+    Let $S \subset \real$ and $a \in \real$. We say $a$ is the \textbf{smallest} element of~$S$ if and only if:
+	\begin{itemize}
+	\item $a \in S$,
+	and
+	\item $\forall s \in S$, $a \le s$.
+	\end{itemize}
+\end{Definition}
+
+\begin{Theorem}
+    {\(\N\) is well-ordered}\label{NisWO}
+    Every nonempty subset of~$\N$ has a smallest element.
+\end{Theorem}
+\begin{Note}
+    If \(P(n)\) can be proven for all \(n\in\N \) using induction, then it can also be proven by applying Theorem \ref{NisWO} ot the set \[ S = \{\, n \in \N^+ \mid \neg P(n) \,\} .\]
+\end{Note}
+
+\section{Application to Number Theory}
+\begin{Definition}
+    {Prime}
+    An element~$p$ of~$\N^+$ is \textbf{prime} if and only if $p > 1$ and $p$ is not divisible by any element of~$\N^+$ other than~$1$ and~$p$.
+\end{Definition}
+
+\begin{Proposition}{} \label{HasPrimeFactor}
+    If $n \in \N$ and $n > 1$, then $n$~is divisible by a prime number.
+\end{Proposition}
+\begin{proof}
+    Suppose there is some natural number $n > 1$, such that $n$~is not divisible by a prime number. (This will lead to a contradiction.) Since $\N$~is well-ordered, we may assume that $n$~is the smallest such number, so:
+        $$ \text{If $1 < k < n$ (and $k \in \N$), then $k$~is divisible by a prime number} .$$
+    
+    Since $n \mid n$, but (by assumption) $n$~is not divisible by any prime number, we know that $n$~is not prime. By definition, this means there exists $k \in \N$, such that $k \mid n$ and $1 < k < n$. From the minimality of~$n$, we know that $k$~is divisible by some prime number~$p$. Then $p \mid k$ and $k \mid n$, so $p \mid n$. This contradicts the fact that $n$~is not divisible by a prime number.
+\end{proof}
+
+\begin{Theorem}{Fundamental Theorem of Arithmetic}
+    Every natural number \textup(other than $0$ and~$1$\textup) is a product of prime numbers \textup(or is itself a prime\textup).
+\end{Theorem}
+    
+\begin{proof}[Proof by contradiction]
+    Suppose there is some natural number $n > 1$, such that $n$~is not a product of prime numbers (and is not a prime). Since $\N$~is well-ordered, we may assume that $n$~is the smallest such number, so:
+        $$ \text{If $1 < k < n$ (and $k \in \N$), then $k$~is a product of prime numbers} .$$
+    
+    Since $n$~is not prime, it is divisible by some natural number~$k$, with $1 < k < n$. This means we may write $n = km$, for some $m \in \N^+$. Since $m = n/k$ and $1 < k < n$, we see that $1 < m < n$. Therefore, the minimality of~$n$ implies that $k$ and~$m$ are products of prime numbers: say $k = p_1 p_2 \cdots p_r$ and $m = q_1 q_2 \cdots q_s$. Then
+        $$ n = km = (p_1 p_2 \cdots p_r)(q_1 q_2 \cdots q_s) $$
+    is a product of prime numbers. This is a contradiction.
+\end{proof}
+
+
+\begin{Corollary}
+    {Infinite many primes}
+    There are infinitely many prime numbers
+\end{Corollary}
+
+
+\begin{proof}[Proof by contradiction]
+    Suppose there are only finitely many prime numbers. Then we can make a list of all of them: 
+        $$ \text{The set of all prime numbers is $\{p_1,p_2,\ldots,p_n\}$.} $$
+    Let 
+        $$ N = p_1\times p_2 \times \cdots \times p_n .$$
+    From \ref{HasPrimeFactor}, we know there is some prime~$p$, such that $p \divides (N+1)$. 
+    
+    Since $p_1,p_2,\ldots,p_n$ is a list of all the prime numbers, we know $p = p_i$, for some~$i$. Therefore $p = p_i$ is one of the factors in the product that defines~$N$, so $p \divides N$. Therefore, $p$ divides both $N$ and~$N+1$, so we have
+        $$ p \divides \ \bigl( (N+1) - N\bigr) \ = \ 1 .$$
+    This implies $p = \pm 1$, which contradicts the fact that~$p$, being a prime number, must be $> 1$.
+\end{proof}
+
+
+\begin{Definition}
+    {relatively prime}
+    Let $a,b \in \N^+$. We say $a$ and~$b$ are \textbf{relatively prime} if and only if they have no divisors in common, other than~$1$. (I.e., if $k \in  \N^+$, and $k$ is a divisor of both $a$ and~$b$, then $k = 1$. In other words, the "greatest common divisor" of $a$ and~$b$ is~$1$.)
+\end{Definition}
+
+\begin{Theorem}
+    {}
+    \label{GCDLinComb}
+    Let $a,b \in \N^+$. If $a$ and~$b$ are relatively prime, then there exist $m,n \in \Z$, such that $ma + nb = 1$.
+\end{Theorem}
+
+\begin{proof}
+    Let
+        $$ S = \{\, ma + nb \mid m,n \in \Z\ k =  \,\} \cap \N^+. $$
+    It is easy to see that $a \in S$ (by letting $m = 1$ and $n = 0$), so $S \neq \emptyset$. Therefore, since $\N$ is well-ordered, we may let $d$ be the smallest element of~$S$.
+    Then $d \in S$, so we have $d = m_0 a + n_0 b$ for some $m_0,n_0 \in \Z$.
+    
+    By the Division Algorithm \ref{DivAlgThm}, we may write 
+        $$ \text{$a = qd + r$ with $0 \le r < d$} .$$
+    So
+        $$ r = a - qd = a - q(m_0a+n_0b) = (1-qm_0)a + qn_0b = m a + n b ,$$
+    where $m = 1 - qm \in \Z$ and $n = qn \in \Z$.
+    On the other hand, since $r < d$, and $d$~is the smallest element of~$S$, we know $r \notin S$. 
+     From the definition of~$S$, we conclude that $r = 0$. So $d \divides a$.
+    
+    By repeating the same argument with $a$ and~$b$ interchanged (and $m_0$ and~$n_0$ also interchanged) we see that $d \divides b$. 
+    
+    Therefore, $d$ is a divisor of both~$a$ and~$b$. Since $a$ and~$b$ are relatively prime, we conclude that $d = 1$. Since $d \in S$, this means $1 \in S$, which establishes the desired conclusion.
+\end{proof}
+\end{document}
