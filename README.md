@@ -1,5 +1,5 @@
 # Lecture Notes
-This is my collection of lecture notes (+ other study things) for courses that I've taken during my undergraduate studies at the University of Alberta.
+This is my collection of lecture notes (+ other study things) for courses that I've taken during my undergraduate studies at the University of Alberta (and from the University of Lethbridge).
 
 Most (if not all) of them are typeset to look like a Dungeon and Dragon guide book. **Why?** Well the short story is that I was bored in my Operating Systems Lab and experimented with different LaTeX templates to see which ones I liked. I choose this template: [DND-5e-LaTeX-Template](https://github.com/rpgtex/DND-5e-LaTeX-Template). The rest is history I guess.
 
@@ -63,7 +63,7 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 ```
 
 ## Future Goals
-- Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not on Linux Adobe Acrobat)
+- Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not in Linux Adobe Acrobat)
 - Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
 
 ## Done/Somewhat Done
