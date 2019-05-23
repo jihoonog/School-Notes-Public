@@ -65,6 +65,7 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 ## Future Goals
 - Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not in Linux Adobe Acrobat)
 - Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
+- Ebook format if possible (EPUB, MOBI, etc)
 
 ## Done/Somewhat Done
 - Easily change the color of the boxes within the same document. (Beta)
