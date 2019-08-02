@@ -49,6 +49,8 @@ In order to build these notes yourself you need at least one program:
 - LaTeX typesetting engine: Either TeX Live (full) or MikTeX is fine, TeX Live is preferred.
 - Rubber (you can manually build the notes yourself but its more of a pain) (recommended)
 - GNU Make (recommended) if you want to use the Makefile.
+- DND-5e-LaTeX-Template from here [DND-5e-LaTeX-Template](https://github.com/rpgtex/DND-5e-LaTeX-Template) 
+- The dndnotes.sty file installed in your TEXMFHOME directory. The dndnotes.sty is in the Testing directory of this repository. 
 
 Goto the root directory that contains the Makefile and type
 ``` make 
@@ -62,16 +64,19 @@ pdflatex -synctex=1 -interaction=nonstopmode filename.tex
 # You may need to recompile as latex needs multiple passes in order to get cross-references to work. 
 ```
 
+## Testing Directory
+The Testing directory is where I keep the dndnotes.sty that contains new environments for Theorems, Definitions, etc. As well as some handy shortcuts for mathematical notations. 
+
 ## Future Goals
 - Typeset mp4s or gifs into the notes. (I know this is possible within Windows Adobe Acrobat but not in Linux Adobe Acrobat)
 - Create a .sty template for assignments (Not in DnD format, Summer 2019 project)
 - Ebook format if possible (EPUB, MOBI, etc)
 
 ## Done/Somewhat Done
-- Easily change the color of the boxes within the same document. (Beta)
-- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Beta)
-- Speed up the compiling process. (Beta)
 - Quickly create and typeset images (Alpha)
+- Create a collections of snippets, macros and templates so it is easier to typeset my notes (Beta)
+- Speed up the compiling process. (Done)
+- Easily change the colour of the boxes within the same document. (Done)
 
 ## Disclaimer
 These notes are not official, nor are they endorsed by the instructor, Wizard of the Coast, Games Workshop or any other company unless explicitly stated. Moreover, these notes haven't been proofread by the instructor (with a few exceptions). Therefore, they are liable to errors or typos. If you find such an error, I'd be greatly appreciate it if you could open a pull request (if you are proficient with LaTeX and have the required template) or open an issue (so that I can fix it). 

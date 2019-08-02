@@ -3,9 +3,9 @@
 \RequirePackage{dnd}
 \RequirePackage{amsmath, amsthm, amssymb}
 \RequirePackage{microtype}
-\RequirePackage{lipsum}
 \RequirePackage{lmodern}
 \RequirePackage[hidelinks]{hyperref}
+\RequirePackage{minted}
 \setlength{\marginparwidth}{2cm} % this is to fix margin warnings
 \RequirePackage[colorinlistoftodos,textsize=normalsize]{todonotes}
 
@@ -18,24 +18,49 @@
 \newtheorem*{remark}{Remark}
 %% This is where the new environment starts
 % Math and term definitions
-\newenvironment{Definition}[1]{\begin{paperbox}{}\begin{definition}[#1]}
-{\end{definition}\end{paperbox}}
-\newenvironment{Theorem}[1]{\begin{paperbox}{}\begin{theorem}[#1]}
-{\end{theorem}\end{paperbox}}
-\newenvironment{Corollary}{\begin{paperbox}{}\begin{corollary}}
-{\end{corollary}\end{paperbox}}
-\newenvironment{Lemma}{\begin{paperbox}{}\begin{lemma}}
-{\end{lemma}\end{paperbox}}
+\newenvironment{Definition}[1]{
+  \begin{DndSidebar}[color=PhbLightGreen]{}
+    \begin{definition}[#1]}
+{   \end{definition}
+  \end{DndSidebar}}
+\newenvironment{Theorem}[1]{
+  \begin{DndSidebar}[color=PhbLightGreen]{}
+    \begin{theorem}[#1]}
+{   \end{theorem}
+  \end{DndSidebar}}
+\newenvironment{Corollary}{
+  \begin{DndSidebar}[color=PhbLightGreen]{}
+    \begin{corollary}}
+{   \end{corollary}
+  \end{DndSidebar}}
+\newenvironment{Lemma}{
+  \begin{DndSidebar}[color=PhbLightGreen]{}
+    \begin{lemma}}
+{   \end{lemma}
+  \end{DndSidebar}}
+\newenvironment{Remark}{
+  \begin{DndComment}[color=PhbMauve]{}
+    \begin{remark}}
+{   \end{remark}
+  \end{DndComment}}
 % Reviewing a list of things after a class
-\newenvironment{Review}{\begin{paperbox}{Review}[DmgLilac]}
-{\end{paperbox}}
+\newenvironment{Review}{
+  \begin{DndSidebar}[color=DmgLilac]{Review}}
+{ \end{DndSidebar}}
 % For Additional notes
-\newenvironment{Note}{\begin{commentbox}{Note}[PhbTan]}
-{\end{commentbox}}
-\newenvironment{Questions}{\begin{commentbox}{Question(s)}\begin{enumerate}}
-{\end{enumerate}\end{commentbox}}
-\newenvironment{Answers}{\begin{commentbox}{Answer(s)}[PhbLightCyan]\begin{enumerate}}
-{\end{enumerate}\end{commentbox}}
+\newenvironment{Note}{
+  \begin{DndComment}[color=PhbTan]{Note}}
+{ \end{DndComment}}
+\newenvironment{Questions}{
+  \begin{DndComment}[color=PhbLightGreen]{Question(s)}
+    \begin{enumerate}}
+{   \end{enumerate}
+  \end{DndComment}}
+\newenvironment{Answers}{
+  \begin{DndComment}[color=PhbLightCyan]{Answer(s)}
+    \begin{enumerate}}
+{   \end{enumerate}
+  \end{DndComment}}
 %% new commands for Cornell Methods
 %% These are useful for short, single question, item, and things to do.  
 \newcommand{\Cues}[1]{\todo[inline,backgroundcolor=green!20]{#1}}
@@ -47,5 +72,8 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
-%% TODO: 
-%% Add more mathematical key terms like conjectures, 
+%% TODO
+%% Add more mathematical key terms like conjectures, etc
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arcsec}{arcsec}
