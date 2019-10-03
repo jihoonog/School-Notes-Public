@@ -1,0 +1,301 @@
+\documentclass[../STAT-252-Notes.tex]{subfiles}
+\begin{document}
+
+\chapter{Several Population means}
+The ANOVA uses the F-distribution. It is to find the difference among more than two groups.
+Measurements of only one variable are recorded, but they come from different populations, treatments or groups.
+The one variable being measured can be considered as the \textbf{responding variable}
+
+\section{F-distribution}
+The F-statistics which is used by ANOVA can be calculated using two types of variations and dividing one by the other. It has two degrees of freedom:
+\begin{itemize}
+  \item \textbf{Numerator degree of freedom} which corresponds to the type of variation placed in the numerator when calculating the test statistic 
+    \item \textbf{Denominator degrees of freedom} which corresponds to the variation placed in the denominator of F-statistics
+\end{itemize}
+\paragraph{example}
+$df = (12,25)$ the first number is the numerator the second number is the denominator.
+
+
+There are an infinite many F-distribution, each identified by the two degrees of freedom.
+
+Here are its properties:
+\begin{DndSidebar}[color=PhbLightGreen]{Properties}
+  \begin{enumerate}
+    \item The teal area under the F-curve is 1 
+    \item It starts at 0 on the left and extends indefinitely to the right approaching but not touching the horizontal axis
+    \item The curve is right skewed
+    \item at $df = (\infty,\infty)$ The $F = 1.000$ at all significance levels
+  \end{enumerate}
+\end{DndSidebar}
+
+\paragraph{The general guidelines on significance}
+{\centering
+\begin{DndTable}[color=PhbLightGreen]{XX}
+  \textbf{P-value} & \textbf{Strength of evidence against $H_0$} \\
+  $P > 0.10$ & Weak \\
+  $0.05 < p \le  0.10$ & Moderate \\
+  $0.01 < P \le  0.05$ & Strong \\
+  $0.001 < P \le 0.01$ & Very string \\
+  $P \le  0.001$ & Extremely strong \\
+\end{DndTable}}
+
+
+\section{ANOVA: assumptions and logic}
+There are multiple types of ANOVA: \textbf{One-way} and \textbf{Two-way}, the one way is to compare values of one variable between several groups or population that is affected by one factor while \textbf{two-way} is the same thing but with two factors.
+The factor in one-way is usually a categorical type. 
+There is multiway factorial which is basically n-ways. 
+
+The \textbf{F-statistic} is:
+\begin{itemize}
+  \item 
+    \[
+      F = \frac{\text{Between groups variablity}}{\text{within groups variablity}}
+    \] or
+  \item 
+    \[ 
+      F = \frac{\text{variation between samples}}{\text{variation within samples}} 
+    \] 
+\end{itemize}
+
+
+There could be three scenarios to explain the logic of ANOVA
+\begin{enumerate}
+  \item A small variation within and between groups
+  \item A larger variation among groups than within groups  
+  \item A large variation among groups (means), but even larger variation within groups
+\end{enumerate}
+Scenario 2 does have extreme different at $\alpha = 0.05$  unlike scenario 1 and 3. 
+
+The F store is made up with 4 components
+\begin{Definition}
+  {F-score}
+  \[ 
+    F = \frac{SS_{Treatment}/(k-1)}{SS_{Error}/(n-k)} 
+  \] 
+  Where  $MS_{Treatment} = SS_{Treatment}/(k-1)$
+
+  and $MS_{Error} = SS_{Error}/(n-k)$.
+
+  In this case $n$ is the number of total observation from all the group and $k$ is the number of groups to compare.
+\end{Definition}
+
+\section{One-way ANOVA Hypothesis Test}
+This is similar to the t-test 
+
+\begin{DndSidebar}[color=PhbLightGreen]{Steps for a one-way ANOVA hypothesis test}
+  \begin{itemize}
+    \item \textbf{Purpose} To test for the difference between several (k) population means
+    \item \textbf{Assumptions} 
+      \begin{enumerate}
+        \item Simple random samples from each populations
+        \item Indent pend samples (All k samples are sampled independently of each other)
+        \item All population begin compared are normally distributed
+        \item Equal population standard deviation
+      \end{enumerate}
+  \end{itemize}
+  Steps
+  \begin{enumerate}
+    \item Check the purpose and assumptions
+    \item State the null and alternative hypotheses:
+      \begin{itemize}
+        \item H0 = $\mu_1 = \mu_2 = \ldots = \mu_k$ 
+        \item Ha = $\exists \mu_1, \mu_2 \in M\ \text{s.t}\ \mu_1 \neq  \mu_2$
+      \end{itemize}
+    \item Obtain the three sums of squares ($SS_{Total},\ SS_{Treatment},\ SS_{Error}$) and consturct a \textbf{One-way ANOVA table} to obtain the calculated value of the F-statistic.
+      {\centering
+        \begin{DndTable}[color=PhbLightCyan]{XXXXX}
+          \textbf{Source of variation} & \textbf{SS} & \textbf{df} & \textbf{MS = SS/df} & \textbf{F-statistics} \\
+          Treatment (Between groups) $SS_{Treatment}$ & $= \sum_{}^{}n_{j}(\overline{y}_j - \overline{\overline{y}})^{2} $ & $k-1$ & $= SS_{Treatment}/(k-1)$ & $F = \frac{MS_{Treatment}}{MS_{Error}}$ \\
+          Error (within group) $SS_{Error}$ & $= \sum_{}^{} \sum_{}^{} (y_{i,j} - \overline{y}_j)^{2}$ & $n-k$ & $ = SS_{Error}/(n-k)$ &  \\
+          Total & $SS_{Total}$ &  $n-1$ &  &  \\
+      \end{DndTable}}
+    \item Devide to reject or not to reject H0
+      $df = (\text{numerator degrees of freedom, denominator degrees of freedom})$ or $df = (k-1,n-k)$ or $F_{n-k}^{k-1}$ 
+      \item Conclusion in terms of the research problem
+  \end{enumerate}
+  
+\end{DndSidebar}
+\Cues{The Treatment between groups is the variation of the group's mean with the grand mean}
+\Cues{The Error within groups is the sum of all variation}
+\begin{Note}
+  \begin{itemize}
+    \item  
+      $n_j(\overline{y}_j - \overline{\overline{y}}) $ is the squared difference from the group's mean with the grand mean or the mean of means. Multiplied by the number of samples for that group. You them sum all of them to get the $SS_{Treatment}$ 
+
+    \item The ANOVA is a \textbf{one-tailed test} and the ANOVA table is one-tailed   
+
+    \item Also \textbf{Never double the p-value}
+  \end{itemize}
+\end{Note}
+
+
+The $SS_{treatment} $ is the sum of variation between the means and the $SS_{error}$ is the sum of variation within groups 
+
+
+
+
+
+
+
+
+\begin{Review}
+  \begin{itemize}
+    \item  ANOVA is a way to analyze and compare variances \underline{among} populations with variance \underline{within} the population
+  \end{itemize}
+\end{Review}
+
+
+\section{Multiple comparison or unplanned comparisons}
+\textbf{if and only if}, one-way ANOVA results rejecting the null hypotheses, then it is often desirable to do multiple comparisons in order to detainee which means are different from which other mean. These are called pairwise comparisons.
+
+You basically do $n\choose 2$ comparisons of means, the formula of which is easy to remember.
+\[ 
+  {n \choose 2} = \frac{n(n-1)}{2}     
+\] 
+Where $n $ is the number of groups.
+
+There are several types of comparisons
+
+\subsection{Tukey Multiple Comparison}
+The \textbf{Purpose} of this test is to determine pairwise differences between $k$ population means when $H_0$ has been rejected in one-way ANOVA.
+The \textbf{assumptions} are the same as for One-Way ANOVA
+~\\~\\
+\paragraph{Steps}
+
+\begin{enumerate}
+  \item At the given confidence level, $1-\alpha$, find the critical value $q_\alpha$ at $df = (k, n-k)$ in the appropriate statistical table.
+  \item Obtain the endpoints of the CI for the difference $\mu_i - \mu_j$ 
+    \[ 
+    (\overline{y}_i - \overline{y}_j) \pm \frac{q_\alpha}{\sqrt{2}} \times \sqrt{MSE} \sqrt{(1 / n_i) + (1 / n_j)} \  
+    \] 
+    where $MSE$ is the mean square error from one-way ANOVA table
+
+    you only need means where $i < j$ to make things consistent. Doing the other way will give the same answer but the signs will be different.
+
+    \item Compile the result in a matrix and declare two population means different if the CI for the difference does \underline{not} contain 0; otherwise, do not declare the two population means different.
+    \item Conclusion, summarized the results in a means comparison diagram by ranking the sample means from smallest to largest and by connecting with lines those whose population manes were not declared different
+      
+      \textbf{and} interpret the result of the multiple comparisons in words.
+\end{enumerate}
+
+
+
+
+
+\subsection{Bonferroni's Method of Multiple comparisons}
+Like the Tukey comparison the Bonferroni's Method does the same things, find pairwise difference between $k$ population means.
+~\\~\\
+
+\paragraph{Steps}
+\begin{enumerate}
+  \item Find the number of multiple comparisons $m$ that are possible
+    \[ 
+      m = \frac{k(k-1)}{2}\ \text{Where $k$ is the number of groups being compared} 
+    \] 
+  \item Calculate the individual comparison-wise error rate ($\alpha_I$) based on family-wise error rate ($\alpha_F$) or CI ($1-\alpha_F$) given:
+    \[ 
+    \alpha_I = \frac{\alpha_F}{m} 
+    \] 
+   \item Find the critical value of $t$ at $df = n-k$ for $\alpha_I / 2: t_{df, \alpha_I / 2}$ 
+   \item Calculate the ME for each comparison (group $i$ vs group $j$)
+     \begin{align*}
+       ME_{ij} &=  Crit.val \times SE(\overline{y}_i - \overline{y}_j) \\
+       ME_{ij} &= t_{n_0k, \alpha_I / 2} \times \sqrt{MSE} \sqrt{\frac{1}{n_i}+\frac{1}{n_j}}  \\
+     \end{align*}
+  \item Declare two population means different if the absolute value of the difference between their sample means is greater than or equal to the corresponding ME
+  \[ 
+  \mu_i - \mu_j \neq 0,\ \text{if $|\overline{y}_i - \overline{y}_j |\ge ME_{ij}$} 
+  \] 
+  \textbf{Present} the matrix 
+  \item Summarized the result in a means comparison diagram by ranking the sample means from smallest to largest and by connecting with lines those whose population means were not declared different \underline{and} \textbf{state the confusion in words}.
+\end{enumerate}
+
+
+\begin{Note}
+  There is a different between the Tukey and the Bonferroni methods. 
+
+  The Tukey method only works if the sample sizes for all the groups are the same (or similar). 
+  While the Bonferroni method can be used in a more general case of unequal population size.
+  
+  Moreover, because of finding the $\alpha_I$, Bonferroni gets:
+  \begin{enumerate}
+    \item Higher Critical Value
+    \item Gives wider Confidence Intervals (due to larger critical values)
+    \item More conservative than the Tukey
+  \end{enumerate}
+  There is a trade off between detection and confidence
+
+  These are unplanned comparisons.
+\end{Note}
+
+\subsection{Linear Combinations (Contrasts)(=Planned Comparisons)}
+The means should be planned before collecting the data
+
+\paragraph{Steps}
+\begin{enumerate}
+  \item Develop the linear combination by deciding which means of groups of means you want to compare.
+    \[ 
+      \gamma_{D-E} = \frac{(\mu_{1,1} + \mu_{1,2} + \ldots + \mu_{1,d})}{d} - \frac{(\mu_{2,1} + \mu_{2,2} +  \ldots + \mu_{2,e})}{e} 
+    \] 
+   Where D and E are combinations of means to be compared and d and e are the number of means within those combinations, respectively.
+
+   Then, define the parameter of the contrast, which will take the following general form:
+   \[ 
+   \gamma = C_1\mu_1 + C_2\mu_2 + \dots + C_k\mu_k 
+   \] 
+  Check to be sure that the coefficients add up to 0 (this makes it a contrast)
+  \[ 
+  \sum_{n=1}^{k} C_n = 0 
+  \] 
+  \item State the hypothesis
+    \begin{itemize}
+      \item Null is $J+0: \gamma = 0$ 
+      \item Alt may be $ H_a: \gamma \neq 0 $ or $ H_a : \gamma > \text{or} < 0$
+    \end{itemize}
+  \item Calculate the estimate (sample contrast), standard error of the estimate and the t-statistic
+    \[ 
+      \text{estimate: } \hat{\gamma} = C_1\overline{y}_1 + C_2\overline{y}_2 + \ldots + C_k\overline{y}_k 
+    \] 
+    \[ 
+      SE(\hat{\gamma}) = s_p \sqrt{\frac{C_1^{2}}{n_1} + \frac{C_2^{2}}{n_2}+\ldots+\frac{C_k^{2}}{n_k}}     
+    \] 
+    Where $s_p$ is the pooled or common standard deviation, and 
+    \[ 
+      s_p = \sqrt{MSE}  = \sqrt{\frac{(n_1-1)s_1^{2} + \ldots + (n_k - 1)s_k^{2}}{n-k} }
+    \] 
+    \[ 
+      t = \frac{\hat{\gamma} - 0}{SE(\hat{\gamma})} 
+    \] 
+  \item Divide to reject or not reject Ho by comparing the P-value ad $df = n-k$ with the sig level $\alpha$ and state the strength of the evidence against Ho.
+  \item Write the conclusion in words in terms of the research problem.
+\end{enumerate}
+\subsubsection{Confidence Interval for a Linear Contrast}
+\paragraph{Steps}
+\begin{enumerate}
+  \item For a given confidence level, find the Critical Value ad $df = n - k$
+  \item Calculate :~\\
+    \[ 
+     \text{Parameter: } \gamma = C_1\mu_1 + C_2\mu_2 + \dots + C_k\mu_k 
+    \] 
+   \[ 
+      \text{estimate: } \hat{\gamma} = C_1\overline{y}_1 + C_2\overline{y}_2 + \ldots + C_k\overline{y}_k 
+    \] 
+    \[ 
+      SE(\hat{\gamma}) = s_p \sqrt{\frac{C_1^{2}}{n_1} + \frac{C_2^{2}}{n_2}+\ldots+\frac{C_k^{2}}{n_k}}     
+    \] 
+    Where $s_p$ is the pooled or common standard deviation, and 
+    \[ 
+      s_p = \sqrt{MSE}  = \sqrt{\frac{(n_1-1)s_1^{2} + \ldots + (n_k - 1)s_k^{2}}{n-k} }
+    \] 
+    \[ 
+      \text{Endpoints: } \hat{\gamma}\pm Crit.Val \times SE(\hat{\gamma}  ) 
+    \] 
+      
+  \item Interpret the CI in terms of the research problem.
+\end{enumerate}
+\begin{Note}
+  There will only be at most 2 unique coefficients for the Parameter and Estimate
+\end{Note}
+
+\end{document}
+

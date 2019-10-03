@@ -26,6 +26,10 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | EAS-212   | Paul Myers        | Winter 2019 |
 | CMPUT-496 | Martin Muller     | Winter 2019 |
 | CMPUT-379 | Ioanis Nikolaidis | Winter 2019 |
+| CMPUT-328 | Nilanjan Ray      | Fall 2019   |
+| CMPUT-429 | J Nelson Amaral   | Fall 2019   |
+| CMPUT-399 | Ioanis Nikolaidis | Fall 2019   |
+| STAT-252  | Gregory Wagner    | Fall 2019   |
 | CMPUT-415 | J Nelson Amaral   | Fall 2020   |
 
 ## The "Wacky" Cover Art

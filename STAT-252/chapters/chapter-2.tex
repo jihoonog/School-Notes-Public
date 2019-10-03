@@ -1,0 +1,315 @@
+\documentclass[../STAT-252-Notes.tex]{subfiles}
+\begin{document}
+\chapter{One or Two Population Means  }
+\section{Inferences for One Mean (The One-sample case)}
+We can make inferences about one population based on samples, this is mostly review from STAT-151 or STAT-1770 depending on where you are from.
+\begin{Definition}
+  {Student t}
+  of the sample mean $\overline{y}$ Suppose that variable $y$ of a population is normally distributed with mean $\overline{y}$, then for sample of size $n$, the variable  
+  \[ 
+  t=\frac{\overline{y}-\mu}{\frac{s}{\sqrt{n} }} 
+  \] 
+  has the $t$-distribution with $n-1$ degrees of freedom        
+\end{Definition}
+The t test and the t table is widely used in statistics and when the of goes to infinity the t distribution follows the normal Gaussian distribution. 
+\subsection{Hypothesis Test for one population}
+This is the steps to do a one-mean t-test (also called the one-sample t-test)
+\begin{enumerate}
+  \item Check the purpose and assumption(to see if this is the appropriate test for the research problem)
+    
+    \textbf{The purpose of the test} to test for the difference between a population mean (by taking a sample and calculating a sample mean) and some hypothesized (theoretical) mean or value
+    
+    \textbf{Assumption}
+    \begin{enumerate}
+      \item Simple random sample
+      \item The population under study is normally distributed or sample size is large
+      \item $\mu$ is unknown
+    \end{enumerate}
+    \item State the null and alternative hypotheses
+
+      The null hypothesis is always $H_0:\ \mu=\mu_0$ and the alternative hypothesis may be either $H_a : \ \mu < \mu_0$ or  $H_a : \ \mu > \mu_0$ for a single side test or  $H_a : \ \mu \ne \mu_0$ for a two-tail test.
+    \item Obtain the calculated value of the test statistic as follows:
+      \[ 
+        t = \frac{\overline{y}-\mu_0}{\frac{s}{\sqrt{n} }} = \frac{\overline{y}-\mu_0}{SE(\overline{y})} 
+      \] 
+      where $\mu_0$ equals some hypothesized theoretical mean or value. Remember the df is $n-1$. If you can't find the right df, always round down for a more conservative estimate.
+      \item Decide to reject or not reject the null hypothesis and state the strength of the evidence against $H_0$ example the t-bale at $df = n-1$ If the $P$-value $\le\alpha$ we reject the null hypothesis.
+      \item Interpretation (conclusion in words)
+\end{enumerate}
+\begin{Note}
+  The $\alpha$ is the likelihood of a making a type-1 error as it's the probability of stating to reject the null even though in reality there is no significant difference.
+\end{Note}
+
+\subsection{Confidence Intervals }
+The general formula for confidence interval or CI is this 
+\begin{equation}
+  CI = Estimate \pm Critical\ Value \times  SE(Estimate)
+\end{equation}
+\begin{enumerate}
+  \item \textbf{Find the critical value} For a given confidence level $1-\alpha$ use the t-table showing the critical values of the t-distribution to find the critical value in the row for the appropriate df, which is $df = n-1$ sample size.
+  \item \textbf{Two-sided confidence interval for $\mu$ is given by the endpoints} 
+    \[ 
+      \overline{y} \pm t_{\frac{\alpha}{2}} \times \frac{s}{\sqrt{n} },\ \ \text{where } \frac{s}{\sqrt{n} } = SE(\overline{y})
+    \] 
+  \item Interpret the confidence interval in terms of the research problem being investigated.
+    \begin{Note}
+      \textbf{Margin of Error (E)} $= t_{\alpha / 2}\times \frac{s}{\sqrt{n} }$  
+    \end{Note}
+  \item The lower bound of the t-interval is $\overline{y} - ME(y)$ which is consistent with a right-tailed test and the upper bound of the t-interval is $\overline{y} + ME(y)$ which is consistent with the left-tailed test. . 
+\end{enumerate}
+
+{\centering
+\includegraphics[width=0.8\textwidth]{../figures/chapter-2/vis-two-sided-ci-me.png}~\\}
+There is a trade off between precision and confidence. The higher the confidence the less precise we are as we need to cast a larger net to capture the estimate mean.
+
+Basically if $\mu_0$ is within the interval, there is no significant difference between $\mu$ and $\mu_0$
+
+\textbf{Two conditions} that must be met to ensure that the conclusions will be the same for a
+hypothesis test and a confidence interval performed on the same data:
+\begin{enumerate}
+  \item The confidence level must be a compliment of the significance level ($\alpha$) applied in the
+hypothesis test
+  \item They must be the same sided, that is, both two-sided or both one-sided. 
+\end{enumerate}
+If these two conditions are not met, then the hypothesis test and CI may still give the same conclusion, but there is no guarantee.
+
+\begin{Note}
+  SPSS is only designed to do Two-sided test and CI. Therefore if you need to do a one sided test then you have to divide the p-value by 2    
+\end{Note}
+
+
+
+
+\section{Inferences for Two Means }
+In this section we are talking about the case where:
+\begin{itemize}
+  \item We have one variable 
+  \item We are comparing two populations by taking two samples
+  \item two sample inference: one is where we are comparing two population means as independent samples and the other as paired samples
+\end{itemize}
+\subsection{Inferences for two population means: based on two independent samples}
+\subsubsection{The sampling distribution of the \underline{difference} between two sample means}
+{\centering
+\begin{DndTable}[color=PhbLightGreen]{XXX}
+  \textbf{Parameter/Statistic} & \textbf{Population 1} & \textbf{Population 2} \\
+  Population mean & $\mu_1$ & $\mu_2$ \\
+  Population std dev & $\sigma_1$ & $\sigma_2$ \\
+  Sample mean & $\overline{y}_1$ & $\overline{y}_2$ \\
+  Sample std def & $s_1$ & $s_2$ \\
+  Sample size & $n_1$ & $n_2$ \\
+\end{DndTable}}
+Suppose that x is a normally distributed variable on each of two populations them, for independent samples of size $n_1$ and $n_2$ from the two population, 
+\begin{itemize}
+  \item The mean of all possible difference between the two sample means equal the difference between the two population mean 
+    \[ 
+    \mu_{\overline{y}_1 - \overline{y}_2} = \mu_1 - \mu_2 
+    \] 
+  \item The std dev of all possible differences between the two sample means equals this
+    \[ 
+      \sigma_{\overline{y}_1 - \overline{y}_2} = \sqrt{(\sigma^{2}_1 / n_1) + (\sigma^2_2 / n_2)}  
+    \] 
+  \item $\overline{y}_1 - \overline{y}_2$ is assumed to be normally distributed.
+\end{itemize}
+
+\subsubsection{ Inferences for Two Population Means Using Independent Samples, Standard Deviations
+Not Assumed Equal}
+This is the general case of comparing two populations of independent samples and can be applied to all situation, whether standard deviation are equal or not, and regardless of sample size.
+{\centering\includegraphics[width=0.8\textwidth]{../figures/chapter-2/non-pooled-two-mean-t-test.png}~\\}
+\subsubsection{Inferences for Two Population Means Using Independent Samples, Standard Deviations
+Assumed Equal}
+This is the \underline{special case} of comparing two population of independent samples, which can be applied when the standard deviation of the two population are similar and the sample size of both samples are nearly equal.
+This is a slightly more more powerful t-test compared to the nonpooled t-test.
+\begin{itemize}
+  \item \textbf{Purpose} the same as the nonpooled t-test
+    \item \textbf{Assumption} the same as the nonpooled t-test plus equal population std dev with a ratio of the higher vs the lower being less than 2 or the apply the Levene's test for equality of variance.
+    \item \textbf{Null and alternative hypotheses} is basically the same as the nonpooled t-test
+      \item \textbf{Test statistic} 
+        \[ 
+          t = \frac{\overline{y}_1 - \overline{y}_2 - \Delta_0}{s_p \sqrt{1 / n_1) + 1 / n_2} } =  \frac{\overline{y}_1 - \overline{y}_2 - \Delta_0}{SE(\overline{y}_1 - \overline{y}_2)} 
+        \] 
+       \[ 
+         sp = \sqrt{\frac{(n_1 - 1) s^2_1 + (n_2 - 1) s^2_2 }{n_1+n_2-2}}  
+       \] 
+       \begin{Note}
+         \begin{itemize}
+           \item $\Delta_0$ is some hypothesized difference, which is almost always 0
+            \item If you obtain a df that is not shown on the t-table, always go to the df below that
+         \end{itemize}
+       \end{Note} 
+       \item If the P-value is less than $\alpha$ then we reject $H_0$ otherwise we do not reject.
+
+\end{itemize}
+
+Here is how to do the CI for the \underline{Difference} between the means of two populations, using independent samples, standard deviations assumed equal or near equal
+{\centering\includegraphics[width=0.8\textwidth]{../figures/chapter-2/CI-pool-1.png}
+\includegraphics[width=0.8\textwidth]{../figures/chapter-2/CI-pool-2.png}~\\
+The relations between the hypothesis test and the confidence intervals
+\includegraphics[width=0.8\textwidth]{../figures/chapter-2/relation-ht-ci-two-pop.png}
+~\\}
+The \textbf{two conditions} that must be met to ensure that the conclusion will be the same for a hypothesis test and a confidence interval performed on the same data.
+
+
+\subsection{Inferences for Two Population Means: Using Two Paired Samples}
+Applies when two populations or measurements are paired in space or in time or by some relationship or paired on the same subject (study unit).
+
+Here are some examples:
+\begin{itemize}
+  \item Ecological monitoring (coral reefs, mangroves, etc.) – same plots observed over time.
+  \item Taking measurements at the same time in different sites (pairing in time)
+  \item Taking measurements on the same patient, such as blood pressure, before and after treatment
+  \item Measuring something like educational level of husbands and their wives
+  \item  Heights of fathers and their oldest sons 
+\end{itemize}
+\newpage
+\begin{DndSidebar}[color=PhbLightGreen]{Paired-Sample t-test (or Paired t-test)}
+  \begin{enumerate}
+    \item Check the purpose and assumption 
+      \begin{enumerate}
+        \item \textbf{Purpose} To test for the difference between two population means, $\mu_1$ and $\mu_2$ 
+        \item \textbf{Assumption} sample random sample, samples are paired (not independent), difference between paired observations are normally distributed or sample size is large  
+      \end{enumerate}
+      \item State the null and alternatives hypotheses which is the same for the rest of the t-test
+        \begin{align*}
+          H_0 &: \mu_1 = \mu_2 \\
+          H_a &: \mu_1 \neq \mu_2 \\
+          H_a &: \mu_1 < \mu_2 \\ 
+          Ha &: \mu_1 > \mu_2
+        \end{align*}
+      \item Obtain the calculated value of the test statistic as follows:
+        \begin{DndTable}[color=PhbLightCyan]{XX}
+          mean difference  & $\overline{d} = \frac{\sum_{}^{} d_i}{n}$ \\
+          Standard deviation of the mean difference & $s_d = \frac{\sum_{}^{} d_i^2 - (\sum_{}^{} d_i)^2 / n}{n-1}$ \\
+          test statistic & $= \frac{\overline{d} - \Delta_0}{s_d / \sqrt{n} }$ \\
+          n & number of paired observation and $df = n-1$ \\
+        \end{DndTable}
+      \item Decide to reject the null or not and state the strength of the evidence against the null, like the rest of the tables if the df is not on there always go lower.
+      \item interpretation in words in terms of the research problem being investigated.
+  \end{enumerate}  
+\end{DndSidebar}
+
+\begin{Note}
+  The difference between the two samples have to be normal, the measurement of the samples themselves can be not normal.
+\end{Note}
+
+
+\paragraph{Comparison of the power of the paired-sample t-test and the Pooled t-test in this case where there is very scrog pairing (correlation)}~\\
+\includegraphics[,width=0.8\textwidth]{../figures/chapter-2/comparsion-paired-v-pooled.png}
+
+
+
+\paragraph{Paired t-interval procedure}
+\begin{itemize}
+  \item \textbf{Purpose} To find a CI for the \underline{difference} between two population means, $\mu_1$ and $\mu_2$ based on paired observation
+  \item \textbf{Assumption} same as or the paired t-test 
+  \item \textbf{Step 1} For a given CI (1-$\alpha$), use the t-table to find $t_{\frac{\alpha}{2}}$ in a row for the appropriate \textbf{df}, where $df = n-1$.
+  \item \textbf{Step 2} the endpoints of the CI of $\mu_1-\mu_2$ are defined by:
+    \[ 
+      \overline{d} \pm t_{\frac{\alpha}{2}}\times \frac{s_d}{\sqrt{n} } = \overline{d}\pm t_{\frac{\alpha}{2},n-1}\times SE(\overline{d}) 
+    \] 
+    \item \textbf{Step 3} interpret the CI in terms of the research problem being investigated.
+      The \textbf{Margin of Error} being 
+      \[ 
+      t_{\frac{\alpha}{2},n-1} \times \frac{s_d}{\sqrt{n} } 
+      \] 
+      
+\end{itemize}
+
+\paragraph{Example}
+~\\
+For a 95 percent CI, and an $a$ of 0.05 at $df = n-1 = 9$, $t_{\frac{\alpha}{2}}= t_{0.05 / 2} = 2.262$
+
+Parameters: $\mu_d = \mu_{2007} - \mu_{2009}$
+
+The standard error we calculated before: $SE(\overline{d}) = 3.14395$ 
+
+
+$\overline{d} \pm t_{\frac{\alpha}{2}} \times  SE(\overline{d})$ 
+
+$-8.2\pm 2.262 \times 3.14395$ 
+
+$(-15.31,-1.09)$ 
+
+It is estimated with a 95 percent CI that the difference in mangrove basal area in Site SR1 between 2007 and 2009 was somewhere between -15.31 and -1.09 $\frac{cm^{2}}{25-m^{2}}$ plot. Note ME = 7.11. 
+
+Because 0 is not within the interval we reject that there is no difference between data in 2007 and 2009.
+
+
+\begin{Note}
+  In SPSS the mean in the paired samples test really means the mean difference $\overline{d} = (\overline{y}_1 - \overline{y}_2)$ 
+\end{Note}
+
+\paragraph{If the difference to test is not zero}
+
+
+{\centering
+\begin{DndTable}[color=PhbLightGreen]{XX}
+  \textbf{Notation} & \textbf{Equation} \\
+  $H_0$ & $\mu_{before} - \mu_{after} = \text{diff}$  \\
+  $H_{a}$ & $\mu_{before} < \neq > \mu_{after} = \text{diff} $ \\
+  Parameter & $\mu_d = \mu_{before} - \mu_{after}$ \\
+  Hypothesized difference & $\Delta_0 = \text{diff}$ \\
+\end{DndTable}}
+Everything else is basically the same.
+
+\begin{Note}
+  P-value of one-tailed and two-tailed tests
+  \begin{itemize}
+    \item A two-tailed test can have a p value greater than 0.5
+    \item A one-tailed test having a p value greater than 0.5 means you have the wrong tail
+  \end{itemize}
+\end{Note}
+To do a left tail test then you need to use the negative values of the parameter, null and alternative hypothesis, etc.
+Everything is reversed.
+
+
+\section{More on Assumptions on Stat inferences }
+
+\begin{DndSidebar}[color=PhbLightGreen]{Guidelines for assessing normality using a normal prob plot}
+  \begin{itemize}
+    \item If the plot is roughly regular, you can assume that the variable is approximated normally distributed.
+    \item If the plot is not roughly linear, you can assume that the variable is not approximately normally distributed.
+  \end{itemize}
+
+  These guidelines should be applied:
+  \begin{itemize}
+    \item Loosely for small samples, but
+    \item strictly for large samples.
+  \end{itemize}
+\end{DndSidebar}
+You can use Levene's Test for equality of variance in SPSS. Ratio of the std dev and if the ratio is less than 2 then it's close enough. 
+
+\section{Transformation}
+If you have non-normality, outlines, and unequal std dev it can often be corrected using transformations.
+There are a few like log, square root, etc.
+After transformation the t-test are applied, back transformation must be done in order for conclusions to be made.
+
+\section{Inferences after a (Natural) log transformation}
+\begin{DndSidebar}[color=PhbLightGreen]{Steps in transforming data and making inferenes}
+  \begin{enumerate}
+    \item transforms the data 
+    \item Check whether the transformed data fit the assumptions of the required test
+    \item Perform the hypothesis test or the confidence interval calculation on the transformed data
+    \item Back-transform the estimate and the confidence interval
+    \item State the conclusion on the original scale 
+  \end{enumerate}
+\end{DndSidebar}
+\begin{Note}
+  A good transformation will lead to the logged value of the median being equal or close to equal to the logged value of the mean.
+\end{Note}
+
+\begin{Note}
+  For the conclusion of a logged confidence interval, if 1 is not inside the confidence interval then there is a difference as $1=0$ as the anti log of $0 = 1$ that is $e^{0} = 1$.
+\end{Note}
+
+\section{Nonparametric methods}
+These methods are more powerful than the basic transformation we did before and are used if the transformed data does not fit our assumption.
+
+There is the Mann-Whitney U test, Kruskal-Wallis test, etc
+
+
+
+
+
+
+
+\end{document}

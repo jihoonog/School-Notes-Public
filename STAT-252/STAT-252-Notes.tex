@@ -1,0 +1,35 @@
+\documentclass[letterpaper,10pt,twoside,onecolumn,openany]{book}
+\usepackage[bg=none,layout=true]{dnd}
+\usepackage{dndnotes}
+\usepackage{wallpaper}
+\usepackage{subfiles}
+\graphicspath{{./figures/}{../figures/}}
+\begin{document}
+\frontmatter                           
+\begin{titlepage}
+    \ThisCenterWallPaper{1}{paper.jpg}~
+    
+    \newpage
+    
+    \begin{center}
+        
+
+        \large
+        \vspace*{\fill}
+        Learn how statistics can be used to 
+        \\~\\
+        By slaying his assignment minions, defeating his midterm champion(s) and ending the final themselves. The heroic legacy of your achievement will be remembered on your academic transcript.
+        \\~\\
+        \vspace*{\fill}
+
+    \end{center}
+    \let\thefootnote\relax\footnote{Disclaimer: }
+\end{titlepage}
+\tableofcontents
+\mainmatter
+
+\subfile{chapters/chapter-1.tex}
+\subfile{chapters/chapter-2.tex}
+\subfile{chapters/chapter-3.tex}
+
+\end{document}
