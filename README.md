@@ -30,7 +30,6 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | CMPUT-429 | J Nelson Amaral   | Fall 2019   |
 | CMPUT-399 | Ioanis Nikolaidis | Fall 2019   |
 | STAT-252  | Gregory Wagner    | Fall 2019   |
-| CMPUT-415 | J Nelson Amaral   | Fall 2020   |
 
 ## The "Wacky" Cover Art
 As a Computing Science major I get exposed to a lot different programming and computing books. For example:
