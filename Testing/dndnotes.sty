@@ -6,6 +6,7 @@
 \RequirePackage{lmodern}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{minted}
+\RequirePackage{cleveref}
 \setlength{\marginparwidth}{2cm} % this is to fix margin warnings
 \RequirePackage[colorinlistoftodos,textsize=normalsize]{todonotes}
 
@@ -19,30 +20,50 @@
 %% This is where the new environment starts
 % Math and term definitions
 \newenvironment{Definition}[1]{
-  \begin{DndSidebar}[color=PhbLightGreen]{}
-    \begin{definition}[#1]}
-{   \end{definition}
-  \end{DndSidebar}}
+\begin{definition}[]
+  \begin{DndSidebar}[color=PhbLightGreen]{#1}
+    \normalsize
+    }
+{   
+  \end{DndSidebar}
+\end{definition}
+}
 \newenvironment{Theorem}[1]{
-  \begin{DndSidebar}[color=PhbLightGreen]{}
-    \begin{theorem}[#1]}
-{   \end{theorem}
-  \end{DndSidebar}}
+\begin{theorem}[]
+  \begin{DndSidebar}[color=PhbLightGreen]{#1}
+    \normalsize
+    }
+{   
+  \end{DndSidebar}
+\end{theorem}
+}
 \newenvironment{Corollary}{
+\begin{corollary}
   \begin{DndSidebar}[color=PhbLightGreen]{}
-    \begin{corollary}}
-{   \end{corollary}
-  \end{DndSidebar}}
+    \normalsize
+  }
+{   
+  \end{DndSidebar}
+\end{corollary}
+}
 \newenvironment{Lemma}{
+\begin{lemma}
   \begin{DndSidebar}[color=PhbLightGreen]{}
-    \begin{lemma}}
-{   \end{lemma}
-  \end{DndSidebar}}
+    \normalsize
+  }
+{   
+  \end{DndSidebar}
+\end{lemma}
+}
 \newenvironment{Remark}{
+\begin{remark}
   \begin{DndComment}[color=PhbMauve]{}
-    \begin{remark}}
-{   \end{remark}
-  \end{DndComment}}
+    \normalsize
+  }
+{   
+  \end{DndComment}
+\end{remark}
+}
 % Reviewing a list of things after a class
 \newenvironment{Review}{
   \begin{DndSidebar}[color=DmgLilac]{Review}}

@@ -1,5 +1,5 @@
-\documentclass[letterpaper,10pt,twoside,onecolumn,openany,draft]{book}
-\usepackage[bg=none,layout=true]{dnd}
+\documentclass[letterpaper,10pt,twoside,twocolumn,openany]{book}
+\usepackage[bg=full,layout=true]{dnd}
 \usepackage{dndnotes}
 \usepackage{wallpaper}
 \usepackage[]{subfiles}
@@ -13,7 +13,7 @@
 \frontmatter                           
 \begin{titlepage}	    
   \begin{tikzpicture}[remember picture,overlay]
-    \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{Test-Title.png}};
+    \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{Test-Title.jpg}};
   \end{tikzpicture}~
   \newpage
 
@@ -38,7 +38,6 @@
 
 \twocolumn
 \part{Introduction to the dnd package}
-
 \chapter{Sectioning}
 \DndDropCapLine{T}{his package is designed to aid you in} 
 writing beautifully typeset lecture notes in the style of the fifth edition of the world's greatest role playing game, Dungeons and Dragons.
@@ -68,7 +67,6 @@ So notes will mostly be in onecolumn format. You can toggle between twocolumn an
 \DndItemHeader{Cheat sheet}{Wondrous item, rare}
 You could use the \texttt{\textbackslash{DndItemHeader}} to describe what kind of cheat sheet you are allowed to have during an examination.
 
-\onecolumn
 
 \chapter{Dnd/Text Boxes}
 The dnd package has three environments for setting text apart so it can draw the reader's attention. 
@@ -157,7 +155,7 @@ These are 8 different colours you can use on DndSidebar, DndComment, DndReadAlou
 \begin{DndSidebar}[color=DmgLilac]{DmgLilac}
   This colour is called DmgLilac
 \end{DndSidebar}
-
+\onecolumn
 \part{Introduction to the dndnotes package}
 \chapter{Introduction}
 The dndnotes package is my collection of user-defined environments and macros to typeset core concepts in a neat way. It requires the dnd package as it creates dndSidebar boxes for definitions, theorems, corollaries, and others. 
@@ -181,7 +179,8 @@ Here it is in verbatim
   \begin{Definition}{Three-Address Instruction}
     Is a sequence of instructions of the form 
     \[ x = y\ \textbf{op}\ z \] 
-    where $x$, $y$, and $z$ are names, constants, or compiler-generated temporaries. 
+    where $x$, $y$, and $z$ are names, constants,
+    or compiler-generated temporaries. 
     The \textbf{op} stands for operator. 
   \end{Definition}
 \end{verbatim}
