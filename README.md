@@ -1,7 +1,7 @@
 # Lecture Notes
 This is my collection of lecture notes (+ other study things) for courses that I've taken during my undergraduate studies at the University of Alberta (and from the University of Lethbridge).
 
-Most (if not all) of them are typeset to look like a Dungeon and Dragon guide book. **Why?** Well the short story is that I was bored in my Operating Systems Lab and experimented with different LaTeX templates to see which ones I liked. I choose this template: [DND-5e-LaTeX-Template](https://github.com/rpgtex/DND-5e-LaTeX-Template). The rest is history I guess.
+Most (if not all) of them are typeset to look like a Dungeons and Dragons guide book. **Why?** Well the short story is that I was bored in my Operating Systems Lab and experimented with different LaTeX templates to see which ones I liked. I choose this template: [DND-5e-LaTeX-Template](https://github.com/rpgtex/DND-5e-LaTeX-Template). The rest is history I guess.
 
 This collection is a subset of my School-Notes repository which are my personal notes kept private as it contains active assignments, copyright assets, experimental LaTeX code, or other forbidden knowledge of the arcane arts :stuck_out_tongue_winking_eye:.    
 
@@ -10,7 +10,7 @@ In the beginning of the Winter 2019 semester I decided to LaTeX all my notes. I 
 
 Now this template was chosen by accident. I discovered this template during a lab session for CMPUT-379 and as a joke typeset my MATH-115 notes with it. It turns out, the different boxes used in the template was great at showing important theorems, definitions, notes, etc. The die tables used for DnD was great at describing different variables within an equation or formula.
 
-In addition, I started playing DnD after a 4 month hiatus and the DM finds it hilarious that I decided to typeset my notes to look like a Dungeons and Dragon book. 
+In addition, I started playing DnD after a 4 month hiatus and the DM finds it hilarious that I decided to typeset my notes to look like a Dungeons and Dragons book. 
 
 ## Courses
 Some are incomplete, for example courses that I've taken during the Fall of 2018 are incomplete as this was before I decided to LaTeX all my notes, only my assignments.
