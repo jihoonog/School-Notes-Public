@@ -1,0 +1,517 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{HTML}
+The HyperText Markup Language, or HTML is the standard markup language for documents designed to be displayed in a web browser.
+
+The current version of has two standards
+\begin{itemize}
+  \item WHATWG's HTML which is a living standard that is constantly being updated.
+  \item W3C's HTML 5 Standard which is closer to a releases versioning standard. i.e., 5.1, 5.2, etc. 
+\end{itemize}
+Generally people prefer the WHATWG's Living standard but because not all web browsers will constantly adhere to the the standard you should look at the capability table to see if the standard is implemented by the user agent/browser.
+
+\begin{DndSidebar}[color=PhbLightGreen]{DOCTYPE}
+  You need to tell the world that this is a modern HTML file. 
+  You must put a DOCTYPE at the top and enclose your content in the HTML tag.
+  \\~\\
+\begin{verbatim}
+<!DOCTYPE html>
+<html>
+...
+</html>
+\end{verbatim}
+\end{DndSidebar}
+
+\section{XHTML}
+You can write HTML in XML format if you follow XML syntax: XHTML.
+Valid HTML is not valid XML, and valid XML is not valid HTML. 
+\begin{itemize}
+  \item For a while there was a drive to combine XML and HTML into "polyglot HTML" where you could write both at the same time, but this was abandoned in 2015.
+  \item
+  Browsers still support \texttt{<voidtag/>} syntax in HTML but it breaks other HTML parsers
+\end{itemize}
+XML is very unforgiving,  a simple mistake could cause a parser to refuse to parse the document.
+Breaks \texttt{Document.write()}, the \texttt{<template>} tag, most entities\dots
+
+Adds support for namespaces, HTML 5 XML has no DTD URL. Uses \texttt{Content-Type: application/xhtml+xml}.
+
+
+\section{Head/Header}
+
+The head tag is where we put information about the webpage. You will usually include a title here.
+
+Meta tags contain meta information for browsers and other tools to help interpret.
+
+\begin{minted}[breaklines]{html}
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Example Page">
+  <meta name="author" content="Abram Hindle">
+  
+  <!-- proprietary extensions -->
+  <meta name="apple-mobile-web-app-capable" content="yes" >
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" >
+  <!-- mobile viewport information -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- stylesheets / css -->
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  
+</head>
+\end{minted}
+
+
+\section{Body}
+Is where all the content goes.
+\begin{minted}[breaklines]{html}
+<body>
+<p>Visible content goes here.</p>
+<p>Consider that you should not directly specify layout information
+  here but that you should mark up blocks with a class allowing you to
+  apply layouts later. You can abstract layout</p>
+</body>  
+\end{minted}
+
+\subsection{Tags}
+All tags should be closed to allow for ease of reading and parsing, except void tags.
+
+Start Tags are enclosed in < and >
+
+End Tags are enclosed in </ and >
+
+\begin{minted}[breaklines]{html}
+<tag>
+  <enclosedtag>
+  </enclosedtag>
+</tag>
+\end{minted}
+
+Void tags are enclosed in < and > like start tags, but don't have a matching end tag.
+\begin{minted}[breaklines]{html}
+<tag>
+  <voidtag>
+  <br>
+</tag>
+\end{minted}
+
+Unless you are writing XHTML, in which case you must follow XML syntax, void tags typically look like \texttt{<voidtag>}. but sometimes are written like \texttt{<voidtag/>}.
+
+This is against the HTML spec.
+
+Tags can be any capitalization in HTML, but typically they are written in lower case. Stick to lower-case when writing HTML.
+
+\subsection{Paragraph Tag: <P>}
+
+\begin{minted}[breaklines]{html}
+<p>
+  Now bears us onward one of the hard margins,
+  And so the brooklet's mist o'ershadows it,
+  From fire it saves the water and the dikes.
+</p>
+<p>
+  Even as the Flemings, 'twixt Cadsand and Bruges,
+  Fearing the flood that tow'rds them hurls itself,
+  Their bulwarks build to put the sea to flight;
+</p>
+\end{minted}
+We can use CSS to style these text blocks. Whitespace in the <p> block doesn't matter. So formatting will most likely be off.
+
+\begin{quotebox}
+  Now bears us onward one of the hard margins, And so the brooklet's mist o'ershadows it, From fire it saves the water and the dikes. 
+  \\~\\
+  \noindent Even as the Flemings, 'twixt Cadsand and Bruges, Fearing the flood that tow'rds them hurls itself, Their bulwarks build to put the sea to flight;
+\end{quotebox}
+
+\subsubsection{Breakline Tag <br>}
+We can make line-breaks explicit with \texttt{<br>}.
+
+\subsection{Image Tag <img>}
+We want to show images, we cannot embed them in HTML easily so we use hyperlinks (URIs) to reference them and include them.
+
+Remember to include alt tags so they are machine and human-readable.
+
+\begin{minted}[breaklines]{html}
+<img src="images/plasma.png" alt="Plasma Pattern">
+<!-- scaling -->
+<img src="images/plasma.png" alt="Plasma Pattern" width="30">
+<!-- scaling without respecting aspect -->
+<img src="images/plasma.png" alt="Plasma Pattern" width="30" height="60">
+\end{minted}
+
+The \texttt{img} tags has certain attributes that are important. The \texttt{alt} tag should be used to describe the image using text. 
+This is sometimes a requirement for accessibility requirements for people who have a visual impairment or for Search engine optimizations. 
+Where most SEOs uses text, not images, although Google might have the capabilities for processing images. 
+
+The \texttt{width} and \texttt{height} attributes are used to set the size of the image. If one of the size attribute is specified then the aspect ratio is preserved otherwise it will follow both the height and width attributes specified by the developer. 
+
+\subsection{Anchor Tag <a>}
+The anchor tag is used to make hypertext or text with hyperlinks.
+
+Anchor tags let us link to other documents or locations. The \texttt{href} attribute links to a URL. The URL can be relative to the location of the current page. Anchor tags used to place anchors on pages, but in HTML 5 they just navigate to ID'd sections now.
+
+\begin{minted}[breaklines]{html}
+<a href="http://slashdot.org">Slashdot.org: News for Nerds Stuff that
+Matters</a><br>
+<a href="http://cnn.com">T</a><a href="http://msn.com">a</a>
+<a href="http://softwareprocess.es/">g</a><a href="http://ualberta.ca">s</a>
+don't have to be very long.<br>
+<a href="../">The a directory down!</a> Relative Link
+\end{minted}
+
+You can also have images within the anchor tags to allow images to become buttons to another link. 
+Elements within the anchor tags are often highlighted in blue to show that it's a hyperlink and a the URL of the link will show on the bottom right corner of the web browser. 
+
+\section{Text Layout Philosophy}
+Let the user agent decide how to display the text. You don't need to control everything. But provide the appropriate semantics first. Then apply layout information to those semantics.
+
+If you want something to show up in a certain make a CSS class and style a span or a div or a paragraph that way.
+
+If you want a fancy layout use flexbox or grid layouts.
+
+\subsection{<div> and <span> tags}
+\texttt{<div>} and \texttt{<span>} tags have no particular meaning. They are used for separating content within the body and allow different style attributes to be applied. Using div and span as is will not change the content of style of the content. 
+
+\begin{itemize}
+  \item \texttt{<div>} will cause a line break before it is displayed.
+  \item \texttt{<span>} will be inlined.
+\end{itemize}
+
+\subsubsection{Example} 
+\begin{minted}[breaklines]{html}
+<div>
+<span style="background-color:#AAAAAA; font-weight:bold">
+  Now bears us onward one of the hard margins,</span><br>
+  And so the brooklet's mist o'ershadows it,<br>
+  From fire it saves the water and the dikes.<br>
+</div>
+<div style="font-size:150%">
+Even <span style="color:red">as the Flemings</span>, 'twixt Cadsand and Bruges,<br>
+  Fearing the flood that tow'rds them hurls itself,<br>
+  Their bulwarks build to put the sea to flight;<br>
+</div>
+\end{minted}
+
+\subsection{Style}
+Tags can have attributes defined like so: 
+\begin{minted}{html}
+<tag attribute1="value1" attribute2="val2">
+\end{minted}
+These attributes could affect the style of the content. The style attributes are Cascading Style Sheet properties.
+
+\section{Cascading Style Sheet (CSS)}
+A language to style an HTML document.
+\begin{itemize}
+  \item Cascade - The children inherits properties of the "parent"
+  \item Style - Properties refer to style properties such as layout, position, color, font, background, etc.
+  \item Sheets - Apply to a page, change a page. 
+\end{itemize}
+
+CSS can be applied on a per tag level, but can also be applied globally. 
+
+\begin{minted}[breaklines]{html}
+<!-- Include a file of CSS  -->
+<link href="path/to/cssfile.css" rel="stylesheet">
+\end{minted}
+
+\begin{minted}[breaklines]{html}
+<!-- Inline CSS -->
+<style type="text/css">
+.angry {
+font-weight:900;
+zoom: 3;
+}
+.angry:nth-child(odd)
+{
+color:green;
+transform:rotate(7deg);
+-webkit-transform:rotate(7deg); /* Safari and Chrome */
+float: left;
+}
+.angry:nth-child(even)
+{
+color:red;
+transform:rotate(-12deg);
+-webkit-transform:rotate(-12deg); /* Safari and Chrome */
+float: right;
+} 
+</style>
+<p style="color:orange">Apply style directly</p>
+<div>
+<div class="angry">HULK</div> <div class="angry">SMASH!</div>
+</div>
+\end{minted}
+
+\subsection{Properties}
+Here are some of the properties to know 
+\begin{itemize}
+  \item color -- color of the text or object
+  \begin{itemize}
+    \item color:green
+    \item color:\#abc (short form)
+  \end{itemize}
+  \item font-family -- the font
+  \begin{itemize}
+    \item font-family:"Times New Roman"
+    \item font-family:"Verdana"
+  \end{itemize}
+  \item font-size -- the font size
+  \item \begin{itemize}
+    \item font-size:10px;
+    \item font-size:10pt;
+    \item font-size:large;
+    \item font-size:200%;
+  \end{itemize}
+  \item font-style -- normal, italic, oblique
+  \begin{itemize}
+    \item font-style:normal;
+  \end{itemize}
+  \item background-color 
+  \item background-image
+\end{itemize}
+
+\subsection{Selectors (classes)}
+A CSS selector selects the HTML element(s) you want to style.
+\subsubsection{Classes}
+CSS labels that starts with a period \texttt{.} denotes a class.
+We can use HTML attributes to label tags with classes that allow the tags to inherit CSS style information. The attribute name is \texttt{class}. E.x., \texttt{class="bg1"} for class bg1 or \texttt{.bg1}.
+You can also combine classes with HTML tag selectors; this example makes p tags with class="highlight" orange instead of yellow. You can override other CSS as well.
+\begin{minted}{css}
+p.highlight { background-color:orange; }
+\end{minted}
+
+\begin{minted}{html}
+<p class="highlight">ALERT in orange!</p>
+\end{minted}
+
+\subsubsection{ID}
+ID selectors are like class selectors except they aim at the one tag with the id="idtag" as an attribute
+
+\begin{minted}{css}
+#yellowtag { background-color:yellow; }
+\end{minted}
+
+
+\subsubsection{Element}
+Element selectors let you style entire HTML elements (tags).
+Important because you might want to theme all divs or imgs or links. 
+\begin{minted}{css}
+p { background-color:yellow; }
+\end{minted}
+This will style all paragraphs with a yellow background.
+
+\subsubsection{Context}
+Selectors that behave depending on the context
+Can be chained with other selectors
+\begin{itemize}
+  \item :hover - when the mouse is over
+  \item :active - active link
+  \item :first-letter - operate on the first letter
+  \item :nth-child(2) - second child
+\end{itemize}
+\begin{Note}
+  The index for nth-child starts at 1 not 0 unlike in most programming languages. 
+\end{Note}
+
+\subsection{Positioning}
+The \texttt{position} attribute is used to position a element within a page.
+It use left, right, top, bottom attributes to control the position.
+\begin{itemize}
+  \item \texttt{fixed} - stays on one spot in the browser
+  \item \texttt{relative} - position relative to where it normally goes
+  \item \texttt{absolute} - absolute positioning relative to the first parent that was positioned (often the page itself).
+  \item \texttt{z-index} - can be used to order overlapping elements. The higher the number the close it is to the screen 
+\end{itemize}
+\subsection{Alignment}
+One big problem with CSS is how to center something!
+Margins can be used or alignment attributes can be used.
+
+\begin{itemize}
+  \item \texttt{text-align} - specifies the horizontal alignment of text in an element
+  \item \texttt{flex} - sets the flexible length on flexible items. Helps for big centering jobs, things with many elements, etc
+  \item \texttt{align-content} - aligns the flexible container's items when the items do not use all available space on the main-axis (horizontally).
+  \item \texttt{justify-content} - defines how the browser distributes space between and around content items along the main-axis of a flex container, and the inline axis of a grid container.
+\end{itemize}
+
+\section{HTML for User Interfaces}
+The HTML Form elements let us accept input from browsers in a structured way and form HTTP GETs and POSTs.
+
+\subsection{<form> tag}
+The form tag encloses a group of HTML input/UI widgets which can then be submitted as once.
+
+\begin{itemize}
+  \item method - We can specify the HTTP method (POST/GET)
+  \item action - We can specify the URI to GET or POST to.
+\end{itemize}
+
+\subsection{<input> tag}
+The input tag can take in textual input, passwords, or act as submit button.
+\subsubsection{type} 
+The input could of many different types including but not limited to
+\begin{itemize}
+  \item button 
+  \item checkbox 
+  \item color 
+  \item date 
+  \item datetime 
+  \item datetime-local 
+  \item email 
+  \item file 
+  \item hidden 
+  \item image 
+  \item month 
+  \item number 
+  \item password 
+  \item radio - Allow only one selection from a group of buttons
+  \item range 
+  \item reset 
+  \item search 
+  \item submit 
+  \item tel 
+  \item text 
+  \item time 
+  \item url 
+  \item week
+\end{itemize}
+
+\subsubsection{name}
+The name of the data sent to the URI
+\subsubsection{value}
+The default value Hidden types allow you to embed values to send along to help the request. 
+\onecolumn
+\subsubsection{Example}
+\begin{minted}[breaklines]{html}
+<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py" method="get">
+What is your name? <input name="name"/></br>
+What is your quest? <input name="quest"/></br>
+What is your favorite colour? <input name="colour"/></br>
+<input type="submit"/>
+</form>
+\end{minted}
+
+\subsection{<select> tag}
+Select tag is for a dropdown box of options.
+
+\begin{minted}[breaklines]{html}
+<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py" method="get">
+What kind of cake shall we have?</br>
+<select name="caketype">
+  <option value="angel">Angel Food Cake</option>
+  <option value="devil" selected>Devil's Food Cake</option>
+  <option value="cowpatty">Marie Antionette's Cake</option>
+</select>
+<input type="submit"/>
+</form>
+\end{minted}
+
+\subsection{File Upload}
+You can upload files with the input tag but we need to switch the POST encoding.
+
+\begin{minted}[breaklines]{html}
+<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py"
+      enctype="multipart/form-data"
+      method="get">
+  Choose a file to upload!
+  <input name="uploadFile" type="file" />
+  <input type="submit"/>
+</form>
+\end{minted}
+
+\section{CGI Diversion}
+Did you know you can write CGI in just about any language?
+
+All it takes is printing HTTP Response headers, reading environment variables and reading from STDIN!
+
+Here's a minimal PERL example.
+
+\begin{minted}[breaklines]{perl}
+use Data::Dumper;
+print "Content-type: text/plain\r\n\r\n";
+print Dumper(\%ENV);
+my $line = 0;
+while(<>) {
+    print $line++ . " " . $_ . $/;
+}
+\end{minted}
+
+So you can use multiple languages.
+
+I really really really recommend using the CGI library that comes with your language if you do. Mostly for parsing of GET and POST arguments.
+
+\begin{minted}[breaklines]{python}
+import cgi
+import cgitb
+cgtib.enable()
+# print your header
+\end{minted}
+
+\subsection{CGI Problems}
+There are many issues with CGI
+\begin{itemize}
+  \item Slow
+  \item 1 process per invocation
+  \item Inefficient communication of requests
+  \item Lack of object-orientation representation of a request
+  \item Difficult to share state  
+\end{itemize}
+\twocolumn
+
+\section{Review}
+\paragraph{HTML}
+\begin{itemize}
+  \item The language used for documents to be displayed on web browsers
+  \item People prefer the WHATWG standard but not all web browsers supports it because it's a living standard
+  \item Must have \mintinline{html}{<!DOCTYPE html>} at the beginning of the document.
+  \item You can write HTML in XML format but the compatibility between the two ain't great. 
+\end{itemize}
+\paragraph{Header}
+\begin{itemize}
+  \item The header is where you put information about the webpage
+  \item \mintinline{html}{<meta charset="UTF-8">} goes here.
+  \item All \mintinline{html}{meta} tags goes in the header.
+  \item Title goes here as well as the CSS style sheet under the \mintinline{html}{<link rel="stylesheet" href="path_to_css.css"}.
+\end{itemize}
+\paragraph{Body}
+\begin{itemize}
+  \item The body contains the actual content of the page
+  \item All tags must have an opening \mintinline{html}{<tag>} and a closing \mintinline{html}{</tag>}
+  \item \mintinline{html}{<voidtag>} and \mintinline{html}{<br>} don't have a matching closing tag.
+  \item \mintinline{html}{<p>} paragraph tags doesn't care about white space. Use \mintinline{html}{<br>} to breaklines explicitly. 
+  \item \mintinline{html}{<img>} Image tags shows images and you should set the \texttt{alt} property within that tag for text-to-speech on images and SEOs.
+  \item \mintinline{html}{<a>} anchor tags are used to make hypertext or text with hyperlinks. Basically what makes Wikipedia great.
+\end{itemize}
+\paragraph{Text Layout}
+\begin{itemize}
+  \item \mintinline{html}{<div>} will create a newline before it's content is displayed
+  \item \mintinline{html}{<span>} will separate a div for column vertically. 
+\end{itemize}
+\paragraph{CSS}
+\begin{itemize}
+  \item The children will inherit properties of the parent node
+  \item A css file can apply the style globally or on a per tag level. 
+  \item Style properties can be applied to certain selectors like 
+  \begin{itemize}
+    \item Tags like \mintinline{html}{div}
+    \item Classes that start with a \texttt{.} for example \mintinline{css}{.pokemon} will be applied to any tags with the class \mintinline{html}{<... class="pokemon">}
+    \item Tags that start with \texttt{\#} for example \mintinline{css}{#yellowtag} will be applied to any tags with the id \mintinline{html}{<... id="yellowtag">} 
+    \item Based on context with the \texttt{:} for example \mintinline{css}{:hover} apply when the mouse is over the element.
+  \end{itemize}
+  \item You can set position using fixed, relative, absolute, and z-index for overlapping
+  \item Alignment using text-align, flex, align-content, justify-content.
+\end{itemize}
+\paragraph{Forms}
+\begin{itemize}
+  \item You can create user submittable forms using the \mintinline{html}{<form>} tag 
+  \item The input for the form is defined using the \mintinline{html}{<input>} tag and you have to define the type, the name of the input to be sent to the URI, and a default value.
+  \item The \mintinline{html}{<select>} tag can be used to show a dropdown box of options.
+\end{itemize}
+\paragraph{CGI Diversion}
+\begin{itemize}
+  \item You can write CGI in any language 
+  \item Basically you can create a program that will generate html content dynamically at runtime. 
+  \item Has some problems.
+\end{itemize}
+
+
+\end{document}

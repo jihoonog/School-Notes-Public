@@ -1,0 +1,802 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{JavaScript}
+Where did it come from?
+Created in one day by Brendan Eich for Netscape in 1995 and is inspired by Java, C, Self, Perl...
+It's Multi-paradigm
+
+\begin{itemize}
+    \item Imperative
+    \item Functional
+    \item Object-oriented
+    \item Prototype-driven
+    \item Event-driven
+    \item Embeddable
+\end{itemize}
+
+JavaScript is best known for it's weird type casting behavior, this leads to a lot of debugging issues.
+
+The reason why we keep using it is because it runs everywhere: 
+\begin{itemize}
+    \item Browsers
+    \item Servers 
+    \item PDFs  
+\end{itemize}
+
+It's also fast on modern browsers, they can compile javascript to machine code.
+
+\section{Running JS on a webpage}
+You can run JavaScript within the \texttt{<script>} tags inside a html file.
+\begin{minted}[breaklines]{html}
+<script>
+var someJS = "JS in a <script> tag!";
+</script>
+<!-- you can embed oneliners within HTML! -->
+<button onClick="alert('Stuck in JS factory, send help!');">
+  Test me!</button>
+\end{minted}
+
+You can also put JavaScript at a separate URL with the \texttt{<script>} tag as well.
+\begin{minted}[breaklines]{html}
+<script src="myscript.js"></script>
+<!--You have to put the closing </script> tag 
+because script isn't a void tag!-->
+\end{minted}
+This allows the html content to be cached while the content of \texttt{myscript.js} can change without affecting the caching behavior of the source html file.
+
+\section{Functions}
+\begin{itemize}
+    \item Functions can return values
+    \item Functions can have parameters
+    \item Functions can access all available scope
+\end{itemize}
+
+\begin{minted}[breaklines]{javascript}
+// Function one with no parameters
+function one() {
+    return 1;
+}
+// A function with 1 param
+function f(x) { 
+    return 2*x; 
+}
+// How to call the function
+f(2) == 4.0;
+// Show on the console each click event
+// Unnamed function
+button.onclick = function(e) {
+    console.log(e);
+};
+\end{minted}
+
+
+\section{Comments}
+\begin{minted}[breaklines]{javascript}
+// This is a line comment
+/* 
+This is a block comment
+*/
+\end{minted}
+
+\section{Closure}
+A closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+\begin{minted}[breaklines]{javascript}
+// I'm some javascript
+/* also a comment */
+function outer(text) {
+    function inner(x) {
+        alert(text);
+    }
+    return inner;
+}
+f = outer("Hi mom I'm on the projector");
+f(1);
+\end{minted}
+
+The code segment before will give an alert to the user with \texttt{Hi mom I'm on the projector}
+
+Another example: 
+\begin{minted}[breaklines]{javascript}
+function p(a) {
+    function q() {
+        console.log("a: " + a);
+        console.log("arguments: " + arguments[0]);
+    }
+    return q;
+}
+r = p(1);
+s = p(2); // now p is finished running, what happens to a?
+r(3); // print 1
+s(4); // print 2
+\end{minted}
+Even though \texttt{r} will print 1 and \texttt{s} will print 2 the arguments that \texttt{r} and \texttt{s} will print is 3 and 4 respectively. 
+
+This is because \texttt{function p} will return \texttt{function q} to the caller that is \texttt{r} and \texttt{s}. When give parameters to \texttt{r} and \texttt{s} those arguments will go to \texttt{function q}. 
+However, \texttt{function q} doesn't take in any parameters. What gives?
+In JavaScript giving additional parameters to a functions is stored in the \texttt{arguments} variable as a list. Where the first additional argument is stored in \texttt{arguments[0]}, the next additional argument is stored in \texttt{arguments[1]} and so on.
+
+\section{Scope}
+By default creating a variable makes globals.
+To create a local variable use
+\begin{itemize}
+    \item \texttt{'use strict'}
+    \item \texttt{let}
+    \item \texttt{const} for constants 
+    \item \texttt{var}
+\end{itemize}
+
+\begin{itemize}
+    \item \texttt{let} and \texttt{const} scopes variables/constants to the enclosing block
+    \item \texttt{var} scopes variables to the enclosing function
+\end{itemize}
+\begin{minted}[breaklines]{javascript}
+"use strict";
+function f() {
+    let a = 1;
+    for (let i = 1; i<10; i++) {
+        var c = i; // var defines it inside the function
+        let b = i; // let only defines it inside the for loop
+    }
+    console.log(c); // 9
+    console.log(b); // Reference Error
+}
+f();
+console.log(a); // Reference Error
+\end{minted}
+
+\begin{Note}
+    \texttt{let} should be used over \texttt{var} because regardless of where a \texttt{var} variable is created it's is hoisted to the top of it's scope. While \texttt{let} behaves similar to a regularly defined variable.
+\end{Note}
+
+\section{Type Coercion} 
+Python does a lot of implicit type conversion
+
+\begin{minted}[breaklines]{javascript}
+"1" + 1 //-> "11"
+\end{minted}
+There is a bias towards strings and floats for conversions.
+
+\section{this}
+Like \texttt{self} in Python, except: You don't have to list in the arguments.
+It's not automatically bound to an object.
+
+In most cases, the value of \mintinline{javascript}{this} is determined by how a function is called (runtime binding). It can't be set by assignment during execution, and it may be different each time the function is called.
+
+In non-strict mode the value of \mintinline{javascript}{this} is always a reference to an object. In \mintinline{javascript}{'use strict'} mode it can be any value. 
+
+\begin{minted}[breaklines]{javascript}
+class Quiz {
+  write() {
+    console.log(this);
+  }
+}
+quiz = new Quiz();
+w = quiz.write
+w()
+\end{minted}
+
+In JavaScript the w method isn't bound to the quiz object unless we call it explicitly like \texttt{quiz.write}, \texttt{w.call(quiz)} or bind it with \texttt{w.bind(quiz)}
+
+ES5 introduced the \mintinline{javascript}{bind()} method to set the value of a function's this regardless of how it's called, and ES2015 introduced arrow functions which don't provide their own this binding (it retains the this value of the enclosing lexical context).
+
+\section{Anonymous Functions}
+JavaScript allows anonymous functions by returning a function definition.
+
+\begin{minted}[breaklines]{javascript}
+var outer = function(text) {
+    return function(x) {
+        console.log(this);
+        alert(text);
+    }
+}
+var f = outer("Hi mom I'm on the projector");
+f.call({}, 1);
+\end{minted}
+
+
+\subsection{Arrow Function =>}
+Like anonymous functions but they always keep the \texttt{this} from when they were created.
+
+\begin{minted}[breaklines]{javascript}
+var outer = function(text) {
+    return (x) => {
+        console.log(this);
+        alert(text);
+    }
+}
+var f = outer("Hi mom I'm on the projector");
+f.call({}, 1); // {} is ignored because it's an arrow function
+\end{minted}
+
+\section{Names} 
+\begin{itemize}
+    \item Start with a letter followed by underscores, letters or numbers.
+    \item Can't be a reserved word like \texttt{break} or \texttt{case} or \texttt{for} or \texttt{function} or \texttt{if} or \texttt{in} etc.
+    \item Convention is to use \texttt{camelCase} like Java not \texttt{snake_case} like Python.
+\end{itemize}
+\begin{minted}[breaklines]{javascript}
+var aString = "Strings";
+var break = "not allowed!";
+var BREAK = "This is allowed!";
+var BrEAK = "Try not to abuse case sensitivity";
+\end{minted}
+
+\section{Numbers}
+Everything is a double, write integers, decimals, or decimals with an exponent.
+\begin{minted}[breaklines]{javascript}
+var aNumber = 10;
+var aNumber = 11.11;
+var aNumber = 1e-100;
+var aNumber = 1E+100;
+var nan = NaN;
+var inf = Infinity;
+var negativeInfinity = -Infinity;
+\end{minted}
+
+\subsection{Casting Numbers}
+There are many different ways to cast numbers 
+\subsubsection{Casting to an "integer"}
+\begin{minted}[breaklines]{javascript}
+Math.floor(0.7)
+Math.ceil(0.7)
+Math.round(0.7)
+Math.trunc(0.7)
+\end{minted}
+
+\subsubsection{Casting to a float}
+\begin{minted}[breaklines]{javascript}
+parseFloat("127")
+Number("0x7F")
++"0x7F" // Unary plus is the same as Number
+\end{minted}
+JavaScript also accepts string hexadecimal for conversions to numbers
+
+\subsection{Rounding Errors}
+Since everything's a double, you get rounding errors.
+\begin{minted}[breaklines]{javascript}
+a = 0.1
+b = 0.2
+a + b == 0.3 // Should be true but false due to a rounding error
+\end{minted}
+
+\section{Strings}
+\begin{itemize}
+    \item Unicode by default
+    \item Use ' ' or " "
+    \item Any characters except control characters and \, " or '
+\end{itemize}
+
+\begin{minted}[breaklines]{javascript}
+var aNumber = 10;
+var aString = "";
+var anotherString ="Hi how are you";
+var escapesString = "\r\n\t\f\b\/\\\\'\"";
+var snowMan = "\u2603";
+snowMan.length === 1;
+aString.length === 0;
+\end{minted}
+
+\subsection{Casting Strings}
+There are a ways to convert things to a string 
+\begin{minted}[breaklines]{javascript}
+"" + 1;
+1 + "";
+String(1); 
+(1).toString();
+String(null); // "null"
+null.toString(); // Error
+(127).toString(16); // "7F"
+\end{minted}
+
+\section{Booleans}
+\begin{itemize}
+    \item \texttt{true} or \texttt{false}
+    \item Unfortunately conditional expressions have lot of truthy and falsey values
+    \item False values: 
+    \begin{minted}[breaklines]{javascript}
+false
+null
+undefined
+''
+0
+NaN
+    \end{minted}
+    \item Everything else is true plus \texttt{true} itself.    
+\end{itemize}
+
+\section{Equality}
+\begin{itemize}
+    \item \texttt{==} the \emph{abstract} equality operator
+    \item \texttt{===} the \emph{strict} equality operator i.e., type must match.
+\end{itemize}
+\begin{minted}[breaklines]{javascript}
+3=="3" // true
+3==="3" // false
+1==true // true
+1===true // false
+undefined == null // true
+undefined === null // false
+NaN==NaN // false
+NaN===NaN // false
+isNaN(NaN) // true
+\end{minted}
+Generally you should use \texttt{===}.
+
+\section{Arrays}
+Arrays in JavaScript are object-oriented and fill of methods.
+
+Unlike MATLAB arrays are 0-indexed.
+\begin{minted}[breaklines]{javascript}
+var empty = [];
+var arrayInitialized = [1,2,3,4,'5'];//mixed!
+var arr = new Array(10);
+arr[0] === undefined;
+arr[0] = 'Assigned';
+'Assigned' === arr[0];
+arrayInitialized[4] === '5';
+arrayInitialized.length === 5;
+arrayInitialized.splice(3,1); // delete 4 from the array (slow)
+\end{minted}
+
+\subsection{Iterating over an array}
+You can use \texttt{for ... of} to iterate over iterable objects, including; strings, arrays, and array-like objects.
+
+\begin{minted}[breaklines]{javascript}
+let a = [1, 2, 3, 4, 5];
+for (let i of a) {
+  console.log(i);
+}
+\end{minted}
+
+If you use \texttt{for ... in} on an iterable object, like strings, arrays, and array-like objects then you will get the \emph{indices} of those iterated elements rather than the elements themselves. 
+
+
+\section{Objects}
+Everything is an object except for these primitives
+\begin{itemize}
+    \item Booleans
+    \item numbers
+    \item strings   
+\end{itemize}
+Although those primitives still have methods, \textbf{objects} have properties.
+These properties are named by a string and property values can be anything including \texttt{undefined}.
+Objects don't have a class and objects are pass by reference.
+
+\subsubsection{Example}
+\begin{minted}[breaklines]{javascript}
+var empty = {};
+var abram = {
+   "name":"Abram Hindle",
+   "job":"Throwing Down JS",
+   "favorite tea":"puerh"
+};
+var dog = {
+   paws: 4 // note I didn't quote paws
+};
+dog.paws === 4;
+abram["favorite tea"] === "puerh";
+abram.name === "Abram Hindle";
+abram["favorite tea"] = "oolong";   
+\end{minted}
+
+\subsubsection{More examples}
+\begin{minted}[breaklines]{javascript}
+undefined.property; // Throws a type error
+undefined && undefined.property // returns undefined
+var empty = {};
+empty.property === undefined;
+var abram = {
+   "name":"Abram Hindle",
+   "job":"Throwing Down JS",
+   "favorite tea":"puerh"
+};
+keys(abram); // produces ["name","job","favorite tea"]
+//prototype!
+var abramChild = Object.create(abram)
+keys(abramChild); // produces []
+abramChild.name === "Abram Hindle"; // inherits keys from abram
+\end{minted}
+
+
+\subsection{Prototypes}
+All javascript objects inherit properties and methods from a prototypes.
+Prototype provides inheritance in JavaScript where objects can have a prototype object, which acts as a template object that it inherits methods and properties from.
+\begin{minted}[breaklines]{javascript}
+var abram = {
+   "name":"Abram Hindle",
+   "job":"Throwing Down JS",
+   "favorite tea":"puerh",
+   "sayName": function() {
+      alert(this.name);
+   }
+};
+abramChild = Object.create(abram);
+abramChild.name = "Child";
+function doit() {
+    abram.sayName();
+    abramChild.sayName();
+}
+\end{minted}
+In this case \texttt{abramChild} is a object created via the \texttt{abram} prototype. It inherited all the properties from abram as well as their default values, but can change the value of the properties after initialization. In this case change \texttt{abramChild.name} to \texttt{Child} instead of \texttt{Abram Hindle}.
+
+\subsection{Looping over Properties}
+
+The \texttt{for ... in} statement iterates over all enumerable properties of an object that are keyed by strings, including inherited enumerable properties from the prototype. 
+
+\begin{minted}[breaklines]{javascript}
+let author = {
+   "name":"Unknown Slide Author",
+   "job":"Making Slides",
+   "sayName": function() {
+      alert(this.name);
+   }
+};
+let hazel = Object.create(author);
+hazel.name = "Hazel Campbell";
+for (let property in hazel) {
+  alert(property + ": " + hazel[property]);
+}
+\end{minted}
+
+\begin{DndSidebar}[color=PhbLightGreen]{ \mintinline{javascript}{Object.keys(object)} }
+  If you want the properties or keys of the object and \textbf{exclude their inherited properties} then use the \mintinline{javascript}{Object.keys(object)} method to iterate over the object's own properties and not their inherited properties.  
+\end{DndSidebar}
+  
+\section{Classes}
+Classes are in essence, "special functions", and and just as you can define function expressions and function declarations, the class syntax has two components: class expression and class declarations.  
+
+JavaScript has several ways of creating \texttt{classes},
+\begin{itemize}
+    \item ECMAScript 2015 classes
+    \item Constructor functions 
+\end{itemize}
+
+\subsection{ECMAScript 2015 Classes}
+The proper way of creating classes is using the ECMAScript 2015 classes.
+
+\begin{minted}[breaklines]{javascript}
+class Pokemon {
+  constructor(name, level) {
+    this.name = name;
+    this.level = level;
+  }
+  levelUp() {
+    this.level += 1;
+  }
+}
+pikachu = new Pokemon("Pikachu", 1);
+pikachu.levelUp();
+\end{minted}
+
+This is similar to C++ where you have a constructor method within the class definition that initializes a class instance.
+Class methods are defined in a similar way to the constructor.
+
+\subsection{Constructor Function}  
+You might see this in older code
+\begin{minted}[breaklines]{javascript}
+// classes start with a capital letter by convention
+function Pokemon(name,level) {
+  this.name = name;
+  this.level = level;
+  this.levelUp = function() {
+    this.level += 1;
+  }
+}
+pikachu = new Pokemon("Pikachu", 1);
+pikachu.levelUp();
+\end{minted}
+Where instead of a \texttt{class} keyword and definition you have a function that will define and initialize its data members and define the class methods within the body of the function constructor.
+
+\begin{minted}[breaklines]{javascript}
+// classes start with a capital letter by convention
+function Pokemon(name,level) {
+  this.name = name;
+  this.level = level;
+  this.levelUp = function() {
+    this.level += 1;
+  }
+}
+pikachu = new Pokemon("Pikachu", 1);
+pikachu.levelUp();
+\end{minted}
+
+Both instances uses new to create a new class instance.
+
+\subsubsection{Adding a method to a prototype}
+If you want to add a new or overwrite a method to an already defined class you can assign the new function on the class's prototype.  
+\begin{minted}[breaklines]{javascript}
+// classes start with a capital letter by convention
+function Pokemon(name,level) {
+  this.name = name;
+  this.level = level;
+}
+// have to include "prototype" here so "this" works in the method
+Pokemon.prototype.levelUp = function() {
+  this.level += 1;
+}
+pikachu = new Pokemon("Pikachu", 1);
+pikachu.levelUp();
+\end{minted}
+
+You can also use the \texttt{Object.Create(prototype)} convention to create a new object from a "default" object. Though this is awkward and rarely used.
+
+\begin{minted}[breaklines]{javascript}
+// classes start with a capital letter by convention
+var Pokemon = {
+  name: null,
+  level: null,
+  levelUp: function() {
+    this.level += 1;
+  }
+}
+pikachu = Object.create(Pokemon);
+pikachu.name = "Pikachu";
+pikachu.level = 1;
+pikachu.levelUp();
+\end{minted}
+
+
+\section{DOM Manipulation}
+You can use JavaScript to manipulate what's on the page.
+The browser turns HTML into the DOM or Document Object Model. 
+\begin{itemize}
+    \item Document: the stuff on your page, the content
+    \item Object: gets turned into objects accessible by JS
+    \item Model: it's a tree with children nodes
+\end{itemize}
+
+\subsection{DOM elements from HTML}
+\begin{minted}[breaklines]{html}
+<p>A paragraph</p>
+<div>
+  Hi!
+  <a href="https://google.ca">Click me!</a>
+</div>
+\end{minted}
+The DOM elements for the html document is 
+\begin{itemize}
+    \item document (it's a tree with children nodes!)
+    \item Root Element: HTML ( document.children[0] )
+    \item Element: Head ( document.children[0].children[0] )
+    \item Element: Body ( document.children[0].children[1] )
+    \item Element: p ( document.children[0].children[1].children[0] )
+    \item \#text: A paragrah
+    \item Element: div
+    \item Text: Hi!
+    \item Element: a ; attribute href
+    \item Text: Click me!
+\end{itemize}
+
+
+\subsection{Recursive}
+Because the DOM is a tree you can recursively traverse the in whatever ways you see fit.
+
+\begin{minted}[breaklines]{javascript}
+function domRecurse(start, depth) {
+  var out = "";
+  for (child of start.childNodes) {
+    indent = "    ".repeat(depth);
+    out += indent + "* " + child.nodeName;
+      if (child.nodeName === "#text") {
+        out += " " + JSON.stringify(child.wholeText);
+      }
+    out += "\n";
+    out += domRecurse(child, depth+1);
+  }
+  return out;
+}
+\end{minted}
+
+\subsection{querySelector}
+You can also jump straight to an element using \texttt{querySelector}. It uses CSS-style selectors for the query. You don't need jQuery.
+
+\begin{minted}[breaklines]{javascript}
+function domRecurseExample() {
+  var start = document.querySelector("#domexample");
+  alert(domRecurse(start, 0));
+}
+\end{minted}
+
+You can use other selectors than \texttt{querySelector} to find specific element(s).
+\begin{minted}[breaklines]{javascript}
+// Get all DIVs
+var divs = document.getElementsByTagName("div"); 
+// gets all elements with class divider
+var dividers = document.getElementsByClassName("divider"); 
+// get the element with the ID main
+var main = document.getElementById('main');
+// get the element by name
+var ups = document.getElementsByName('up');
+\end{minted}
+
+\subsection{jQuery}
+jQuery's functionality is now available from APIs built-in to browsers.
+
+Old projects that need backwards-compatibility or already use jQuery:
+\begin{itemize}
+    \item 
+    Using jQuery is totally cool!
+\end{itemize}
+
+
+New projects using ECMA 2016 and later:
+\begin{itemize}
+    \item 
+    Better to just use the tools the browser gives you.
+\end{itemize}
+
+
+\subsection{Changing the DOM}
+You can change the DOM by creating elements on the \texttt{document}
+
+\subsubsection{Filling a div}
+This will add
+\begin{quotebox}
+    Here's some text in that div! Let's make a link too!
+\end{quotebox}
+The \texttt{Let's make a link too!} is an \texttt{a.href} to \texttt{https://google.ca/}.
+\begin{minted}[breaklines]{html}
+<div id="fillme"></div>
+\end{minted}
+
+\begin{minted}[breaklines]{javascript}
+function fillExample() {
+  fillme = document.getElementById("fillme");
+  fillme.textContent = "Here's some text in that div! ";
+  a = document.createElement("a"); // create an a element
+  a.textContent = "Let's make a link too!";
+  a.href = "https://google.ca/";
+  fillme.appendChild(a);
+}
+\end{minted}
+
+\subsubsection{Adding a colour border}
+This will add a randomly colored border to each of the two \texttt{div} elements.
+\begin{minted}[breaklines]{html}
+<div class="styleme">I'm text in a div!</div>
+<div class="styleme">I'm text in another div!</div>
+\end{minted}
+
+\begin{minted}[breaklines]{javascript}
+function styleExample() {
+  var divs = document.getElementsByClassName("styleme");
+  divs = Array.prototype.slice.call(divs); // convert HTMLCollection to Array
+  divs.map( (div) => {
+    console.log(div);
+    div.style.border = "5px solid";
+    div.style.borderColor = "rgb(" + (256*Math.random())
+      + ", " + (256*Math.random())
+      + ", " + (256*Math.random()) + ")";
+  });
+}
+\end{minted}
+This will apply a random border color to both divs. 
+\begin{minted}[breaklines]{javascript}
+function styleExample2() {
+  old = document.getElementById("styleme2sheet");
+  if (old) {
+    old.parentNode.removeChild(old);
+  }
+  var css = "div.styleme2 { border: 5px solid "
+      + "rgb(" + (256*Math.random())
+      + ", " + (256*Math.random())
+      + ", " + (256*Math.random()) + "); }";
+  style = document.createElement('style');
+  style.type = "text/css";
+  style.id = "styleme2sheet";
+  style.textContent = css;
+  document.head.appendChild(style);
+}
+\end{minted}
+
+\section{Review}
+\paragraph{Running JS in HTML}
+\begin{itemize}
+  \item Use the \mintinline{html}{<script>} tag to either inline JS code or even better 
+  \item Set the \texttt{src} property to the JavaScript file so you don't invalidate the page's cache.
+\end{itemize}
+\paragraph{Function}
+\begin{itemize}
+  \item Functions can return values.
+  \item Functions can have parameters.
+  \item If parameters are not defined you can still pass arguments to the function by passing them regardless and use the \mintinline{javascript}{arguments} array in the function body to access them. 
+  \item Function can access all available scope.
+  \item Everything is passed by reference.
+\end{itemize}
+\paragraph{Closure}
+\begin{itemize}
+  \item Gives you access to an other function's scope from an inner function. 
+  \item Closures are created every time a function is created.
+  \item You can call a function that returns another function (let's call it function 2) and calling that returned function (function 2) again will allow that second function (function 2) to access data from the first function. called.   
+\end{itemize}
+\paragraph{Scope}
+\begin{itemize}
+  \item Default creating a variable makes it global.
+  \item For local variable, use \texttt{var}, \texttt{const} for constants, \texttt{let}, or \texttt{'use strict'}.
+  \item \texttt{let} and \texttt{const} scopes variables to the enclosing block.
+  \item \texttt{var} scopes variable to the enclosing function.
+  \item \texttt{var} also declares and set variable to undefined at the start of the enclosing function. 
+  \item Use \texttt{let} over \texttt{var}
+\end{itemize}
+\paragraph{Type Coercion}
+\begin{itemize}
+  \item For numbers there is a bias towards floats.
+  \item For everything else there is a bias towards strings, and strings takes precedence.
+\end{itemize}
+\paragraph{This}
+\begin{itemize}
+  \item Like Python's \mintinline{python}{self}
+  \item Don't need to list it in the argument so no \mintinline{python}{def func(self, ...)}.
+  \item Not automatically bound to an object, you have to explicitly define this to a variable or
+  \item call the function using the \mintinline{javascript}{call()} or \mintinline{javascript}{bind()} method. 
+\end{itemize}
+\paragraph{Anonymous Functions}
+\begin{itemize}
+  \item Defined by just writing \mintinline{javascript}{function()} with no identifier.
+  \item The \mintinline{javascript}{=>} operator also creates an anonymous function but defines \mintinline{javascript}{this} from when they were created.
+\end{itemize}
+\paragraph{Names}
+\begin{itemize}
+  \item Start with a letter followed by \mintinline{awk}{[a-zA-Z0-9_]}.
+  \item Cannot be a reserved word like \mintinline{javascript}{break}, etc
+  \item Use camelCase.
+\end{itemize}
+\paragraph{Numbers}
+\begin{itemize}
+  \item Everything is a double
+  \item Casting to int can be done using the \mintinline{javascript}{Math} module.
+  \item Casting to float can be done using \mintinline{javascript}{parseFloat} or \mintinline{javascript}{Number} methods and it can take in both integers as well as hexadecimals. 
+  \item Numerical errors still apply like in C and C++.
+\end{itemize}
+\paragraph{Strings}
+\begin{itemize}
+  \item Unicode by default
+  \item You can use the \mintinline{javascript}{String} constructor or \mintinline{javascript}{(2).toString()} method on the primitive number type or just implicit casting.
+\end{itemize}
+\paragraph{Booleans}
+\begin{itemize}
+  \item \mintinline{javascript}{true} or \mintinline{javascript}{false}
+  \item There are falsey types which var keywords and values that default to false. For example an empty string is false.
+\end{itemize}
+\paragraph{Equality}
+\begin{itemize}
+  \item \mintinline{javascript}{==} abstract equality operator, will try and implicit type cast before evaluating.
+  \item \mintinline{javascript}{===} strict equality operator, will evaluate if the types match as well.
+  \item Use the strict equality operator over the abstract equality operator.  
+  \item Also \mintinline{javascript}{NaN != NaN} for both operators, use \mintinline{javascript}{isNaN(NaN)}.
+\end{itemize}
+\paragraph{Arrays}
+\begin{itemize}
+  \item Arrays are object oriented and have methods like
+  \item length, splice
+  \item index starts at 0.
+  \item index operator is \mintinline{javascript}{[]}
+  \item Range based iteration of objects is done using \mintinline{javascript}{for (... of ...)}
+  \item Range based iteration of the indices is done using \mintinline{javascript}{for (... in ...)}
+\end{itemize}
+\paragraph{Objects}
+\begin{itemize}
+  \item Everything is an object except for Numbers, Booleans and strings
+  \item They are like JSON format with key-value pairs.
+  \item The keys can be either strings or regular identifier with a colon \mintinline{javascript}{:}
+  \item Passed by reference.
+  \item Object's attributes can be accessed using the object indexing operator \mintinline{javascript}{object["string"]} or as a direct attribute so long as it doesn't have any spaces \mintinline{javascript}{object.name}.
+  \item \mintinline{javascript}{Object.keys(object)} will produce the keys of the object.
+  \item Iterating though the object using \mintinline{javascript}{for (... in object)} will iterate through all the keys including its prototype. 
+\end{itemize}
+\paragraph{Classes}
+\begin{itemize}
+  \item Constructor which is the newer standard way
+  \item Constructor functions which is the older way where everything is defined in the function's body.
+  \item You can add a method to a prototype by creating a new attribute to the \mintinline{javascript}{object.prototype} attribute. 
+\end{itemize}
+\paragraph{DOM manipulation}
+\begin{itemize}
+  \item Change the content of a page using JS 
+  \item You can get elements by using \mintinline{javascript}{document.querySelector()} or get specific elements using \mintinline{javascript}{document.getElementBy<selector>()} where the \texttt{<selector>} is what you want.
+  \item You can create an element using \mintinline{javascript}{document.createElement()} and assign predefined attributes to it.  
+\end{itemize}
+
+
+\end{document}
