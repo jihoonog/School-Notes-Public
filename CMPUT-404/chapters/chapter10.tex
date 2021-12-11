@@ -1,0 +1,189 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{RESTful WebServices}
+\section{REST}
+\begin{Definition}
+  {REST}
+  REST stands for 
+  \begin{itemize}
+    \item \textbf{REpresentational}: Where issues related to representation, how to describe/name/show
+    \item \textbf{State}: What is communicated
+    \item \textbf{Transfer}: How to communicate
+  \end{itemize}
+\end{Definition}
+Think of it as a design pattern for architecture like you learned in CMPUT-301 or software engineering class.
+REST was introduced by Fielding as his Doctoral thesis.
+Where methods of calling remote objects. Using URIs to name objects and Using HTTP Verbs to manipulate them.
+A lot of websites have APIs to help computers navigate the website and GET, PUT, DELETE,  POST data.
+
+\begin{DndSidebar}[color=PhbLightGreen]{TLDR}
+  \begin{itemize}
+    \item URIs refer to resources, focus on URIs over parameters
+    \item You do things (by using HTTP verbs) to resources, i.e., Delete something, put something up, get something, etc.
+    \item You use existing infrastructure and caching rules (HTTP and HTTP User Agents and HTTP Proxies)
+  \end{itemize}
+  
+\end{DndSidebar}
+
+\section{RPC}
+RPC or remote procedure calls.
+Take advantage of performance aspect of HTTP
+\begin{itemize}
+  \item Caching
+  \item Proxies
+  \item Flexible Networking
+  \item Pluggable Middleware
+  \item Allows routing
+\end{itemize}
+
+But REST is not RPC.
+RPC calls are calls made across a network with semantics of procedures and functions with inputs and outputs.
+HTTP has properties, headers, named URIs, verb and parameters. HTTP is transformable while RPC calls are not.
+
+\section{Properties of REST}
+\begin{itemize}
+  \item Client Server communication
+  \item Stateless
+  \item Cacheable
+  \item Uniform interface
+  \item Layered
+  \item Code on Demand (JavaScript) (optional)
+\end{itemize}
+
+
+\subsection{Stateless}
+REST is stateless, in that the client holds the state. The server avoids holding the client state this means requests are \textbf{heavy} with context to transfer the "state" of the client to the server.
+However, this statelessness gives us an important property that allows 
+\begin{itemize}
+  \item Caching
+  \item Memorization
+  \item Transformation
+\end{itemize}
+
+\subsection{Cacheable}
+Browsers and clients can cache response, but so can secondary caches. If the entity is not going to change then why bother getting from the source?.
+\begin{itemize}
+  \item GET
+  \item HEAD
+\end{itemize}
+These are cacheable by default.
+\begin{itemize}
+  \item POST
+  \item PATCH
+\end{itemize}
+are not cacheable but can be if they have a cache control header.
+
+\subsection{Layered}
+Your application might not be multi-machine but it can have layering that operations with the HTTP request.
+You could have an auth layer that validates authentication and strips auth information before passing the request off to the next layer.
+HTTP Request handling allows routing and the decoration of routes to handle requests in a layered manner.
+
+\subsection{REST Examples}
+\subsubsection{Search Queries}
+These are, safe, repeatable, cacheable, and stateless
+\subsubsection{Weather}
+Similar to a search query, they are safe, repeatable, cacheable, and stateless so long as the weather doesn't change too quickly.
+\subsubsection{A photo}
+Same as the last two.
+\subsubsection{Payment}
+A payment will change the state on the server as some form of modification is done on the server.
+It's not cacheable because it changes the state on the server. It is not safe because it changes the state on the server, nor is it repeatable because doing multiple payment operations due to a connection issue can lead to a double charge if the server didn't catch the double transaction.
+\subsubsection{Authentication}
+Authentication is tricky depending on the type.
+It is safe and repeatable once the token has been established. Something like basic auth is safe and repeatable because it's checked against the server's database. It can be stateless if the server is checking if the given auth information is correct. But when a new auth is generated it is not stateless. It can be cacheable if there is a expiry on the auth information.
+
+Session IDs are not stateless because they need to keep the state of the clients who are connecting to their servers. If they have connection issues or get rerouted they need to keep track on who is still using their services. However, once they disconnect that session information needs to be deleted.
+
+You can however have stateless cookies if they are not changing the state of the server, i.e., the auth cookie is being checked against the server's database.
+The suggestion is to do authentication via headers either:
+\begin{itemize}
+  \item HTTP-Auth
+  \item HTTP-Digest
+  \item Custom headers
+\end{itemize}
+
+\section{Performance}
+There are many ways you can improve the performance of you website.
+
+\subsection{Caching}
+The best way to improve performance is to use caching.
+You can increase the locality of data to the user either by storing it in:
+\begin{itemize}
+  \item the browser
+  \item the layers
+  \item the cache between the layers
+  \item or by cache transformation
+\end{itemize}
+
+\subsection{Layering}
+Improve reliability by layering and making more machines responsible for the same task.
+If one machine dies, the middleware can just route around the failure. Distributed operations are easy.
+You can load balance and share data across machines if they are independent, improving responsiveness as less machines are bogged down by a surge of requests.
+
+You can combine both layering and caching to further improve performance.
+
+\subsection{Issues}
+This performance improvement leads to other issues as well.
+\begin{itemize}
+  \item Multiple layers increases latency
+  \item Every layer of abstraction is a danger to performance
+  \item Bandwidth, requests are large
+  \item Performance limitations of HTTP and TCP
+  \item Concurrency issues
+\end{itemize}
+
+
+\section{Design Tips}
+Consider what is publicly readable. What the read or read-only interface should look like.
+What needs to be private or have some form of authentication.
+Remember OOA, think about
+\begin{itemize}
+  \item The nouns
+  \item Your verbs
+  \item What relationships can be become URIs
+\end{itemize}
+
+Take advantage of caching of using methods like GET instead of POST.
+Consider how independent data is, can you split up safely? How coupled is it? Does it need to be coupled?
+The heavy state can be stored on the client side. Take advantage of locality, your client side is the fastest side.
+
+\subsection{Nouns}
+Usually you chose a noun because you have a collection of items. Maybe use the plural form.
+Use good concrete names. Don't generalize, you can generalize the routes in your code but be concrete.
+
+\section{General REST recommendations}
+\begin{itemize}
+  \item Focus noun first, then do verbs to those nouns
+  \item Plural URLs
+  \item Relations relation to first object i.e., /tweets/2/responses
+  \item Use verb ending URLs for important tasks like /search
+  \item Version the API in the URL
+  \item Search using get params
+  \item Use status code 201 for creation of a new resource
+  \item Use JSON
+  \item Don't wrap data up by default, have the attributes of the data in raw key-value form.
+  \item For large data use pages
+  \item Use simple HTTP auth + SSL over anything more complicated.
+\end{itemize}
+
+\section{HATEOAS}
+Hypermedia As The Engine of Application State or \textbf{HATEOAS}.
+This include hyperlinks in your REST API responses. So you can have an index that points to a link to another object. This gives a hint to where the app or the reader could go to next. Use hypermedia it's the web. Furthermore, if you use status code 201 you are using location: to allow redirection to the new object.
+
+\section{Errors}
+For errors you should use these:
+\begin{itemize}
+  \item 200 OK
+  \item 201 Created
+  \item 204 No content
+  \item 304 Not Modified
+  \item 401/403/404/405
+\end{itemize}
+
+\section{PUT}
+For PUT you should think about if you really need to make a new object on a PUT or just update it. Should you force creation via POST.
+
+
+  
+
+\end{document}

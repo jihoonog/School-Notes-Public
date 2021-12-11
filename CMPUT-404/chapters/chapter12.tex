@@ -1,0 +1,167 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{HTTP Authentication}
+\section{Web authentication}
+\begin{itemize}
+  \item  The methods of authenticating users according to the HTTP spec.
+  \item  Somewhat different from alternative auth means such as secure tokens, cookies, and sessions, but often used together.
+  \item  Since software is on the web, we need to apply the same protections we apply to software.
+\end{itemize}
+
+There are two forms:
+\begin{enumerate}
+  \item Basic - Username and password sent as clear text (base64 encoded)
+  \item Digest - Using cryptographic hashes and shared secrets to authenticate. Slightly safer, can still get hijacked
+\end{enumerate}
+In either case you should use HTTPS.
+
+\section{HTTP Basic Authentication}
+This is the easiest and it's "stateless". 
+User accesses a resource and a 401 unauthorized is returned but \texttt{WWW-Authenticate} header is sent.
+\begin{itemize}
+  \item \texttt{WWW-Authenticate: Basic realm="name of your realm"} the realm is what you are authenticating for.
+  \item User-agent responds with \texttt{Authorization: Basic <auth_info>}
+\end{itemize}
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
+<auth_info> = Base64(userid + ":" + password)
+\end{minted}
+\end{listing}
+
+\begin{Note}
+  The username and password is not encrypted just encoded to a base64 value. A hacker can recreate the username and password by decoding the base64 value.
+\end{Note}
+
+The client should be access all paths "at or deeper than the depth of the last symbolic element in the path field". So all fields and subdirectories within whatever you authenticated with.
+You can send authorization as much as you like.
+
+HTTP Basic over HTTP is:
+\begin{itemize}
+  \item Unencrypted
+  \item Insecure
+  \item Stealable
+  \item Unsafe
+  \item Proxyable
+  \item Stateless
+\end{itemize}
+
+\section{HTTP Digest Authentication}
+\begin{DndReadAloud}[color=bgtan]
+  "Users and implementors should be aware that
+this protocol is not as secure as Kerberos, and
+not as secure as any client-side private-key
+scheme. Nevertheless it is better than nothing,
+better than what is commonly used with telnet
+and ftp, and better than Basic authentication.
+-- Franks et al. 1999
+http://www.ietf.org/rfc/rfc2617.txt
+\end{DndReadAloud}
+
+This avoids sending a plaintext username and password across the wire.
+All content traded could be listened on.
+No encryption, but a hashing and shared secret scheme.
+Can attempt to avoid replay attacks:
+\begin{itemize}
+  \item Replay attack, whereby repeating a recorded message you fake being authenticated
+  \item You copy one of my "going to lunch emails" and you send it to my colleague to trick my colleague to leave their office.
+\end{itemize}
+
+\subsection{HTTP Digest Run Down}
+In general we form a bunch of strings using colons:
+\begin{itemize}
+  \item We hash them
+  \item We share them
+  \item Some of these strings are secrets
+\end{itemize}
+\begin{enumerate}
+  \item First the client requests data
+  \item Then the server responds with a 401 and WWW-Authenticate: Digest ...args...
+  \item Then the client repeats the request with a Authorization: header
+  \item Then the server echos back much of that information and returns the appropriate content and status
+\end{enumerate}
+
+\subsubsection{Request Digest}
+The request-digest for non-qop is 
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
+def KD(x,y):
+  return md5(x + ":" + y)
+hash = md5() # often not always
+A1 = username_value + ":" + realm_value ":" + passwd
+A2 = ":" + digest_uri # (authorization header request)
+request_digest = '"' + KD(hash(A1), nonce_value + ":" + hash(A2)) + '"'
+\end{minted}
+\end{listing}
+
+The request-digest for qop is:
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
+def KD(x,y):
+  return md5(x + ":" + y)
+hash = md5() # often not always
+A1 = username_value + ":" + realm_value ":" + passwd
+A2 = method + ":" + digest_uri # (authorization header request)
+request_digest = '"' + KD(hash(A1), ":".join([nonce, nc, cnonce, qop, hash(A2)]) + '"'
+\end{minted}
+\end{listing}
+
+\subsubsection{Response Digest}
+sub header \texttt{rspauth} 
+response-digest for qop is the same as the request digest of qop.
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
+def KD(x,y):
+  return md5(x + ":" + y)
+hash = md5() # often not always
+A1 = username_value + ":" + realm_value ":" + passwd
+A2 = method + ":" + digest_uri # (authorization header request)
+request_digest = '"' + KD(hash(A1), ':'.join([nonce, nc, cnonce, qop, hash(A2)]) + '"'
+\end{minted}
+\end{listing}
+\textbf{Except} the value is hex encoded.
+
+\subsection{Issues}
+\begin{itemize}
+  \item Can be man in the middled - Someone could change HTTP headers on you and latch onto your authentication
+  \item Offers no confidentiality
+  \item Performance issues - Each nonce update requires a reauth, can't send a pre-auth'd request without chatting fist.
+\end{itemize}
+
+\subsection{Nonces}
+\begin{itemize}
+  \item Need to be generated and changed often
+  \item A Stale nonce is a broken system
+  \item Easy to break
+\end{itemize}
+
+
+\section{Authentication and REST}
+\begin{itemize}
+  \item Digest will require a lot of hand shaking all over the place
+  \item Basic is far simpler
+  \item Basic works fine over HTTPS
+  \item Other alternatives include
+  \begin{itemize}
+    \item OpenID
+    \item Oauth
+    \item Cookies and sessions but you might have strip authentication along the way to make it more restful
+    \item Tokens    
+  \end{itemize}
+\end{itemize}
+
+\section{Authorization header}
+In Oauth and Oauth2 the authorization header is overridden with a token:
+\begin{itemize}
+  \item \texttt{Authorization: token OATUH-TOKEN}
+  \item Reusing HTTP infrastructure is probably a good idea
+\end{itemize}
+Authorization token allows things to stay RESTful.
+
+
+
+
+
+
+
+
+\end{document}

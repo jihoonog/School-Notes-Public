@@ -97,7 +97,7 @@ The messages could be fragmented into multiple data frames.
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=\columnwidth]{../assets/websocket\_frame.png}
+    \includegraphics[width=\columnwidth]{../assets/websocket-frame.png}
     \caption{Websocket Format}
     \label{fig:websocket}
 \end{figure}
@@ -184,6 +184,7 @@ The browser sanitizes everything, is in control to prevent malicious web pages f
 
 \subsection{Websockets in JS}
 Here is an example usage for the websocket API in JavaScript.
+
 \begin{minted}[breaklines]{javascript}
 var ws = new WebSocket("ws://www.example.com/socketserver");
 var ws = new WebSocket("ws://www.example.com/socketserver", ["proto1", "proto2"]);
@@ -199,12 +200,8 @@ ws.close();
 
 You can send a plain string text or an array of binary information, your choice.
 
-
-
-
-
-
-
+Make sure that you define the websocket's \texttt{onopen} event handler to handle anything during the opening of the websocket where the connection is ready to send and receive data. The function should take in a single \texttt{Event} parameter.
+You should also define the \texttt{onmessage} event handler to handle anything when a message is received from the server. It takes in a single parameter of a \texttt{MessageEvent} type.
 
 
 \end{document}

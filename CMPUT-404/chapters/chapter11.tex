@@ -1,0 +1,107 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{Web Mining}
+\begin{Definition}{What is Web Mining}
+    Web mining is the mining of information from the web
+    \begin{itemize}
+        \item mining website access and error logs
+        \item mining websites
+        \item mining webservices
+        \item automating tasks by automating website access     
+    \end{itemize}
+\end{Definition}
+Webservices are easy to mine, Websites are much harder. You can also automate webtasks.
+
+\section{Web Mining Workflow}
+\begin{enumerate}
+    \item Retrieve the documents - Get a bunch of documents
+    \item Extract information from documents - Get the information we need from the document and parse them
+    \item Analyze information - From the extracted information
+    \item Aggregate and Report Results - Take analyzed information and report about it
+\end{enumerate}
+All of these steps can be parallelized depending on the task at hand and how they are implemented.
+
+Before starting, check to see if the data you want exist elsewhere? It is preferred to use the website's API or webservice. They usually have better quality data.
+
+\section{Atom or RSS Feed}
+Most websites have such a service. They are XML generated data that can be "easily" parsed. 
+
+\textbf{Atom} is like RSS but provides appropriate encoding of bodies, and focused on internationalization. 
+It is part of the IETF Standard and allow partial content. Atom came after RSS to deal with any evolutionary issues.
+
+\subsection{Parsing RSS or Atom Feed}
+In Python you should use a Feedparser for RSS or Atom, you could use an XML parser to read RSS or Atom data but in a lot of cases these data are often ill-formed xml and it will break the xml parser.
+
+
+\subsubsection{Example RSS scraper}
+\begin{minted}[breaklines]{python}
+import feedparser
+import difflib
+cbc = feedparser.parse("http://rss.cbc.ca/lineup/topstories.xml")
+cnn = feedparser.parse("http://rss.cnn.com/rss/cnn_topstories.rss")
+cbc_titles = [x['title'] for x in cbc.get('entries')]
+cnn_titles = [x['title'] for x in cnn.get('entries')]
+res = [(x,difflib.get_close_matches(x,cbc_titles,1,0.01)) for x in
+            cnn_titles]
+
+>>> res[0]
+(u'7 days to solve Crimea crisis', [u'Russian forces tighten grip on Crimea'])
+\end{minted}
+
+
+\section{Parse HTML Data}
+If you need to parse HTML data because you can't find a RSS or Atom feed, webservice or an API then you can use a package like \texttt{BeautifulSoup} to parse HTML data for you.
+You should never use regex to process HTML because HTML is not a regular language therefore it may not always work. 
+
+\subsection{}{BS4 Example}
+\begin{minted}[breaklines]{python}
+import urllib, urllib2
+artist = "devo"
+fd = urllib2.urlopen("http://www.allmusic.com/search/all/%s" % artist)
+content = fd.read()
+# now we just have some HTML
+# we could use regexes and try to find links
+import bs4
+soup = bs4.BeautifulSoup(content)
+res = soup.findAll("",{"class":"artist"})
+ahref = res[0].findAll("",{"class":"name"})[0].a
+name = ahref.text.strip()
+link = ahref.attrs["href"]
+\end{minted}
+
+\subsection{Modularize it}
+Like any good programmer you should modularize the scrapper program so it is flexible
+
+Like so
+\begin{minted}[breaklines]{python}
+def get_artist(artist):
+    uriartist = urllib.urlencode({"":artist})[1:]
+    fd = GET("http://www.allmusic.com/search/all/%s" % uriartist)
+    content = fd.read()
+    soup = bs4.BeautifulSoup(content)
+    res = soup.findAll("",{"class":"artist"})
+    ahref = res[0].findAll("",{"class":"name"})[0].a
+    name = ahref.text.strip()
+    link = ahref.attrs["href"]
+    return newartist(name,link)
+
+def get_similar(artist_entry):
+    url = artist_entry["url"]
+    related = url + '/related'
+    rfd = GET(related)
+    related_content = rfd.read()
+    soup = bs4.BeautifulSoup(related_content)
+    res = soup.findAll("",{"class":"similars"})
+    ahrefs = [x.a for x in res[0].findAll("li")]
+    links = [(a.text,a.attrs["href"]) for a in ahrefs]
+    return links
+\end{minted}
+
+\section{Selenium}
+Selenium allows the automation of an actual browser for web testing OR web mining.
+You can walk the DOM from your host language.
+Great for walking dynamic pages.
+You can also use it for unit testing and integration testing of front-end web elements so long as the interface of the buttons don't change too much.
+
+
+\end{document}

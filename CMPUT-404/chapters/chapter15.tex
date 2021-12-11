@@ -1,0 +1,384 @@
+\documentclass[../CMPUT-404-Notes.tex]{subfiles}
+\begin{document}
+\chapter{HTTP Performance}
+It's a non functional requirement
+
+They can be measured in terms of 
+\begin{itemize}
+    \item requests
+    \item volume
+    \item latency
+    \item bandwidth
+    \item utilization 
+\end{itemize}
+
+\section{Before you Optimize}
+\begin{enumerate}
+    \item Measure Something
+    \item Record the performance metric
+    \item Record and track the original settings for that metric
+    \item Run the tests multiple times to get a sample. Avoid luck and outliers
+\end{enumerate}
+
+Because we are using statistics to quantity and compare performance, we use statistical analysis to quantify and determine if there is a quantifiable difference. 
+To determine if there is an actual difference then make a t-test comparing the two performances and see if the difference is significant. 
+
+\section{Web Performance Best Practices}
+Google says:
+\begin{itemize}
+    \item Optimizing caching - keeping your application's data and logic off the
+    network altogether
+    \item Minimizing round-trip times - reducing the number of serial request response cycles
+    \item Minimizing request overhead - reducing upload size
+    \item Minimizing payload size - reducing the size of responses, downloads, and cached pages
+    \item Optimizing browser rendering - improving the browser's layout of a page
+    \item Optimizing for mobileNew! - tuning a site for the characteristics of mobile
+    networks and mobile devices
+\end{itemize}
+
+\section{Caching}
+\begin{itemize}
+    \item Caching increase locality
+    \item Locality increases bandwidth
+    \item Locality decreases latency
+    \item Levels of cache:
+    \begin{itemize}
+        \item CPU
+        \item Memory
+        \item Disk
+        \item Network
+    \end{itemize}
+\end{itemize}
+Use \texttt{ETags} and \texttt{Last-Modified} headers.
+
+\subsection{User Agent Cache}
+\begin{quotebox}
+    Also, if the response does have a Last-Modified
+    time, the heuristic expiration value SHOULD be
+    no more than some fraction of the interval since
+    that time. A typical setting of this fraction might
+    be 10\%. – RFC2616 section 13
+\end{quotebox}
+This means if it was modified 10 minutes ago, you should probably hit it up again in a minute.
+
+Thus it is up to the browser to emit a request.
+They do so upon expiry or last modified time heuristic.
+Or the user forces a refresh like CTRL-SHIFT-R or ctrl-shit click on the refresh button.
+In browser cache is the most local and high performance cache!
+
+\subsection{Cache-Control}
+Generally sent by User Agent.
+Indicates how they want to handle this request.
+It signals proxies and caches how to handle the request.
+
+\subsubsection{no-cache}
+You must revalidate - We didn't give it a time
+\begin{itemize}
+    \item A 304 response is fine
+    \item Forces a request out to the server
+    \item max-age=0 means the same thing
+\end{itemize}
+
+\subsubsection{no-store}
+Don't store anything
+\begin{itemize}
+    \item Suggests that the results are not-cacheable
+    and emphemeral.
+    \item Will not act as DRM
+\end{itemize}
+
+\subsubsection{max-age=}
+Cache-Control: max-age=seconds in a HTTP
+response tells the Use-Agent the maximum
+age they should let this resource last
+\begin{itemize}
+    \item Easy to deploy
+    \item Cache-Control: max-age=259200 = 3 Days
+    \item Benefit: no date math for you!
+    \item Benefit: No date formatting!
+    \item Disadvantage: Have to predict max-age!
+\end{itemize}
+
+\subsection{Header specific caching}
+These are the header specific for caching
+
+\subsubsection{Expires}
+Expires tells the Use-Agent after which date
+they should ask for a new instance of the
+resource.
+\begin{itemize}
+    \item Easiest to deploy
+    \item Very simple
+    \item Causes lots of problems if set wrong!
+\end{itemize}
+
+\subsubsection{If-Modified-Since}
+\begin{itemize}
+    \item Conditional HTTP Request
+    \item Return a 304 if not modified since
+    \item If-Modified-Since: Mon, 07 Apr 2014 03:00:05 GMT. Don't send me anything new unless the resource has
+    been modified after that time.
+    \item If the response is anything but a 200 OK, return a
+    normal response instead of the 304
+\end{itemize}
+
+\subsubsection{Last-Modified}
+\begin{quotebox}
+    The Last-Modified entity-header field value is
+    often used as a cache validator. In simple
+    terms, a cache entry is considered to be valid if
+    the entity has not been modified since the LastModified value. - HTTP RFC 2616 Fielding et
+    al.
+\end{quotebox}
+Last-Modified is a date that the resource was last modified
+\begin{itemize}
+    \item Used for simple caching
+    \item Requires the HTTP server to respond
+\end{itemize}
+
+\subsubsection{ETag}
+What if you cannot guess or estimate the time
+that content will be safe?
+What if content updates all the time, unpredictably?
+What if content updates but all changes aren't
+that important:\\
+\noindent
+- E.g. your age does increase every second but
+maybe it isn't important to caching to have your
+age updated per each second?
+
+How do you make it?
+\begin{itemize}
+    \item If strong (exact content) just use a hash like SHA1
+    \item If weak then hash some content you think is
+    relevant and prefix with \texttt{W/"etagvalue"} to
+    indicate it is a weak hash
+    \item If hashing is pointless make an etag of actual
+    values in plaintext
+    \item Keep it short
+\end{itemize}
+
+HTTP Response Header
+\begin{itemize}
+    \item Contains a name or tag indicating the content
+    or revision of a resource.
+    \begin{itemize}
+        \item Is not date related
+        \item Tends to be content related
+        \item Can be any value
+        \item Can use any hash
+    \end{itemize}
+\end{itemize}
+    
+\subsubsection{Dangers of ETags}
+Cookies part II
+\begin{itemize}
+    \item Etags allow for vendors (advertisers) to finger print your
+    client because your client will send the etags back.
+    \item If you deny cookies, you tend to send etags
+\end{itemize}
+
+Too much information
+\begin{itemize}
+    \item Some Etags contain irrelevant information!
+    \item What if the browser reboots and the Etags are
+    lost?
+\end{itemize}
+
+\section{Cross Cutting Concern}
+Performance is a cross cutting concern
+because it interacts with other functionality:\\
+\noindent
+- Security
+\begin{itemize}
+    \item Lack of encryption means global proxying
+    \item Authentication can limit caching
+    \item Authentication can imply state
+\end{itemize}
+- State
+\begin{itemize}
+    \item State can limit caching
+    \item State can limit layering
+\end{itemize}
+
+\section{Round Trips}
+DNS Lookups, Connections, HTTP transactions
+\begin{itemize}
+    \item Async is fast: Just send it! Who cares when it arrives
+    \item Rountrips are synchronous and slow: We must wait for a
+    response!
+    \item Avoid HTTP Redirects that aren't cacheable
+    \item Rewrite Server Side
+    \item Avoid too many HTTP hosts
+    \item Can you piggyback?
+    \item CSS Sprites are often recommended to reduce number of image requests
+    \item Avoid CSS imports
+\end{itemize}
+
+\subsection{Round Trip Tricks}
+Use multiple static content hostnames:
+\begin{itemize}
+    \item Take a hit in DNS lookup
+    \item But improve parallel download performance
+    \item Static hosts should not be dynamic and have stable IPs
+\end{itemize}
+
+\section{Reduce Request Size}
+Giant Cookies - NOOOOO
+\begin{itemize}
+    \item Giant URIs -- NOOOO
+    \item Too many headers? NOOOO
+    \item Remember all that networking we went over?
+\end{itemize}
+Try to fit within the MTU!
+
+
+\section{Avoid Dynamism and Cookies for Static Content}
+For static content, do GETs to get it
+\begin{itemize}
+    \item For static content avoid dynamism and cookies
+    \item Cookies imply state and can mess up caching
+    \item Use separate domains for static content to
+    \item avoid statefulness
+\end{itemize}
+
+\section{Minimize Resource Size}
+\begin{itemize}
+    \item Images - too big
+    \item Javascript - minify (I dislike this one)
+    \item GZIP Encoding!
+    \item Sound - too big
+    \item Video - too big
+    \item You can fake Sound and Video in JS!
+\end{itemize}
+
+\section{Minimize Number of Resources}
+\begin{itemize}
+    \item 1 or 0 CSS Files
+    \item 1 or 0 Javascript Files
+    \item 1 or 0 Images (CSS Sprites)
+    \item 1 or 0 HTML Files
+\end{itemize}
+You could generate a page in JS and take no hit.
+1 giant page has the problem if it is dynamic, but if
+it is 1 giant page that does dynamic things you can
+cache that page and never have to get HTML/JS/CSS
+again.
+
+\section{Optimize Rendering}
+Recommendations:
+\begin{itemize}
+    \item CSS at the top
+    \item Javascript at the bottom
+    \item Content in the middle
+    \item Give appropriate sizes and hints
+    \item The layouter is quite expensive, give some hints
+    and it will go to town.
+\end{itemize}
+
+\section{Defer JavaScript}
+Nasty trick:
+\begin{itemize}
+    \item Encode javascript as a string and eval it later
+    when you need it.
+    \item Avoids heavy page loading and JS parsing with
+    the browser is working hard.
+    \item CPU driven
+\end{itemize}
+
+\section{Content Delivery Network}
+\begin{itemize}
+    \item These are global networks of content
+    providers that can mirror your content.
+    \item Excellent latency and locality
+    \item Great for static stuff
+    \item \$\$\$
+\end{itemize}
+    
+
+\section{GZIP things}
+\begin{itemize}
+    \item Turn on GZIP encoding to make things smaller
+    \item Watch out! This affects latency
+    \item Improves bandwidth
+    \item Balancing act
+    \item Generally recommended
+\end{itemize}
+
+\section{Fix DNS}
+\begin{itemize}
+    \item Use A and AAAA records instead of CNAMEs
+    \item Have your authoritative name server give the results
+    \item Allow for caching of DNS requests to avoid excessive lookups
+    \item Provide many A records in 1 response
+    \item Reduce number of hosts on 1 page
+    \item Some recommend using CNAME to allow multiple connections (so it depends!)
+\end{itemize} 
+
+\section{Avoid Indirection}
+\begin{itemize}
+    \item Redirections
+    \item Imports
+    \item Dynamic choosing of content
+    \item Javascript downloading of content
+\end{itemize}
+    
+\section{Avoid POST}
+POST is not idempotent
+\begin{itemize}
+    \item POST is not cacheable
+    \item POST is dynamic
+    \item POST smashes all the performance
+    infrastructure in a fine powder and blows it
+    into your face.
+\end{itemize}
+    
+\section{Check for errors}
+403s, 404s, 410s, etc. Are all slow
+\begin{itemize}
+    \item Often the server works harder to serve an error
+    than it does to serve real content.
+    \item Errors cause exceptions, exceptions cause latency
+    and pain and reporting.
+    \item Errors cause logging - more IO
+    \item Errors are worthless requests hogging up
+    resources
+\end{itemize}
+
+\section{Encoding}
+Sending a JSON encoding is not always
+appropriate in terms of size.
+\begin{itemize}
+    \item Sending an audio stream as ASCII text? Bad idea. Use an appropriate format.
+    \item Do you need lossy or losseless?
+    \item Do you need XML? JSON? CSV? Binary?
+\end{itemize}
+
+\section{Repeat yourself or don't repeat yourself}
+Cache matters if the cache can avoid you
+repeating yourself then go for it.
+But sometimes denormalizing data and
+providing duplicate information avoids more
+requests.
+
+\section{Async over Sync}
+Asynchronous means that you can do other
+things while something is occurring.
+\begin{itemize}
+    \item Synchronous is blocking which implies latency.
+    \item Synchronous means round trips
+    \item Async means parallelizable
+    \item Synchronous means serialized
+\end{itemize}
+
+\section{Javascript Includes}
+Some people like to include common libraries
+from the library homepage.
+\begin{itemize}
+    \item Benefit: Someone else has done this so the user has cached it.
+    \item Disadvantage: What if they get hacked
+    \item Disadvantage: What if they are slower than you?
+    \item Disadvantage: What if you lose locality?
+\end{itemize}
+
+\end{document}
