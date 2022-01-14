@@ -1,38 +1,43 @@
 \documentclass[letterpaper,10pt,twoside,onecolumn,openany]{book}
-\usepackage[bg=none,layout=true]{dnd}
-\usepackage{dndnotes}
+% \usepackage[bg=print,layout=true]{dnd}
+% \usepackage{dndnotes}
 \usepackage{wallpaper}
 \usepackage{subfiles}
+\usepackage[]{mathtools}
 \usepackage[]{datetime}
+\usepackage[]{pdfpages}
 \graphicspath{{./figures/}{../figures/}}
+
+
 \begin{document}
-\frontmatter                           
-\begin{titlepage}
-    \ThisCenterWallPaper{1}{paper.jpg}~
+% \frontmatter                           
+% \begin{titlepage}
+%     \ThisCenterWallPaper{1}{paper.jpg}~
     
-    \newpage
+%     \newpage
     
-    \begin{center}
+%     \begin{center}
         
 
-        \large
-        \vspace*{\fill}
-        Learn how statistics can be used to 
-        \\~\\
-        By slaying his assignment minions, defeating his midterm champion(s) and ending the final themselves. The heroic legacy of your achievement will be remembered on your academic transcript.
-        \\~\\
-        \vspace*{\fill}
+%         \large
+%         \vspace*{\fill}
+%         Learn how statistics can be used to 
+%         \\~\\
+%         By slaying his assignment minions, defeating his midterm champion(s) and ending the final themselves. The heroic legacy of your achievement will be remembered on your academic transcript.
+%         \\~\\
+%         \vspace*{\fill}
 
-    \end{center}
-    \let\thefootnote\relax\footnote{Disclaimer: }
-\end{titlepage}
-\tableofcontents
-\mainmatter
+%     \end{center}
+%     \let\thefootnote\relax\footnote{Disclaimer: }
+% \end{titlepage}
+% \tableofcontents
+% \mainmatter
 
-\subfile{credit.tex}
-
-\subfile{chapters/chapter-1.tex}
-\subfile{chapters/chapter-2.tex}
-\subfile{chapters/chapter-3.tex}
-
+%\subfile{credit.tex}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_1-Research_Design_Review_of_1st_Level_Stats.pdf}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_2-One_or_Two_Population_Means.pdf}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_3-Several_Population_Means.pdf}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_4-Simple_Linear_Regression.pdf}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_5-Multiple_Linear_Regression.pdf}
+\includepdf[pages=-]{pdfs/STAT_252-Notes-Section_6-Two-Factor_ANOVA.pdf}
 \end{document}

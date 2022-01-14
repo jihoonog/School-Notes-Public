@@ -13,25 +13,15 @@ SOURCE=STAT-252-Notes
 
 # Build Section
 # This will build all the latex files within the current directory
-all: | print full
-
-# This will build a print friendly version of the notes, i.e. no paper background
-print:
-	sed -i -e 's/bg=full\|bg=none/bg=print/' ${SOURCE}.tex
-	${BUILDER} ${OPT} --jobname ${SOURCE}-print $(SOURCE)
-	sed -i -e 's/bg=print/bg=none/' ${SOURCE}.tex
+all: | full 
 
 
 # This will build with the full background 
 full:
-	sed -i -e 's/bg=print\|bg=none/bg=full/' ${SOURCE}.tex
-	${BUILDER} ${OPT} --jobname ${SOURCE}-full ${SOURCE}
-	sed -i -e 's/bg=full/bg=none/' ${SOURCE}.tex
+	${BUILDER} ${OPT} --jobname ${SOURCE} ${SOURCE}
 
 
 # this will clean everything except for the pdfs
 clean:
 	$(BUILDER) --clean ${SOURCE}
-	${BUILDER} --jobname ${SOURCE}-print --clean  $(SOURCE)
-	${BUILDER} --jobname ${SOURCE}-full  --clean $(SOURCE)
-	cd chapters ; latexmk -C ; rm *.synctex.gz ; cd ..
+	${BUILDER} --jobname ${SOURCE} --clean  $(SOURCE)
