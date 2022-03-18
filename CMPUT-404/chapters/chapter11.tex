@@ -37,12 +37,11 @@ In Python you should use a Feedparser for RSS or Atom, you could use an XML pars
 \begin{minted}[breaklines]{python}
 import feedparser
 import difflib
-cbc = feedparser.parse("http://rss.cbc.ca/lineup/topstories.xml")
-cnn = feedparser.parse("http://rss.cnn.com/rss/cnn_topstories.rss")
+cbc = feedparser.parse( "http://rss.cbc.ca/lineup/topstories.xml" ) 
+cnn = feedparser.parse( "http://rss.cnn.com/rss/cnn_topstories.rss" )
 cbc_titles = [x['title'] for x in cbc.get('entries')]
 cnn_titles = [x['title'] for x in cnn.get('entries')]
-res = [(x,difflib.get_close_matches(x,cbc_titles,1,0.01)) for x in
-            cnn_titles]
+res = [(x,difflib.get_close_matches(x,cbc_titles,1,0.01)) for x in cnn_titles]
 
 >>> res[0]
 (u'7 days to solve Crimea crisis', [u'Russian forces tighten grip on Crimea'])
@@ -53,11 +52,11 @@ res = [(x,difflib.get_close_matches(x,cbc_titles,1,0.01)) for x in
 If you need to parse HTML data because you can't find a RSS or Atom feed, webservice or an API then you can use a package like \texttt{BeautifulSoup} to parse HTML data for you.
 You should never use regex to process HTML because HTML is not a regular language therefore it may not always work. 
 
-\subsection{}{BS4 Example}
+\subsection{BS4 Example}
 \begin{minted}[breaklines]{python}
 import urllib, urllib2
 artist = "devo"
-fd = urllib2.urlopen("http://www.allmusic.com/search/all/%s" % artist)
+fd = urllib2.urlopen( "http://www.allmusic.com/search/all/%s" % artist)
 content = fd.read()
 # now we just have some HTML
 # we could use regexes and try to find links
@@ -69,6 +68,8 @@ name = ahref.text.strip()
 link = ahref.attrs["href"]
 \end{minted}
 
+\newpage
+
 \subsection{Modularize it}
 Like any good programmer you should modularize the scrapper program so it is flexible
 
@@ -76,7 +77,7 @@ Like so
 \begin{minted}[breaklines]{python}
 def get_artist(artist):
     uriartist = urllib.urlencode({"":artist})[1:]
-    fd = GET("http://www.allmusic.com/search/all/%s" % uriartist)
+    fd = GET( "http://www.allmusic.com/search/all/%s" % uriartist)
     content = fd.read()
     soup = bs4.BeautifulSoup(content)
     res = soup.findAll("",{"class":"artist"})

@@ -379,10 +379,11 @@ The input could of many different types including but not limited to
 The name of the data sent to the URI
 \subsubsection{value}
 The default value Hidden types allow you to embed values to send along to help the request. 
-\onecolumn
 \subsubsection{Example}
 \begin{minted}[breaklines]{html}
-<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py" method="get">
+<form 
+action="http://webdocs.cs.ualberta.ca/~hindle1/1.py"  
+method="get">
 What is your name? <input name="name"/></br>
 What is your quest? <input name="quest"/></br>
 What is your favorite colour? <input name="colour"/></br>
@@ -392,9 +393,10 @@ What is your favorite colour? <input name="colour"/></br>
 
 \subsection{<select> tag}
 Select tag is for a dropdown box of options.
-
 \begin{minted}[breaklines]{html}
-<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py" method="get">
+<form 
+action="http://webdocs.cs.ualberta.ca/~hindle1 /1.py" 
+method="get">
 What kind of cake shall we have?</br>
 <select name="caketype">
   <option value="angel">Angel Food Cake</option>
@@ -409,9 +411,9 @@ What kind of cake shall we have?</br>
 You can upload files with the input tag but we need to switch the POST encoding.
 
 \begin{minted}[breaklines]{html}
-<form action="http://webdocs.cs.ualberta.ca/~hindle1/1.py"
-      enctype="multipart/form-data"
-      method="get">
+<form action="http://webdocs.cs.ualberta.ca/ ~hindle1/1.py"
+  enctype="multipart/form-data"
+  method="get">
   Choose a file to upload!
   <input name="uploadFile" type="file" />
   <input type="submit"/>

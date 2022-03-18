@@ -101,9 +101,9 @@ Features that make it faster, and more responsive (lower latency) is:
 This avoids using multiple TCP connection to a single server thus reducing the number of high-latency TCP and TLS handshakes.
 Both request and response is happening at the same time and data is interleaved. Requests and responses can be prioritized.
 
+\newpage
 \section{HTTP Request}
 To send a message to a \textbf{server} \emph{from} the \textbf{client} one would need to send a HTTP Request message.
-\newpage
 
 \begin{Definition}{HTTP Request}
 This is the grammar for a HTTP request.
@@ -123,7 +123,7 @@ The request line always come first where the \texttt{Method} is the type of requ
 For format for \texttt{HTTP-Version} is \texttt{HTTP/X.Y} where \texttt{X} is the major and \texttt{Y} is the minor version numbers.
 For this project it's entire in HTTP1.1 so \texttt{HTTP-Version} should be \texttt{HTTP/1.1}.
 
-There must be an empty line with a \texttt{CRLF} or \texttt{\\r\\n} right after the header to separate the header and the body of the message.
+There must be an empty line with a \texttt{CRLF} right after the header to separate the header and the body of the message.
 \end{Definition}
 
 \section{HTTP Response}

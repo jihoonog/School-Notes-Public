@@ -45,6 +45,8 @@ HTTP Basic over HTTP is:
   \item Stateless
 \end{itemize}
 
+\newpage
+
 \section{HTTP Digest Authentication}
 \begin{DndReadAloud}[color=bgtan]
   "Users and implementors should be aware that
@@ -93,7 +95,8 @@ request_digest = '"' + KD(hash(A1), nonce_value + ":" + hash(A2)) + '"'
 \end{minted}
 \end{listing}
 
-The request-digest for qop is:
+\newpage 
+The request-digest for \texttt{qop} is:
 \begin{listing}[!h]
 \begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
 def KD(x,y):
@@ -107,7 +110,7 @@ request_digest = '"' + KD(hash(A1), ":".join([nonce, nc, cnonce, qop, hash(A2)])
 
 \subsubsection{Response Digest}
 sub header \texttt{rspauth} 
-response-digest for qop is the same as the request digest of qop.
+response-digest for \texttt{qop} is the same as the request digest of \texttt{qop}.
 \begin{listing}[!h]
 \begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm, breaklines]{python}
 def KD(x,y):
@@ -118,6 +121,7 @@ A2 = method + ":" + digest_uri # (authorization header request)
 request_digest = '"' + KD(hash(A1), ':'.join([nonce, nc, cnonce, qop, hash(A2)]) + '"'
 \end{minted}
 \end{listing}
+
 \textbf{Except} the value is hex encoded.
 
 \subsection{Issues}

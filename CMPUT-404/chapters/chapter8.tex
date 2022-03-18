@@ -123,7 +123,7 @@ function startGetting() {
     fetchJSON(url).then((json) => { // another callback
       console.log(json); // browser turned the JSON into an object
       text = json.message; // it has properties
-      document.querySelector("#ajaxy").innerText = text;
+      document.querySelector("#ajaxy"). innerText = text;
     });
   }, 1000); // 1 second or 1000ms
 }
@@ -167,9 +167,10 @@ A new content is put into the blockquotes after a second or so.
 \subsubsection{Example}
 \begin{minted}[breaklines]{javascript}
 function stringifyExample() {
-  var obj = { "food":"hotdog", 
-              "condiments":["ketchup","mustard","cheese"],
-              "sausage":"weiner"
+  var obj = { 
+    "food": "hotdog",
+    "condiments": ["ketchup","mustard","cheese"],
+    "sausage": "weiner"
   };
   document.querySelector("#hotdog").value = 
     JSON.stringify(obj, null, " "); // pretty print
