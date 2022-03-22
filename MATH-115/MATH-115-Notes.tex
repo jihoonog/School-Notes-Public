@@ -1,5 +1,6 @@
 \documentclass[letterpaper,10pt,twoside,twocolumn,openany]{book}
-\usepackage[layout=true,nomultitoc,bg=full]{dnd} % this has to come first in order for this to work
+\usepackage[layout=true,bg=full]{dnd} % this has to come first in order for this to work
+\usepackage{dndnotes}
 \usepackage{listings}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -28,7 +29,9 @@
 \begin{document}                       
 \frontmatter                           
 \begin{titlepage}
-    \ThisCenterWallPaper{1}{cover.jpg}~
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{./cover.jpg}};
+  \end{tikzpicture}~
     \newpage
     
     \begin{center}
@@ -50,14 +53,14 @@
 \mainmatter                             % only in book class (Arabic page #s)
 
                         
-\chapter{Chapter 1-5: Math 114 Review}                % Print a "chapter" heading
+\chapter{Math 114 Review}                % Print a "chapter" heading
 \section{Derivatives}
-\begin{paperbox}{Derivative Definition}
+\begin{DndSidebar}{Derivative Definition}
     Let a function $f ( x)$ be defined on an open interval $I = ( a, b)$. The function $f ( x)$ is differentiable at $x_0 \in I$ if the following limit exists
     \[ f' ( x_0) = \lim_{x \rightarrow x_0} \frac{f ( x) - f ( x_0)}{x - x_0} . \]
     An equivalent formula is derived if we take $x - x_0 = h$
     \[ f' ( x_0) = \lim_{h \rightarrow 0} \frac{f ( x_0 + h) - f ( x_0)}{h} . \]
-\end{paperbox}
+\end{DndSidebar}
 
 
 \begin{description}
@@ -98,7 +101,7 @@ Use linear approximation and approximate $\log_2 ( 2.1)$.
 
 \newpage
 \subsection{General Rules of Derivatives}
-\begin{paperbox}{The rules for derivatives}
+\begin{DndSidebar}{The rules for derivatives}
     These are the general rules for derivatives.
     \begin{equation}
         y = x^n \Rightarrow y' = nx^{n-1}\ dx
@@ -139,10 +142,10 @@ Use linear approximation and approximate $\log_2 ( 2.1)$.
     \begin{equation}
         \cosh(x)' = \sinh(x)
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 \section{L'Hospital's Rule}
-\begin{paperbox}{L'Hospital's Rule}
+\begin{DndSidebar}{L'Hospital's Rule}
     Suppose $f$ and $g$ are differentiable and $g'(x) \neq 0$ on an open interval $I$ that contains $a$ (except possibly at $a$). Suppose that
     \begin{gather*}
         \lim_{x\to a} f(x) = 0\ \text{and}\ \lim_{x\to a} g(x) = 0\\
@@ -152,10 +155,10 @@ Use linear approximation and approximate $\log_2 ( 2.1)$.
         \lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a} \frac{f'(x)}{g'(x)}
     \end{gather*}
     if the limit on the right side exists (or is $\infty$ or $-\infty$).
-\end{paperbox}
+\end{DndSidebar}
 \newpage
 \section{Derivatives of inverse functions}
-\begin{paperbox}{The general formula}
+\begin{DndSidebar}{The general formula}
     If we have an expression like this: $ y = f^{-1}(x)$. This is equivalent to:
     \begin{equation}
         y = f^{-1}(x) \Leftrightarrow f(y) = x
@@ -170,10 +173,10 @@ Use linear approximation and approximate $\log_2 ( 2.1)$.
         y' &= \frac{1}{f'(y)}\\
         y' &= \frac{1}{f'(f^{-1}(x))}
     \end{align*}    
-\end{paperbox}
+\end{DndSidebar}
 
 \subsection{Inverse Trigonometric Functions}
-\begin{paperbox}{Inverse Trigonometric Functions}
+\begin{DndSidebar}{Inverse Trigonometric Functions}
     These are the standard trigonometric functions, their inverse, and their domains.
     \begin{gather}
         \theta = \cos^{-1}(x) \Leftrightarrow x = \cos(\theta)\\ 
@@ -190,11 +193,11 @@ Use linear approximation and approximate $\log_2 ( 2.1)$.
         \nonumber
         \theta\in \biggl[-\frac{\pi}{2},\frac{\pi}{2}\biggl],\ x\in(-\infty, \infty)
     \end{gather}
-\end{paperbox}
+\end{DndSidebar}
 \newpage
 When you have an expression in the form like this $f(g^{-1}(x))$ where $f(x)$, and $g^{-1}(x)$ are trigonometric functions then using the following equation above we get these trigonometric identities.
 
-\begin{commentbox}{Cos inverse}
+\begin{DndComment}{Cos inverse}
     If you have
     $
         y = \theta = \cos^{-1}(x)
@@ -215,9 +218,9 @@ When you have an expression in the form like this $f(g^{-1}(x))$ where $f(x)$, a
         \sin(\cos^{-1}(x)) = \sqrt{1-x^2}\\
         \tan(\cos^{-1}(x)) = \frac{\sqrt{1-x^2}}{x}
     \end{gather}
-\end{commentbox}
+\end{DndComment}
 
-\begin{commentbox}{Sin inverse}
+\begin{DndComment}{Sin inverse}
     If you have
     $
         y = \theta = \sin^{-1}(x)
@@ -238,9 +241,9 @@ When you have an expression in the form like this $f(g^{-1}(x))$ where $f(x)$, a
         \cos(\sin^{-1}(x)) = \sqrt{1 - x^2}\\
         \tan(\sin^{-1}(x)) = \frac{x}{\sqrt{1 - x^2}}
     \end{gather}
-\end{commentbox}
+\end{DndComment}
 
-\begin{commentbox}{Tan inverse}
+\begin{DndComment}{Tan inverse}
     If you have
     $
         y = \theta = \tan^{-1}(x)
@@ -262,7 +265,7 @@ When you have an expression in the form like this $f(g^{-1}(x))$ where $f(x)$, a
         \sin(\tan^{-1}(x)) = \frac{x}{\sqrt{1 + x^2}}\\
         \cos(\tan^{-1}(x)) = \frac{1}{\sqrt{1 + x^2}}
     \end{gather}
-\end{commentbox}
+\end{DndComment}
 
 \newpage
 
@@ -296,18 +299,18 @@ You derive each term with respect to the variable you are deriving for and colle
 
 \section{Integrals} 
 \subsection{Riemann Sum}
-\begin{paperbox}{Riemann Sum}
+\begin{DndSidebar}{Riemann Sum}
     Let $y = f ( x)$ and $a \leq x \leq b$ is a continuous function. The area under the curve of the function is calculated by the formula
     \[ A = \lim_{n \rightarrow \infty} \sum_{n = 1}^n f ( x_k) \Delta x, \]
     where $\Delta x = \frac{b - a}{n}$, and $x_k = a + k \Delta x$.
     \includegraphics[scale=0.8]{supplement-2.eps}
-\end{paperbox}
+\end{DndSidebar}
 \subsection{Fundamental Theorem of Calculus}
-\begin{paperbox}{Fundamental Theorem of Calculus}
+\begin{DndSidebar}{Fundamental Theorem of Calculus}
     The fundamental theorem of calculus states that
     \[ A = \int_a^b f(x)\ dx \]
     where $\int$ stands for the anti-derivative operation.
-\end{paperbox}
+\end{DndSidebar}
 \subsubsection*{Example}
 For finding the area under the curve $y = x^2$, $0 \leq x \leq 1$, we use the Riemann sum. We have $a = 0, b = 1$, and thus $\Delta x = \frac{1 - 0}{n} = \frac{1}{n}$. 
 Intermediate points are $x_k = a + k \Delta x = \frac{k}{n}$, and thus
@@ -321,7 +324,7 @@ Alternatively, we can use the fundamental theorem of calculus and write
 \[ A = \int_0^1 x^2 dx = \frac{1}{3} x^3 |_0^1 = \frac{1}{3} . \]
 
 \subsection{General Rules for Integrals}
-\begin{paperbox}{The general rules for integrals}
+\begin{DndSidebar}{The general rules for integrals}
     There are two different types of integrals: indefinite and definite
     \subsubsection{Indefinite}
         \begin{equation}
@@ -355,10 +358,10 @@ Alternatively, we can use the fundamental theorem of calculus and write
         \begin{equation}
             \int_a^b f(x) dx = F(b) - F(a)
         \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 \subsection{Properties of Integrals}
-\begin{paperbox}[]{Properties of Integrals}
+\begin{DndSidebar}[]{Properties of Integrals}
     
     \begin{equation}
         \int_b^a f(x)dx = -\int_a^b f(x)dx
@@ -366,10 +369,10 @@ Alternatively, we can use the fundamental theorem of calculus and write
     \begin{equation}
         \int_a^b f(x) dx + \int_b^c f(x) dx = \int_a^c f(x) dx
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 
-\chapter{Chapter 6: Applications of Integration}
+\chapter{Applications of Integration}
 \section{Areas between curves}
 To find the area between two curves there exist a general formula to calculate such a question.\\
 \begin{tikzpicture}
@@ -380,15 +383,15 @@ To find the area between two curves there exist a general formula to calculate s
         \addlegendentry{$f(x)$}
     \end{axis}
 \end{tikzpicture}
-\begin{paperbox}[]{Areas between Curves Formula}
+\begin{DndSidebar}[]{Areas between Curves Formula}
     \begin{equation}
         \int_a^b |(f(x)-g(x))|dx = \int_a^b |f(x)| dx - \int_a^b |g(x)| dx
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 
 \section{Volume}
-\begin{paperbox}[]{}
+\begin{DndSidebar}[]{}
 To find the volume of a curve about the x axis use this equation below.
     
     \begin{equation}
@@ -398,23 +401,23 @@ To find the volume of a curve about the x axis use this equation below.
     \begin{equation}
         V = \int_a^b \pi x^2\ dy
     \end{equation}
-\end{paperbox}
-\begin{commentbox}{What does $dv$ mean?}
+\end{DndSidebar}
+\begin{DndComment}{What does $dv$ mean?}
     \begin{align*}
         dv &= \pi y^2 dx \\
         &\text{or}\\
         dv &= \pi x^2 dy
     \end{align*}
     These are called differential volume of the curve, the sum of which gives us the volume.
-\end{commentbox}
-\begin{paperbox}{General Area Formula}
+\end{DndComment}
+\begin{DndSidebar}{General Area Formula}
     \begin{equation}
         V = V_o - V_i = \int_a^b f(x)\ dx - \int_a^b g(x)\ dx 
     \end{equation}\\
     $f(x)$ is the function that encompasses $g(x)$.
     \\
     $g(x)$ is the function that encompasses the hollowed out cylinder
-\end{paperbox}
+\end{DndSidebar}
 \subsection{Example}
 \subsubsection*{Question}
 Find the volume around the y-axis:
@@ -433,20 +436,19 @@ Find the volume around the y-axis:
     \pi \frac{1}{2}y^2\Big|_0^1 &- \pi \frac{1}{3}y^3 \Big|_0^1\\
     V = \frac{\pi}{2} &- \frac{\pi}{3} = \frac{\pi}{6} 
 \end{align*}
-\newpage
 \subsection{Volume with an offset x-axis}
 If you need to calculated a volume with a cylinder removed due to an offset then you will need to modify the general formula.
-\begin{paperbox}[]{Offset x-axis formula}
+\begin{DndSidebar}[]{Offset x-axis formula}
     \begin{equation}
         V = \int_a^b \pi (a \pm x)^2\ dy - (\pi r^2 * (b-a))
     \end{equation}
     The sign is negative if the offset is positive, and positive if the offset is negative.
     You have to substitute x with the function whose domain is y.
-\end{paperbox}
-
+\end{DndSidebar}
+\newpage
 \section{Volumes by Cylindrical Shells}
 We can also calculate the volume of a function using the cylindrical shells method.
-\begin{paperbox}[]{Cylindrical Shell Formula}
+\begin{DndSidebar}[]{Cylindrical Shell Formula}
     \begin{equation}
         V = \int_a^b 2\pi x f(x) dx \quad \text{where}\ 0 \leq a < b
     \end{equation}
@@ -454,22 +456,21 @@ We can also calculate the volume of a function using the cylindrical shells meth
     $2\pi x$ is the circumference\\
     $f(x)$ is the height between two functions.\\
     $dx$ is the thickness, which is infinitely small.
-\end{paperbox}
-\begin{commentbox}{}
+\end{DndSidebar}
+\begin{DndComment}{}
     Note: This is for volumes that are generated around the y axis. If the volume generated is done by the x axis then replace the function that uses y as the domain.    
-\end{commentbox}
+\end{DndComment}
 
 
-\begin{commentbox}{Offset}
+\begin{DndComment}{Offset}
     If the volume is generated about an axis that is off origin then substitute x in $2\pi x$ with $2\pi (a - x)$ if the offset is positive, or $2\pi (a + x)$ if the offset is negative. The previous rule apply if the volume is generated about the y-axis. 
-\end{commentbox}
+\end{DndComment}
 
-\newpage
 
 
 \section{Average Value of a function}
 This will calculate the average value of a continuous function from all points a to b when a is less than b.
-\begin{paperbox}[]{General Equation}
+\begin{DndSidebar}[]{General Equation}
     
     \begin{equation}
         f_{ave} = \frac{1}{b-a} \int_a^b f(x)dx 
@@ -482,8 +483,8 @@ This will calculate the average value of a continuous function from all points a
     \begin{equation}
         \int_a^b f(x)dx = f(c)(b-a)
     \end{equation}
-\end{paperbox}
-
+\end{DndSidebar}
+\newpage
 \section{Exercise}
 \begin{enumerate}
     \item Find the area enclosed by the given curves from $ 2 \leq x \leq 4 $ \[ y  =\frac{5}{x},\ y = \frac{10}{x^2} \] \subparagraph{Answer} \[5\ln(2)-\frac{5}{2}\]
@@ -493,9 +494,9 @@ This will calculate the average value of a continuous function from all points a
 \end{enumerate}
 
 
-\chapter{Chapter 7: Techniques of\newline Integration}
+\chapter{Techniques of\newline Integration}
 In this chapter we will learn the 4 techniques of integration or 80 \% of this entire course.
-\begin{paperbox}[]{General Integration Formula}
+\begin{DndSidebar}[]{General Integration Formula}
     Know them inside and out
     \begin{align}
         \int x^n\ dx\ &\text{where n $\neq$ -1} = \frac{x^{n+1}}{n+1} + C\\
@@ -507,11 +508,11 @@ In this chapter we will learn the 4 techniques of integration or 80 \% of this e
         \int \frac{dx}{\sqrt{1-x^2}} &= \sin^{-1} (x) + C\\
         \int \tan(x)\ dx &= \ln|\sec(x)| + C  
     \end{align} 
-\end{paperbox}
+\end{DndSidebar}
 
 
 \section{Substitution}
-\begin{paperbox}{Subsitution Rule}
+\begin{DndSidebar}{Subsitution Rule}
     If $u = g(x)$ is a differentiable function whose range is an interval $I$ and $f$ is continuous $I$, then
     \begin{equation}
         \int f(g(x))\ g'(x)\ dx = \int f(u)\ du
@@ -519,7 +520,7 @@ In this chapter we will learn the 4 techniques of integration or 80 \% of this e
     You basically "simplify" the expression using a different variable where there is a more obvious integration rule you can use to evaluate the expression. Once the anti-derivative is found you can re-substitute the original function back into the expression.
     \\~\\
     Note: You may need to do this multiple times for some expressions.  
-\end{paperbox}
+\end{DndSidebar}
 \newpage
 If you have an expression that looks like this 
 $$
@@ -528,7 +529,7 @@ $$
 Where f(x) and g(x) are both functions and f(x) is not a linear function. Then try using the substitution technique to evaluate the expression. Note this may not work. You may need to fix this.
 
 \section{Arctan Integration}
-\begin{paperbox}[]{General formula for Arctan Intergration}
+\begin{DndSidebar}[]{General formula for Arctan Intergration}
     When you have an integral in the form:
     \begin{equation*}
         \int \frac{dx}{a^2 + x^2}
@@ -538,13 +539,13 @@ Where f(x) and g(x) are both functions and f(x) is not a linear function. Then t
         \frac{1}{a} \tan^{-1}  \Big(\frac{x}{a}\Big) + C
     \end{equation}
     You may need to factor out the coefficient in order to satisfy this form.
-\end{paperbox}
+\end{DndSidebar}
 
 
 
 
 \section{Arcsine Integration}
-\begin{paperbox}[]{General formula for Arcsin Intergration}
+\begin{DndSidebar}[]{General formula for Arcsin Intergration}
     When you have an integral in the form:
     \begin{equation*}
         \int \frac{dx}{\sqrt{a^2 - x^2}}
@@ -554,14 +555,14 @@ Where f(x) and g(x) are both functions and f(x) is not a linear function. Then t
         \sin^{-1}  \Big(\frac{x}{a}\Big) + C
     \end{equation}
     You may need to factor out the coefficient in order to satisfy this form.
-\end{paperbox}
+\end{DndSidebar}
     
 \newpage
 
 
 
 \section{Integration by Parts}
-\begin{paperbox}[]{General formula for Intergration by Parts}
+\begin{DndSidebar}[]{General formula for Intergration by Parts}
     
     Here is the general formula for integration by parts:
     \begin{equation}
@@ -570,30 +571,28 @@ Where f(x) and g(x) are both functions and f(x) is not a linear function. Then t
     \begin{equation}
         \int_a^b udv = uv|_a^b - \int_a^b vdu
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
-\begin{commentbox}{Special "power" case}
+\begin{DndComment}{Special "power" case}
     If the integration looks like this:
     \begin{equation}
         \int f(x)^ng(x) dx
     \end{equation}
     Then it takes n iterations of integration by parts.
-\end{commentbox}
+\end{DndComment}
 
 During substitution of an integration you may have to change the domain of the integration by the new domain of the substituted equation.
-\begin{commentbox}{}
+\begin{DndComment}{}
     \begin{align*}
         \int_0^1 x &\ln(x+1) dx\\
         \text{Let t = x + 1, }&\text{then dt = dx, and x = t - 1}\\
         \int_1^2 (t&-1) \ln(t) dt
     \end{align*} 
-\end{commentbox}
-\newpage
+\end{DndComment}
 
 
 \section{Trig Substitution}
-\vspace{-0.4cm}
-\begin{paperbox}[]{Trigonometric Rules}
+\begin{DndSidebar}[]{Trigonometric Rules}
     Know these rules well.    
     \begin{gather}
         \cos^2(x) + \sin^2(x) = 1\\
@@ -607,14 +606,14 @@ During substitution of an integration you may have to change the domain of the i
         \int \sec(x) dx = \ln|\sec(x) + \tan(x)| + C\\
         \int \csc(x)\ dx = -\ln|\csc(x) + \cot(x)| + C
     \end{gather}
-\end{paperbox}
+\end{DndSidebar}
 
-\begin{commentbox}{If you have this form of intergration}
+\begin{DndComment}{If you have this form of intergration}
     \begin{equation}
         \int \cos^a(x) \sin^b(x) dx
     \end{equation}
     Where at least one of the powers are odd, then separate the odd powered trig function into an even powered trig function.
-\end{commentbox}
+\end{DndComment}
 \begin{gather*}
     \text{Let $a$ be odd and greater than 2, then}\\
     \int \sin^a(x) \cos^b(x)\ dx\\
@@ -624,7 +623,6 @@ During substitution of an integration you may have to change the domain of the i
     -\int (1 - u^2)^{\frac{a-1}{2}}  u^b du\\
     \text{You get the idea}
 \end{gather*} 
-\newpage
 \begin{gather*}
     \text{Let $b$ be odd and greater than 2, then}\\
     \int \sin^a(x) \cos^b(x)\ dx\\
@@ -634,9 +632,9 @@ During substitution of an integration you may have to change the domain of the i
     \int u^a (1 - u^2)^{\frac{b-1}{2}}\ du\\
     \text{You get the idea}
 \end{gather*}
-\begin{commentbox}{Both are even powers}
+\begin{DndComment}{Both are even powers}
     If both powers are the same and are even then you can use this: $2 \sin(x) \cos(x) = \sin(2x)$ to replace the multi-trig function into a single trig function.
-\end{commentbox}
+\end{DndComment}
 \begin{gather*}
     \text{Let a be an even number}\\
     \int \sin^a(x) \cos^a(x)\ dx\\
@@ -644,10 +642,10 @@ During substitution of an integration you may have to change the domain of the i
     \frac{1}{2^a} \int \sin^a(2x)\ dx\\
     \text{You get the idea}
 \end{gather*}
+\newpage
 
 
-
-\begin{paperbox}[]{For tan and sec intergrations}    
+\begin{DndSidebar}[]{For tan and sec intergrations}    
     For tan and sec integration there are two rules you can follow.
     \begin{gather*}
         \int \tan^{odd}(x) \sec^n(x)\ dx \\ 
@@ -661,7 +659,7 @@ During substitution of an integration you may have to change the domain of the i
         \text{Let $u = \tan(x)$}\\
         \int \tan^n(x)(\tan^2(x) + 1)^{\frac{even-2}{2}}\sec^2(x)\ dx
     \end{gather*}
-\end{paperbox}
+\end{DndSidebar}
 \newpage
 
 
@@ -669,7 +667,7 @@ During substitution of an integration you may have to change the domain of the i
 
 
 \section{Trigonometric Substitution with Angles}
-\begin{paperbox}[]{Tan subsitution with angle}
+\begin{DndSidebar}[]{Tan subsitution with angle}
     For the general integration shown below:
     \begin{equation}
         \int \frac{dx}{f(a^2+b^2x^2)^\alpha}
@@ -701,12 +699,12 @@ During substitution of an integration you may have to change the domain of the i
  
     \end{tikzpicture}\\
     Once you integrated the expression you have to convert the domain from radian to real. Use the figure above to substitute the trigonometric function with the real expressions.
-\end{paperbox}
+\end{DndSidebar}
 
 
 
 \newpage
-\begin{paperbox}[]{Sin subsitution with angle}
+\begin{DndSidebar}[]{Sin subsitution with angle}
     For the general integration shown below:
     \begin{equation}
         \int \frac{dx}{f(a^2-b^2x^2)^\alpha}
@@ -739,11 +737,11 @@ During substitution of an integration you may have to change the domain of the i
  
     \end{tikzpicture}\\
     Once you integrated the expression you have to convert the domain from radian to real. Use the figure above to substitute the trigonometric function with the real expressions.
-\end{paperbox}
+\end{DndSidebar}
 
 
 \newpage
-\begin{paperbox}[]{Sec subsitution with angle}
+\begin{DndSidebar}[]{Sec subsitution with angle}
 
     For the general integration shown below:
     \begin{equation}
@@ -777,14 +775,14 @@ During substitution of an integration you may have to change the domain of the i
  
     \end{tikzpicture}\\
     Once you integrated the expression you have to convert the domain from radian to real. Use the figure above to substitute the trigonometric function with the real expressions.
-\end{paperbox}
+\end{DndSidebar}
 
 
 \newpage
 
 
 \section{Partial Fraction}
-\begin{paperbox}{Partial Fraction}
+\begin{DndSidebar}{Partial Fraction}
     If you have an integral that look a fraction of polynomials then you have to use partial fractions to evaluate it. Here is an generic example:
     \begin{gather}
         \int f(x) = \large\int \frac{P(x)}{Q(x)}\\
@@ -795,15 +793,15 @@ During substitution of an integration you may have to change the domain of the i
         \nonumber
         a_n \neq 0
     \end{gather}
-\end{paperbox}
-\begin{commentbox}{Working with partial fractions}\\
+\end{DndSidebar}
+\begin{DndComment}{Working with partial fractions}\\
     This will only work if the degree (that is the highest power of the polynomial) of the numerator is less than the degree of the denominator.\\
     If $Deg(P(x)) \geq Deg(Q(x)) $, then you would have to use long division to make the degree of the numerator be less than the denominator.
-\end{commentbox}
+\end{DndComment}
 
 
 \subsection{Long Division}
-\begin{paperbox}{Long Division}
+\begin{DndSidebar}{Long Division}
     If you need to use long division in order to integrate using partial fraction then the overall general equation will look like this.
     \begin{gather}
         Q(x)\overline{)P(x)} = S(x)\\
@@ -816,13 +814,13 @@ During substitution of an integration you may have to change the domain of the i
         R(x): \text{Is the remainder}
     \end{gather}
     Generally $\int S(x)$ is pretty easy to evaluate as you are integrating a polynomial. So the power rule applies.
-\end{paperbox}
+\end{DndSidebar}
 Once the expression is in the proper format we can continue with our evaluation.
 \newpage
 
 
 \subsection{Q(x) is a product of distinct linear factors}
-\begin{paperbox}{The "simple" case}\\
+\begin{DndSidebar}{The "simple" case}\\
     If you can factorize $Q(x)$ to\\
     $ Q(x) = (a_1x + b_1)(a_2x + b_2)...(a_kx + b_k)$\\
     then you can write the partial fraction like this:
@@ -831,7 +829,7 @@ Once the expression is in the proper format we can continue with our evaluation.
         \large\int \frac{R(x)}{Q(x)} = \int\frac{A_1}{(a_1x + b_1)} + \int\frac{A_2}{(a_2x + b_2)} +\\
         ... + \int\frac{A_k}{(a_kx + b_k)}
     \end{gather} 
-\end{paperbox}
+\end{DndSidebar}
 To solve for the coefficients one must isolate them by multiplying its denominator with all other terms and $R(x)$, then set x such that the denominator is zero canceling all other coefficients.
 \subsubsection{General equation}
 \begin{gather*}
@@ -856,13 +854,13 @@ Once the coefficients are found they can be substituted into the expression and 
 
 
 \subsection{Q(x) is a product of linear factors, some of which are repeated}
-\begin{paperbox}{Repeated factors}
+\begin{DndSidebar}{Repeated factors}
     If you have a factor that is $(a_ix + b_i)^r$ Where: $ r > 1$ then the partial fraction decomposition would look like this:
     \begin{equation}
         \frac{A_1}{a_ix+b_i} + \frac{A_2}{(a_ix+b_i)^2} + ... + \frac{A_r}{(a_ix+b_i)^r}
     \end{equation}
     There would be r terms after the decomposition with each term having a factor with a unique power [1-r]. 
-\end{paperbox}
+\end{DndSidebar}
 Depending on the expression you may have to use techniques from both case 1 and 2 in order to integrate the expression.
 
 \subsubsection{Example}
@@ -887,7 +885,7 @@ $$\begin{aligned}
 \newpage
 
 \subsection{Q(x) Contains Irreducible Quadratic Factors, None of Which Is Repeated}
-\begin{paperbox}{Quadratic Factor}
+\begin{DndSidebar}{Quadratic Factor}
     If Q(x) has the factor $ ax^2 + bx + c$, where $b^2 - 4ac < 0$, then, in addition to the partial fractions in equations 58 and 59, the decomposition will have a term of the form:
     \begin{equation}
         \frac{Ax+B}{ax^2 + bx + c}
@@ -904,7 +902,7 @@ $$\begin{aligned}
     \begin{equation}
         \large\int \frac{dx}{a(u^2 + d)} = \frac{1}{a\sqrt{d}}\tan^{-1}\biggl(\frac{x}{a\sqrt{d}}\biggl) + C
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 \subsubsection{Example}
 Evaluate \LARGE$\large\int \frac{2x^2 - x 4}{x^3 + 4x}$ \normalsize$dx$\\
 $\begin{aligned}
@@ -925,7 +923,7 @@ $\begin{aligned}
 
 
 \subsection{General Formula}
-\begin{paperbox}{The general idea}\\
+\begin{DndSidebar}{The general idea}\\
     \begin{enumerate}
         \item Convert the fraction such that the polynomial degree of the denominator is greater than the polynomial degree of the numerator (if necessary).
         \item Factorize both polynomials.
@@ -938,19 +936,19 @@ $\begin{aligned}
         \item Use linear algebra to solve for the coefficients (look at the previous example).
     \end{enumerate}
     
-\end{paperbox}
+\end{DndSidebar}
 
 
 
 \section{Improper Integral}
 When you have infinity as part of the range or the function is discontinuous over the range.
-\begin{paperbox}{convergence vs divergence}\\
+\begin{DndSidebar}{convergence vs divergence}\\
     An integral \textbf{converges} if the value of the integral is a real number.\\ 
     It \textbf{diverges} if the value of the integral is $\pm\infty$
-\end{paperbox}
+\end{DndSidebar}
 
 \subsection{Type 1}
-\begin{paperbox}{Type 1}
+\begin{DndSidebar}{Type 1}
     \begin{equation} \label{eq:1}
         \int_a^\infty f(x)\ dx = \lim_{r \to \infty} \int_a^r f(x)\ dx
     \end{equation}
@@ -962,7 +960,7 @@ When you have infinity as part of the range or the function is discontinuous ove
         \int_{-\infty}^\infty f(x)\ dx = \int_{-\infty}^0 f(x)\ dx + \int_0^\infty f(x)\ dx 
     \end{equation}
     Use equation \ref{eq:1} and \ref{eq:2} to solve equation \ref{eq:3} were $a = 0$.
-\end{paperbox}
+\end{DndSidebar}
 \newpage
 \subsubsection{Example}
 Evaluate this expression:
@@ -977,16 +975,16 @@ $$ \int_1^\infty \frac{dx}{x}$$
 
 
 \subsection{Type 2}
-\begin{paperbox}{Type 2}
+\begin{DndSidebar}{Type 2}
     If the function is discontinuous over the range of domain, then you have to split the integration between the point of discontinuity.
     \begin{equation}
         \int_{a}^b f(x)\ dx = \int_{a}^{c^-} f(x)\ dx + \int_{c^+}^b f(x)\ dx 
     \end{equation}
     Where $c$ is the domain where the range of the function is discontinuous. i.e. $f(c) = DNE/UNKNOWN$.
-\end{paperbox}
-\begin{commentbox}{Having + and - on the point of discontinuity}
+\end{DndSidebar}
+\begin{DndComment}{Having + and - on the point of discontinuity}
     It's important to have the appropriate + and - symbols for $c$ as you are evaluating the integrals when they approach c from the right or left side respectively. The direction of approach matter as it could affect the sign of the value (positive or negative).
-\end{commentbox}
+\end{DndComment}
 
 
 \subsubsection{Example}
@@ -1018,21 +1016,21 @@ $$
     = \lim_{r \to 1^-} \ln|r-1| = -\infty
 \end{gather*}    
 This integration diverges therefore the entire function diverge.
-\begin{commentbox}{Condition of Divergence}
+\begin{DndComment}{Condition of Divergence}
     If one of the integrals leads to a divergence then the entire function is divergent.
-\end{commentbox}
+\end{DndComment}
 
 
 
 \subsection{Non-elementary Integral}
-\begin{paperbox}{Proving divergence or convergence of Nonelementary Integrals}
+\begin{DndSidebar}{Proving divergence or convergence of Nonelementary Integrals}
     If you have an integral that is non-elementary. i.e. having a summation of trig functions, polynomials, and constant. Then the answer to the expression is impossible to find based on current understanding. One way to solve the expression (somewhat) is by using proofs.  
-\end{paperbox}
-\begin{commentbox}{Big-O}
+\end{DndSidebar}
+\begin{DndComment}{Big-O}
     Used in CS and Math to determine the behavior of a function based on input size (More of a CS definition). The basic idea is that you find a single term expression where the order of expression is as big or bigger then the non-elementary function.
-\end{commentbox}
+\end{DndComment}
 \newpage
-\begin{paperbox}{Big-O}
+\begin{DndSidebar}{Big-O}
     \textbf{Big-O}:
     Let f be the non-elementary function and g a single term function or something that is easily integrable. Then you find a function g such that.
     \begin{equation*}
@@ -1042,7 +1040,7 @@ This integration diverges therefore the entire function diverge.
     \begin{equation*}
         \lim_{x \to 0} \biggl|\frac{f(x)}{g(x)}\biggl| < \infty 
     \end{equation*}
-\end{paperbox}
+\end{DndSidebar}
 You can say that Big-O will give the "upper bound" for the growth rate of function f.
 \\~\\ 
 There is a "lower bound" equivalent called Big-Omega but in a lot of cases this function can be a constant like 0.
@@ -1082,9 +1080,9 @@ $$
 $$
 Converges to some value between 0 and 1.
 
-\begin{paperbox}{Condition for Convergence of Nonelementary Functions}
+\begin{DndSidebar}{Condition for Convergence of Nonelementary Functions}
     An Non-elementary function converges onto a value if and only if the upper \textbf{and} lower bounds $\neq \pm \infty$. Otherwise, the function diverges.
-\end{paperbox}
+\end{DndSidebar}
 
 \section{Exercise}
 \begin{enumerate}
@@ -1107,14 +1105,14 @@ Converges to some value between 0 and 1.
 \end{enumerate}
 
 
-\chapter{Chapter 8: Further Applications of Integration}
+\chapter{Further Applications of Integration}
 \section{Arc Length}
 Calculate the length of a function given a range from a to b.
-\begin{paperbox}{Equation}
+\begin{DndSidebar}{Equation}
     \begin{equation}
         L = \int_a^b \sqrt{1 + (f'(x))^2}\ dx
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 \subsubsection{Proof}
 To prove this equation, let assume that you have an arbitrary function f that is continuous. The distance between two points on the graph can be approximated by the summation of very small slopes.
 \\~\\ 
@@ -1153,7 +1151,7 @@ $\begin{aligned}
 
 
 \section{Surface Area}
-\begin{paperbox}{Surface Area}
+\begin{DndSidebar}{Surface Area}
     \begin{equation}
         SA = \int_a^b 2\pi f(x)\ ds
     \end{equation}
@@ -1164,14 +1162,14 @@ $\begin{aligned}
     \begin{equation}
         SA = 2\pi \int_a^b f(x)\ \sqrt{1 + (f'(x))^2}dx
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 Basically you are adding infinitely many cylinder of size $ds$ together. As the surface area of a cylinder excluding the top and bottom is $2\pi r h $, where $h$ is $ds$.\\
-\begin{commentbox}{If you are rotating around the y-axis}   
+\begin{DndComment}{If you are rotating around the y-axis}   
     If you are rotating around the y axis then you would use this equation
     \begin{equation} 
         L = \int_a^b 2\pi\ x(y) \sqrt{1 + (x'(y))^2}\ dy
     \end{equation}
-\end{commentbox}
+\end{DndComment}
 \newpage
 
 \subsubsection{Example}
@@ -1203,12 +1201,12 @@ $\begin{aligned}
     \item Find the exact area of the surface obtained by rotating the curve about the y-axis \[ y = \frac{1}{4}x^2 - \frac{1}{2}\ln(x),\ 2 \leq x \leq 4 \] \\ \subparagraph{Answer} \[ \frac{62\pi}{3} \]
 \end{enumerate}
 
-\chapter{Chapter 9: Differential Equation}
+\chapter{Differential Equation}
 Differential equations may be the most important applications for calculus. Scientists from all fields use differential equation to create models to explain the phenomenon that they are studying. Although it is often impossible to find an explicit formula for the solution of a differential equation, we will see that graphical and numerical approaches provide the information we need.
 
 \section{Initial Value Problem}
 Suppose that you have a differential equation $y'$ with a specific initial condition or the "starting" value. Find $y$ with a known constant.
-\begin{paperbox}{Initial Value Problem (IVP)}
+\begin{DndSidebar}{Initial Value Problem (IVP)}
     Generally the problem is in this form of expression:
     {\centering
     $\begin{cases}
@@ -1217,7 +1215,7 @@ Suppose that you have a differential equation $y'$ with a specific initial condi
     \end{cases}$\\}
     What we are trying to find is a function $y$ that satisfy both conditions above.
     Later we will talk about separable equation and how it will help solve this problem.
-\end{paperbox} 
+\end{DndSidebar} 
 
 
 \section{Population Dynamics}
@@ -1231,7 +1229,7 @@ Is this a reasonable assumption? Suppose we have a population of $P = 1,000,000,
     $t$ & time (the independent variable)\\ 
     $P$ & \# of individuals in the population (the dependent variable)
 \end{dndtable}
-\begin{paperbox}{Rate of growth of a population}
+\begin{DndSidebar}{Rate of growth of a population}
     \begin{equation}
         \frac{dP}{dt} = kP
     \end{equation}
@@ -1242,12 +1240,12 @@ Is this a reasonable assumption? Suppose we have a population of $P = 1,000,000,
     \begin{equation}
         P'(t) = C(ke^{kt}) = k(Ce^{kt}) = kP(t)
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 
 \subsection{Separable Equation}
 How did we get the population dynamics equation from before? To derive this equation we have to use the property of separable equation.
-\begin{paperbox}{Separable Equation}
+\begin{DndSidebar}{Separable Equation}
     If you have an expression like below.
     \begin{equation*}
         \frac{dy}{dx} = f(x)g(y)
@@ -1261,8 +1259,7 @@ How did we get the population dynamics equation from before? To derive this equa
     \begin{equation}
         \int h(y)\ dy = \int g(x)\ dx
     \end{equation}
-\end{paperbox}
-\newpage
+\end{DndSidebar}
 \subsubsection{Example}
 Evaluate this expression:
 $$
@@ -1289,11 +1286,11 @@ The logistic model is a better representation of explaining the dynamics of a po
     $k$ & relative growth rate\\
     $M$ & carrying capacity
 \end{dndtable}
-\begin{paperbox}{Logistic Model Equation}
+\begin{DndSidebar}{Logistic Model Equation}
     \begin{equation}
         \frac{dP}{dt} = kP\biggl(1 - \frac{P}{M}\biggl)
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 Because the equation above is separable we get this
 $$
     \large \frac{dP}{P(1-\frac{P}{M})} = k\ dt 
@@ -1302,7 +1299,6 @@ This left side expression can be evaluated using partial fractions to get this
 $$ 
     \large\int \frac{M\ dP}{P(M - P)} = \int \frac{dP}{P} + \int \frac{dP}{M-P}
 $$
-\newpage
 \begin{gather*}
     \int \frac{dP}{P} + \int \frac{dP}{M - P} = \int k\ dt\\
     \ln \biggl|\frac{P}{M-P}\biggl| = kt + C\\
@@ -1312,7 +1308,7 @@ $$
     P = \frac{M}{1 + Ce^{-kt}}\\
     \frac{M - P_0}{P_0} = Ce^0 = C
 \end{gather*}
-\begin{paperbox}{Logistic Equation}
+\begin{DndSidebar}{Logistic Equation}
     \begin{equation}
         P(t) = \frac{M}{1 + Ce^{-kt}}\ \ \text{Where } C = \frac{M - P_0}{P_0}
     \end{equation}
@@ -1320,13 +1316,13 @@ $$
         \lim_{t \to \infty} P(t) = M
     \end{equation*}
     $M$ is the terminal value
-\end{paperbox}
+\end{DndSidebar}
 
 \section{Newton Cooling Equation}
 Lets say you want to model the transfer of heat between an object and its environment. We can use differential equation to model this behavior.
 
 
-\begin{paperbox}{Newton Cooling Equation}   
+\begin{DndSidebar}{Newton Cooling Equation}   
     \begin{dndtable}
         \textbf{Notation} & \textbf{Meaning}\\
         $t$ & Time t \\  
@@ -1342,8 +1338,7 @@ Lets say you want to model the transfer of heat between an object and its enviro
     \begin{equation}
         T(t) = T_E + (T_0 - T_E)e^{-kt}
     \end{equation}
-\end{paperbox} 
-\newpage
+\end{DndSidebar} 
 \subsubsection{Example}
 Suppose that you have a bowl of hot soup at 60 degrees C, a refrigerator at 4 degrees C, and $k = 0.1$ . How long will it take for the soup in the refrigerator to drop down to 50 degrees C?
 \\~\\ 
@@ -1386,7 +1381,7 @@ $\begin{aligned}
     -\ \frac{75}{2}\ln\biggl(\frac{1}{3}\biggl) &= t
 \end{aligned}$
 \section{Linear Equations}
-\begin{paperbox}{FO Linear Diff Eq}
+\begin{DndSidebar}{FO Linear Diff Eq}
     A first-order linear differential equation is one that can be put into the form:
     \begin{equation}
         \begin{cases}
@@ -1398,16 +1393,16 @@ $\begin{aligned}
         \frac{dy}{dx} + p(x)y = Q(x)
     \end{equation}
     Its linear as $y'$ and $y$ are both linear have a power of 1.
-\end{paperbox}
+\end{DndSidebar}
 In order to evaluate this function we need a special function called an \textbf{integrating factor} denoted as $\mu(t)$ 
 
 \subsection{Integrating factor $\mu(t)$}
-\begin{paperbox}{What is $\mu(t)$}
+\begin{DndSidebar}{What is $\mu(t)$}
     $ \mu(t) $ is a special function that fulfills the condition as an integrating factor:
     \begin{equation}
         \mu(t) p(t) = \mu'(t)
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 Multiplying the entire linear differential equation with $ \mu(t) $ lead to this expression:
 $$
     \mu(t)y' + \mu'(t)y = \mu(t)r(t)
@@ -1437,12 +1432,12 @@ as our integrating factor we get this expression once we substituted $ \mu(t) $ 
 \begin{equation*}
     y(t) = \frac{\int e^{\int p(t)} r(t)\ dt + C}{e^{\int p(t)}}
 \end{equation*}
-\begin{paperbox}{The universal equation}
+\begin{DndSidebar}{The universal equation}
     The universal equation is shown below:
     \begin{equation}
         y(t) = \frac{\int e^{\int p(t)} r(t)\ dt}{e^{\int p(t)}} + \frac{C}{e^{\int p(t)}}
     \end{equation}
-\end{paperbox}
+\end{DndSidebar}
 
 \subsubsection{Example}
 Evaluate this expression
@@ -1500,9 +1495,6 @@ $\begin{gathered}
 
 \subfile{parametric-curve.tex}
 
-\subfile{finals.tex}
-
-\twocolumn
 
 
 \chapter{Professor's Villains}
@@ -1623,7 +1615,7 @@ Beware that the final is going to be absurdly difficult. If his midterm champion
 
 \onecolumn
 \appendix 
-\chapter{Appendix A: Unit circle}
+\chapter*{Appendix A: Unit circle}
 {\centering    
 \begin{tikzpicture}[scale=5,cap=round,>=latex]
     % draw the coordinates
@@ -1692,9 +1684,9 @@ Beware that the final is going to be absurdly difficult. If his midterm champion
 
 \twocolumn
 
-\chapter{Appendix B: Other rules}
+\chapter*{Appendix B: Other rules}
 \section{Log rules}
-\begin{paperbox}{Log rules}
+\begin{DndSidebar}{Log rules}
     $\log_b a$ is only defined if and only if $a > 0$ and $ b > 0$.
     \begin{gather}
         \log_b a = c \Rightarrow a = b^c\\
@@ -1707,11 +1699,11 @@ Beware that the final is going to be absurdly difficult. If his midterm champion
         \log_b a - \log_b c = \log_b \frac{a}{c}\\
         \frac{\log_b a}{\log_b c} = \log_c a 
     \end{gather}
-\end{paperbox}
+\end{DndSidebar}
 
 
 \section{Trigonometric Hyperbolic Functions}
-\begin{paperbox}{Trigonometric Hyperbolic functions}
+\begin{DndSidebar}{Trigonometric Hyperbolic functions}
     \begin{gather}
         \sinh (x) = \frac{e^x - e^{-x}}{2}\\
         \cosh (x) = \frac{e^x + e^{-x}}{2}\\
@@ -1722,8 +1714,8 @@ Beware that the final is going to be absurdly difficult. If his midterm champion
         e^{-x} = \frac{\cosh(x) - \sinh(x)}{2}
     \end{gather}
     $\sinh (x)$ is an odd function and $ \cosh(x)$ is an even function.
-\end{paperbox}
-\chapter{Credits}
+\end{DndSidebar}
+\chapter*{Credits}
 \subsection{General}
 \begin{itemize}
     \item Created by: Jihoon Og, u/DnD\_Notes
@@ -1743,4 +1735,10 @@ Beware that the final is going to be absurdly difficult. If his midterm champion
 
 \subsection{Disclaimer}
 This document is completely unofficial and in no way endorsed by Wizards of the Coast or Games Workshop. All associated marks, names, races, race insignia characters, locations, illustrations and images from Dungeons and Dragons, and Warhammer are either \textregistered, \textcopyright, TM and/or Copyright Wizards of the Coast Ltd 2012-2018, or Games Workshop. All used without permission. No challenge to their status intended. All Rights Reserved to their respective owners.
+
+
+% \subfile{finals.tex}
+
+% \twocolumn
+
 \end{document}

@@ -7,7 +7,7 @@
 
 # Latex compiler selection and options
 BUILDER=rubber
-OPT=--synctex --pdf -v
+OPT=--shell-escape --synctex --pdf -v
 SOURCE=MATH-115-Notes
 
 # Build Section
