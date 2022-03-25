@@ -7,7 +7,7 @@
 
 # Latex compiler selection and options
 BUILDER=rubber
-OPT=--synctex --pdf -v
+OPT=--shell-escape --synctex --pdf -v
 # The main .tex file without the .tex
 SOURCE=MATH-2000-Notes
 
@@ -34,3 +34,4 @@ clean:
 	$(BUILDER) --clean ${SOURCE}
 	${BUILDER} --jobname ${SOURCE}-print --clean  $(SOURCE)
 	${BUILDER} --jobname ${SOURCE}-full  --clean $(SOURCE)
+	cd Chapters ; latexmk -C ; *.synctex.gz ; cd ..

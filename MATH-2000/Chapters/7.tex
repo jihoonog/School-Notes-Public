@@ -66,7 +66,7 @@ There are other relations like \(>\) and \(<\).
     \caption{Digraph of the relation above}
     \label{fig:digraph}
 \end{figure}
-\\
+
 This relation is:
 \begin{enumerate}
     \item reflexive since \(1R1\),\(2R2\),\(3R3\)
@@ -117,10 +117,10 @@ This relation is:
         \end{equation}
         Therefore
         \begin{align*}
-            (a_1 + b_3) + (a_2 + b_2)
-             & = (a_1 + b_2) + (a_2 + b_3) &  & \text{(rearrange terms)}
-            \\&= (a_2 + b_1) + (a_3 + b_2) && \text{\ref{NxNEquivRelEgEqn}}
-            \\&= (a_3 + b_1) + (a_2 + b_2) && \text{(rearrange terms)} .
+            & (a_1 + b_3) + (a_2 + b_2) & 
+            \\& = (a_1 + b_2) + (a_2 + b_3) & \text{(rearrange terms)} 
+            \\&= (a_2 + b_1) + (a_3 + b_2) & \text{\ref{NxNEquivRelEgEqn}} 
+            \\&= (a_3 + b_1) + (a_2 + b_2) & \text{(rearrange terms)}
         \end{align*}
         Subtracting $a_2 + b_2$ from both sides of the equation, we conclude that $a_1 + b_3 = a_3 + b_1$,
         so $(a_1,b_1) \sim (a_3,b_3)$.
@@ -172,7 +172,7 @@ This relation is:
 \begin{Note}
     That if \(\sim\) is a equivalence relation on a set A, and \(a_1,a_2 \in A\) for which \(a_1 \sim a_2\), it is tempting to think of \(a_1\) and \(a_2\) as being equal but this is not technically correct. However, we have that \(a_1 \sim a_2\) if and only if \([a_1] = [a_2]\)
 \end{Note}
-
+\newpage
 \section{Modular arithmetic}
 \subsection{The integers modulo 3} Recall that if \(n\in \N^+\), then congruence modulo n is an equivalence relation. We will work with \(n=3\).
 \begin{Note}
@@ -196,8 +196,14 @@ We can do arithmetic (add, subtract, and multiply) on these equivalence classes,
     We have $[1]_3 + [2]_3 = [1 + 2]_3 = [3]_3$. However, since $3 \equiv 0 \pmod{3}$, we have $[3]_3 = [0]_3$, so the above equation can also be written as $[1]_3 + [2]_3 = [0]_3$. Equivalently, $\overline{1} + \overline{2} = \overline{0}$.
 
     This is an example of the following general principle:
-    $$ \text{%the result of any arithmetic operation (modulo~$3$) will be either $[0]_3$, $[1]_3$, or~$[2]_3$:
-            \it If $r$ is the remainder when $a + b$ is divided by\/~$3$, then $\overline{a} \mathbin{+_3} \overline{b} = \overline{r}$.} $$
+    $$ 
+    \begin{aligned}
+        &\text{The result of any arithmetic operation (modulo~$3$) will be}\\
+        &\text{either $[0]_3$, $[1]_3$, or~$[2]_3$:} \\
+        &\text{\it If $r$ is the remainder when $a + b$ is divided by\/~$3$,}\\
+        &\text{then $\overline{a} \mathbin{+_3} \overline{b} = \overline{r}$.} 
+    \end{aligned}
+    $$
 
     Here is a table that shows the results of addition modulo~$3$:
     \begin{center} \begin{tabular}{c||c|c|c}
@@ -213,7 +219,7 @@ We can do arithmetic (add, subtract, and multiply) on these equivalence classes,
         \end{tabular}
     \end{center}
 \end{commentbox}
-
+\newpage
 \begin{Definition}
     {}
     Fix some nonzero natural number $n \in \N^+$.
@@ -245,10 +251,10 @@ and\/ $\overline{0}, \overline{1}, \overline{2}, \ldots, \overline{n-1}$ are all
 	\begin{align*}
 	(\overline{17} - \overline{5}) \times (\overline{21} +\overline{11})
 	&=(\overline{3} - \overline{5}) \times (\overline{0} +\overline{4})
-	=  (\overline{3 - 5}) \times (\overline{0 + 4})
+	\\&=  (\overline{3 - 5}) \times (\overline{0 + 4})
 	\\&= \overline{-2} \times \overline{4}
 	= \overline{5} \times \overline{4}
-	= \overline{5 \times 4}
+	\\&= \overline{5 \times 4}
 	= \overline{20}
 	= \overline{6}
 	. \end{align*}

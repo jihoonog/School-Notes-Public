@@ -135,9 +135,13 @@
 
 \begin{proof}
     We know that $A \setminus B$, $B \setminus A$, and $A \cap B$ are pairwise-disjoint, and that their union is $A\cup B$, so
-    $$ \#(A \setminus B) + \#(B \setminus A) + \# (A \cap B)
-        = \# \bigl( (A \setminus B) \cup (B \setminus A) \cup (A \cap B)  \bigr)
-        = \# (A \cup B) .$$
+    $$ 
+    \begin{aligned}
+        &\#(A \setminus B) + \#(B \setminus A) + \# (A \cap B)
+        \\&= \# \bigl( (A \setminus B) \cup (B \setminus A) \cup (A \cap B)  \bigr)
+        \\&= \# (A \cup B) .
+    \end{aligned}
+    $$
     Also, we have
     \begin{align*}
         \#A
@@ -148,8 +152,8 @@
     $$  \# B = \#(B \setminus A) + \# (A \cap B) .$$
     Therefore
     \begin{align*}
-        \#A + \#B
-         & = \bigl( \#(A \setminus B) + \# (A \cap B)  \bigr) + \bigl(  \#(B \setminus A) + \# (A \cap B) \bigr)
+        &\#A + \#B
+        \\&= \bigl( \#(A \setminus B) + \# (A \cap B)  \bigr) + \bigl(  \#(B \setminus A) + \# (A \cap B) \bigr)
         \\&=  \#(A \setminus B) + \#(B \setminus A) + 2\# (A \cap B)
         \\&=  \#(A \cup B) + \# (A \cap B)
         .\end{align*}

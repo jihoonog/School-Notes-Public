@@ -48,7 +48,8 @@
     \begin{align*}
         1 + {} & 2 + 3 + \cdots + k
         \\&= \bigl(1 + 2 + 3 + \cdots + (k-1) \bigr) + k
-        \\&= \frac{(k-1)\bigl( (k-1)+1\bigr)}{2} + k && \text{(Induction Hypothesis)}
+        \\&= \frac{(k-1)\bigl( (k-1)+1\bigr)}{2} + k 
+        \\& \text{(Induction Hypothesis)}
         \\&= \frac{(k-1)k}{2} + k
         \\&= k \left( \frac{k-1}{2} + 1 \right)
         \\&= k \left( \frac{k+1}{2} \right)
@@ -83,7 +84,8 @@
     \begin{align*}
         3 +  {} & 7 + 11 + \cdots + (4k-1)
         \\&= \Bigl( 3 +  7 + 11 + \cdots + \bigl(4(k-1)-1\bigr) \Bigr) + (4k-1)
-        \\&= \Bigl( 2(k-1)^2 + (k-1) \Bigr)  + (4k-1) && \text{(Induction Hypothesis)}
+        \\&= \Bigl( 2(k-1)^2 + (k-1) \Bigr)  + (4k-1)
+        \\& \text{(Induction Hypothesis)}
         \\&= \Bigl( 2(k^2 - 2k + 1) + (k-1) \Bigr)  + (4k-1)
         \\&= (2k^2 - 4k + 2) + (k-1)  + (4k-1)
         \\&= 2k^2 + k
@@ -96,7 +98,7 @@
     $$ 3 + 7 + 11 + \cdots + (4n-1) = 2n^2 + n $$
     for every $n \in \N^+$.
 \end{proof}
-
+\newpage
 \section{Other proofs by induction}
 \begin{commentbox}{Example on Mondulo Operations}[{PhbLightCyan}]
     Suppose $a,b,n \in \Z$, with $a \equiv b \pmod{n}$. Show
@@ -155,7 +157,12 @@
     \medskip
 
     (i) \emph{Base case.} For $n = 1$, we have
-    $$ \sum_{k=1}^n F_k = \sum_{k=1}^1 F_k = F_1 = 1 = 2 - 1 = F_3 - 1 = F_{1+2} - 1 = F_{n+2} - 1,$$
+    $$ 
+    \begin{aligned}
+        \sum_{k=1}^n F_k = \sum_{k=1}^1 F_k &+= F_1 = 1 = 2 - 1 = F_3 - 1 
+        \\&= F_{1+2} - 1 = F_{n+2} - 1,
+    \end{aligned}
+    $$
     so $P(1)$ is true.
 
     \medskip
@@ -174,7 +181,7 @@
     Therefore, by the Principle of Mathematical Induction, $P(n)$ is true for every~$n$. This means
     $\displaystyle \sum\limits_{k=1}^n F_k = F_{n+2} - 1$ for all $n \in \natural^+$.
 \end{proof}
-
+\newpage
 \section{Other versions of induction}
 There are other versions of induction that works better in solving other cases.
 \begin{Proposition}
@@ -301,7 +308,8 @@ There are other versions of induction that works better in solving other cases.
 \end{Proposition}
 \begin{proof}
     Suppose there is some natural number $n > 1$, such that $n$~is not divisible by a prime number. (This will lead to a contradiction.) Since $\N$~is well-ordered, we may assume that $n$~is the smallest such number, so:
-        $$ \text{If $1 < k < n$ (and $k \in \N$), then $k$~is divisible by a prime number} .$$
+    
+    If $1 < k < n$ (and $k \in \N$), then $k$~is divisible by a prime number.
     
     Since $n \mid n$, but (by assumption) $n$~is not divisible by any prime number, we know that $n$~is not prime. By definition, this means there exists $k \in \N$, such that $k \mid n$ and $1 < k < n$. From the minimality of~$n$, we know that $k$~is divisible by some prime number~$p$. Then $p \mid k$ and $k \mid n$, so $p \mid n$. This contradicts the fact that $n$~is not divisible by a prime number.
 \end{proof}
@@ -312,7 +320,8 @@ There are other versions of induction that works better in solving other cases.
     
 \begin{proof}[Proof by contradiction]
     Suppose there is some natural number $n > 1$, such that $n$~is not a product of prime numbers (and is not a prime). Since $\N$~is well-ordered, we may assume that $n$~is the smallest such number, so:
-        $$ \text{If $1 < k < n$ (and $k \in \N$), then $k$~is a product of prime numbers} .$$
+    
+    If $1 < k < n$ (and $k \in \N$), then $k$~is a product of prime numbers.
     
     Since $n$~is not prime, it is divisible by some natural number~$k$, with $1 < k < n$. This means we may write $n = km$, for some $m \in \N^+$. Since $m = n/k$ and $1 < k < n$, we see that $1 < m < n$. Therefore, the minimality of~$n$ implies that $k$ and~$m$ are products of prime numbers: say $k = p_1 p_2 \cdots p_r$ and $m = q_1 q_2 \cdots q_s$. Then
         $$ n = km = (p_1 p_2 \cdots p_r)(q_1 q_2 \cdots q_s) $$

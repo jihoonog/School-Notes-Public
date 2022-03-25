@@ -1,10 +1,12 @@
-\documentclass[letterpaper,10pt,twoside,onecolumn,openany]{book}
+\documentclass[letterpaper,10pt,twoside,twocolumn,openany]{book}
 \usepackage[bg=none,layout=true]{dnd}
 \usepackage{dndnotes}
 \usepackage{wallpaper}
 \usepackage{subfiles}
 \usepackage{import}
 \usepackage{datetime}
+
+
 \allowdisplaybreaks
 
 
@@ -26,8 +28,9 @@
 \begin{document}
 \frontmatter                           
 \begin{titlepage}
-    \ThisCenterWallPaper{1}{MATH-2000-Title.png}~
-    
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{./MATH-2000-Title.png}};
+    \end{tikzpicture}~
     \newpage
     
     \begin{center}
@@ -41,7 +44,6 @@
     \end{center}
     \let\thefootnote\relax\footnote{Disclaimer: This book is not responsible for the consequences of faulty proofs, attempting to cast a mathematical fireball, speaking math cant in an examination or saying yes when the professor asks, "Are you really sure about this proof?" }
 \end{titlepage}
-\subfile{Chapters/credit.tex}
 \tableofcontents
 \mainmatter
 \part{Introduction to Logic and Proofs}
@@ -56,4 +58,5 @@
 \subfile{Chapters/7.tex}
 \subfile{Chapters/8.tex}
 \subfile{Chapters/9.tex}
+\subfile{Chapters/credit.tex}
 \end{document}
