@@ -34,7 +34,7 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | ECON-281  | Mesbah Sharaf     | Fall 2021   |
 
 ## The "Wacky" Cover Art
-As a Computing Science major I get exposed to a lot different programming and computing books. For example:
+As a Computing Science major I get exposed to a lot of different programming and computing books. For example:
 - Compilers: Principles, Techniques, and Tools used in compiler design classes is affectionately known as the **Dragon Book**
 - Operating System Concepts by Silberschatz, Galvin and Gagne is often called the **Dinosaur Book**
 - Structure and Interpretation of Computer Programs is often called the **Wizard Book**
