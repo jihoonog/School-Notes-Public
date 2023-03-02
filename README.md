@@ -32,6 +32,8 @@ Some are incomplete, for example courses that I've taken during the Fall of 2018
 | STAT-252  | Gregory Wagner    | Fall 2019   |
 | CMPUT-404 | Abram Hindle      | Fall 2021   |
 | ECON-281  | Mesbah Sharaf     | Fall 2021   |
+| CMPUT-503 | Matt E. Taylor    | Winter 2023 |
+| CMPUT-697 | Joerg Sander      | Winter 2023 |
 
 ## The "Wacky" Cover Art
 As a Computing Science major I get exposed to a lot of different programming and computing books. For example:
